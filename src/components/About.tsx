@@ -69,7 +69,7 @@ const About = () => {
                 {/* 3. A 2x2 grid for the feature cards */}
                 <Grid container spacing={4}>
                     {features.map((feature, index) => (
-                        <Grid size={6} key={index}>
+                        <Grid size={{lg: 6, md: 6, sm: 12}} key={index}>
                             <FadeInOnScroll>
                                 <Paper
                                     elevation={2}

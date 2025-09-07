@@ -27,16 +27,7 @@ const Instructor = () => {
                 <Grid container spacing={6} sx={{ mt: 4 }} alignItems="center">
                     {/* --- Image Column with Hover Effect --- */}
                     <Grid
-                        size={6}
-                        sx={{
-                            transition:
-                                "transform 0.3s ease, box-shadow 0.3s ease",
-                            borderRadius: "12px",
-                            "&:hover": {
-                                transform: "translateY(-8px)",
-                                boxShadow: "0 0 25px rgba(255, 255, 255, 0.15)", // Subtle glow effect
-                            },
-                        }}
+                        size={{xs: 12, md: 5}}
                     >
                         <FadeInOnScroll>
                             <Box
@@ -80,16 +71,7 @@ const Instructor = () => {
                     </Grid>
                     {/* --- Content Column with Hover Effect --- */}
                     <Grid
-                        size={6}
-                        sx={{
-                            transition:
-                                "transform 0.3s ease, box-shadow 0.3s ease",
-                            borderRadius: "12px",
-                            "&:hover": {
-                                transform: "translateY(-8px)",
-                                boxShadow: "0 0 25px rgba(255, 255, 255, 0.15)", // Subtle glow effect
-                            },
-                        }}
+                        size={{xs: 12, md: 7}}
                     >
                         <FadeInOnScroll>
                             <Box sx={{ p: { xs: 0, md: 2 } }}>

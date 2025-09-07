@@ -34,26 +34,28 @@ const CtaBanner = () => {
                     {/* 2. New two-column layout */}
                     <Grid container alignItems="center" spacing={4}>
                         {/* Left Column: Headline */}
-                        <Grid size={12}>
+                        <Grid size={12} textAlign={"center"}>
                             <Typography
                                 variant="h3"
                                 component="h2"
                                 fontWeight="bold"
-                                sx={{ textAlign: { xs: "center", md: "left" } }}
+                                sx={{
+                                    textAlign: { xs: "center", md: "left" },
+                                    fontSize: { xs: "2rem", md: "3rem" },
+                                }}
                             >
-                                👉 The Future Won’t Wait — Why Should You?
+                                {`👉 The Future Won't Wait — Why Should You?`}
                             </Typography>
                             <Typography
                                 variant="h6"
                                 sx={{
                                     my: { xs: 2, md: 1 },
                                     color: "#e0e0e0",
-                                    maxWidth: "500px",
-                                    textAlign: { xs: "center", md: "left" },
+                                    maxWidth: "100%",
                                 }}
                             >
-                                Upgrade your career and personal growth with
-                                Self-Craft Skills’ live programs.
+                                {`Upgrade your career and personal growth with
+                                Self-Craft Skills' live programs.`}
                             </Typography>
                         </Grid>
 
@@ -89,6 +91,7 @@ const CtaBanner = () => {
                                                 "linear-gradient(45deg, #FFD700 30%, #FFA500 90%)",
                                             WebkitBackgroundClip: "text",
                                             WebkitTextFillColor: "transparent",
+                                            fontSize: { xs: "1rem", md: "1.5rem"},
                                         }}
                                     >
                                         Only 30 Seats are Available
