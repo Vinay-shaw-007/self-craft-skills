@@ -1,8 +1,7 @@
 // src/components/coursesData.ts
-import AiBanner from "../assets/ai-course-banner.png";
-import ContentBanner from "../assets/content-course-banner.png";
-import CommunicationBanner from "../assets/communication-course-banner.png";
-import AiCourseTitleSvg from "../assets/ai-course-title.svg";
+import AiBanner from "../assets/ai-course-banner.jpg";
+import ContentBanner from "../assets/content-course-banner.jpg";
+import CommunicationBanner from "../assets/communication-course-banner.jpg";
 
 // 1. This is the missing interface definition that was causing the error
 interface CourseDetails {
@@ -145,7 +144,7 @@ export const coursesData: Course[] = [
         id: "ai-unlocked",
         image: AiBanner,
         title: "AI UNLOCKED: ZERO TO HERO",
-        titleSvg: AiCourseTitleSvg,
+        titleSvg: null,
         status: "Open for Enrollment",
         details: aiCourseDetails,
     },

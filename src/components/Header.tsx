@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import MenuIcon from "@mui/icons-material/Menu";
-import Logo from "../../public/logo.svg";
+import Logo from "../assets/logo.png";
 
 // 1. "Support" has been added to the navigation list for the drawer
 const navItems = [

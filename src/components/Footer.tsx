@@ -9,7 +9,7 @@ import {
     Divider,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom"; // 1. This import is crucial
-import Logo from "../../public/logo.svg";
+import Logo from "../assets/logo.png";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
