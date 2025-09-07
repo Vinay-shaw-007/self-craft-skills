@@ -1,6 +1,6 @@
 // src/main.tsx
-import React from "react";
-import ReactDOM from "react-dom/client";
+
+import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -11,6 +11,7 @@ import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/500.css";
 import "@fontsource/poppins/700.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Create a custom theme to match the brand colors
 const theme = createTheme({
@@ -27,11 +28,18 @@ const theme = createTheme({
     },
 });
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-    <React.StrictMode>
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <App />
-        </ThemeProvider>
-    </React.StrictMode>
+const router = createBrowserRouter([
+    {
+        path: "/*",
+        element: <App />,
+    },
+]);
+
+const root = createRoot(document.getElementById("root")!);
+
+root.render(
+    <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <RouterProvider router={router} />
+    </ThemeProvider>
 );

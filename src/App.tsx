@@ -1,5 +1,5 @@
 // src/App.tsx
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Box } from "@mui/material";
 
 // Import Pages and Components
@@ -17,38 +17,27 @@ import CourseDetailPage from "./pages/CourseDetailPage";
 
 function App() {
     return (
-        <BrowserRouter>
-            <Box sx={{ backgroundColor: "#FFFFFF" }}>
-                <Header />
-                <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/courses" element={<CoursesPage />} />
-                    <Route
-                        path="/courses/:courseId"
-                        element={<CourseDetailPage />}
-                    />{" "}
-                    {/* New Route */}
-                    <Route path="/faq" element={<FaqPage />} />
-                    <Route
-                        path="/privacy-policy"
-                        element={<PrivacyPolicyPage />}
-                    />
-                    <Route
-                        path="/terms-and-conditions"
-                        element={<TermsPage />}
-                    />
-                    <Route
-                        path="/refund-policy"
-                        element={<RefundPolicyPage />}
-                    />
-                </Routes>
-                <Box id="support">
-                    <Footer />
-                </Box>
-                <BackToTopButton />
-                <WhatsAppButton />
+        <Box sx={{ backgroundColor: "#FFFFFF" }}>
+            <Header />
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/courses" element={<CoursesPage />} />
+                <Route
+                    path="/courses/:courseId"
+                    element={<CourseDetailPage />}
+                />{" "}
+                {/* New Route */}
+                <Route path="/faq" element={<FaqPage />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+                <Route path="/terms-and-conditions" element={<TermsPage />} />
+                <Route path="/refund-policy" element={<RefundPolicyPage />} />
+            </Routes>
+            <Box id="support">
+                <Footer />
             </Box>
-        </BrowserRouter>
+            <BackToTopButton />
+            <WhatsAppButton />
+        </Box>
     );
 }
 

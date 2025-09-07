@@ -24,10 +24,8 @@ import Logo from "../../public/logo.svg";
 // 1. "Support" has been added to the navigation list for the drawer
 const navItems = [
     { label: "Home", href: "/" },
-    // { label: "About", href: "/#about" },
     { label: "Courses", href: "/courses" },
     { label: "FAQs", href: "/faq" },
-    { label: "Support", href: "/#support" },
 ];
 
 const Header = () => {
@@ -163,7 +161,7 @@ const Header = () => {
                         <Typography
                             variant="h6"
                             component="div"
-                            fontWeight="bold"
+                            fontWeight="medium"
                             sx={{ color: "#333" }}
                         >
                             Self Craft Skills
@@ -171,36 +169,33 @@ const Header = () => {
                     </Box>
 
                     <Box sx={{ display: { xs: "none", md: "flex" }, gap: 4 }}>
-                        {navItems.map((item) =>
-                            // Filter out the Support link for desktop view
-                            ["Support"].includes(item.label) ? null : (
-                                <RouterNavLink
-                                    key={item.label}
-                                    to={item.href}
-                                    style={{ textDecoration: "none" }}
-                                >
-                                    {({ isActive }) => (
-                                        <Link
-                                            underline="none"
-                                            sx={{
-                                                whiteSpace: "nowrap",
-                                                fontSize: "1rem",
+                        {navItems.map((item) => (
+                            <RouterNavLink
+                                key={item.label}
+                                to={item.href}
+                                style={{ textDecoration: "none" }}
+                            >
+                                {({ isActive }) => (
+                                    <Link
+                                        underline="none"
+                                        sx={{
+                                            whiteSpace: "nowrap",
+                                            fontSize: "1rem",
 
-                                                transition: "color 0.2s",
-                                                "&:hover": {
-                                                    color: "primary.main",
-                                                },
-                                                ...(isActive
-                                                    ? activeLinkStyle
-                                                    : { color: "#333" }),
-                                            }}
-                                        >
-                                            {item.label}
-                                        </Link>
-                                    )}
-                                </RouterNavLink>
-                            )
-                        )}
+                                            transition: "color 0.2s",
+                                            "&:hover": {
+                                                color: "primary.main",
+                                            },
+                                            ...(isActive
+                                                ? activeLinkStyle
+                                                : { color: "#333" }),
+                                        }}
+                                    >
+                                        {item.label}
+                                    </Link>
+                                )}
+                            </RouterNavLink>
+                        ))}
                     </Box>
 
                     <Stack direction="row" spacing={1} alignItems="center">
