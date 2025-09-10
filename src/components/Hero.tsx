@@ -26,8 +26,9 @@ const Hero = () => {
                         color: "#333",
                     }}
                 >
-                    Learn Skills That{" "}
-                    <span style={{ color: "#D32F2F" }}>Craft Your Life.</span>
+                    
+                    Learn & Share Knowledge{" "}
+                    <span style={{ color: "#D32F2F" }}>Across Different Fields.</span>
                 </Typography>
                 <Typography
                     variant="h6"
