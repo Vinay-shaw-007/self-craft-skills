@@ -17,7 +17,7 @@ const faqData = [
         questions: [
             {
                 q: "What is Self-Craft Skills?",
-                a: "Self-Craft Skills is an online learning academy that focuses on real-world knowledge and personal growth. Our programs blend skill development with mindset training to prepare learners for future opportunities.",
+                a: "Self Craft Skills is a knowledge-sharing platform where you can learn about various fields. We aim to make learning simple, practical, and useful for learners. ",
             },
             {
                 q: "Why should I choose Self-Craft Skills?",
