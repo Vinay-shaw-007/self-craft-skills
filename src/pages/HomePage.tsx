@@ -2,9 +2,8 @@
 import { Box } from "@mui/material";
 import Hero from "../components/Hero";
 import About from "../components/About";
-import Instructor from "../components/Instructor";
-import CtaBanner from "../components/CtaBanner";
 import useScrollToHash from "../hooks/useScrollToHash";
+import UrgencyCta from "../components/UrgencyCta";
 
 const HomePage = () => {
     useScrollToHash();
@@ -16,12 +15,6 @@ const HomePage = () => {
             <Box id="about">
                 <About />
             </Box>
-            <Box id="instructor">
-                <Instructor />
-            </Box>
-
-            {/* 2. New container for the CTA Banner */}
-            {/* This creates the white space and textured background around the banner */}
             <Box
                 sx={{
                     backgroundColor: "white",
@@ -30,7 +23,10 @@ const HomePage = () => {
                     px: { xs: 2, md: 4 }, // This creates the left/right white space
                 }}
             >
-                <CtaBanner />
+                
+                 
+                <UrgencyCta />
+
             </Box>
         </main>
     );

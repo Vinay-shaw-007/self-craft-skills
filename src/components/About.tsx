@@ -7,104 +7,145 @@ import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import GroupsIcon from "@mui/icons-material/Groups";
 import FadeInOnScroll from "./FadeInOnScroll";
 
-// 1. New structured content for the four feature blocks
+// Features data for card layout
 const features = [
     {
-        icon: <ModelTrainingIcon sx={{ fontSize: "3rem" }} color="primary" />,
-        title: "🎯 Practical Skills",
+        icon: <ModelTrainingIcon sx={{ fontSize: "3.5rem", color: "#fff" }} />,
+        title: "Diverse Learning Paths",
         description:
-            "Master in-demand skills with hands-on, expert-led courses. Begin with our AI & ChatGPT Zero-to-Hero program and gain an edge in today’s world.",
+            "Explore courses tailored to your passion and career growth across various fields.",
+        gradient: "linear-gradient(135deg, #FF6B6B, #FFD93D)",
     },
     {
-        icon: <PsychologyIcon sx={{ fontSize: "3rem" }} color="secondary" />,
-        title: "🧠 Mindset Coaching",
+        icon: <PsychologyIcon sx={{ fontSize: "3.5rem", color: "#fff" }} />,
+        title: "Hands-on Learning",
         description:
-            "Build focus, resilience, and clarity through life sessions designed to help you stay productive and unlock your true potential.",
+            "Work on real-world projects with expert guidance and practical exercises.",
+        gradient: "linear-gradient(135deg, #6BCB77, #4D96FF)",
     },
     {
-        icon: <TrendingUpIcon sx={{ fontSize: "3rem", color: "#2e7d32" }} />, // Custom green
-        title: "📈 Growth-Oriented Learning",
+        icon: <TrendingUpIcon sx={{ fontSize: "3.5rem", color: "#fff" }} />,
+        title: "Mindset Coaching",
         description:
-            "Our programs are built not just to teach, but to transform the way you think, learn, and work—driving long-term success.",
+            "Boost your confidence and resilience with actionable strategies and coaching.",
+        gradient: "linear-gradient(135deg, #FF7E5F, #FEB47B)",
     },
     {
-        icon: <GroupsIcon sx={{ fontSize: "3rem", color: "#ff8f00" }} />, // Custom orange
-        title: "🤝 Community Support",
+        icon: <GroupsIcon sx={{ fontSize: "3.5rem", color: "#fff" }} />,
+        title: "Community Support",
         description:
-            "Learn together, stay accountable, and connect with like-minded learners through our supportive learning community.",
+            "Join an inspiring network of learners to share ideas, stay up-to-date, and become more productive. ",
+        gradient: "linear-gradient(135deg, #00C9FF, #92FE9D)",
     },
 ];
 
 const About = () => {
     return (
-        // 2. New light blue-to-white gradient background
         <Box
-            sx={{
-                py: { xs: 6, md: 10 },
-                background: "linear-gradient(180deg, #EDF5FD 0%, #FFFFFF 70%)",
-            }}
+        //     sx={{
+        //         py: { xs: 6, md: 10 },
+        //         background: "linear-gradient(180deg, #EDF5FD 0%, #FFFFFF 70%)",
+        //         backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%23e5e5e5' stroke-width='1'%3E%3Cpath d='M 40 0 L 0 0 0 40'%3E%3C/path%3E%3C/g%3E%3C/svg%3E")`,
+        //         backgroundSize: "25px 25px",
+        //         backgroundRepeat: "repeat",
+        //     }}
         >
+        
+            
             <Container>
                 <FadeInOnScroll>
                     <Box sx={{ textAlign: "center", mb: { xs: 6, md: 8 } }}>
-                        <Typography
-                            variant="h4"
-                            component="h2"
-                            fontWeight="bold"
-                        >
-                            ✨ Unlock Skills + Mindset to Craft Yourself
-                        </Typography>
+                        {/* 2. New yellow title badge design */}
+                        <Paper sx={{
+                            display: 'inline-block',
+                            p: '8px 32px',
+                            borderRadius: '50px',
+                            backgroundColor: '#fef08a',
+                            boxShadow: '0 8px 16px rgba(250, 204, 21, 0.2)',
+                            mb: 3
+                        }}>
+                            <Typography variant="h5" component="h2" fontWeight="bold" >
+                                ✨ About Self Craft Skills
+                            </Typography>
+                        </Paper>
                         <Typography
                             variant="h6"
                             color="text.secondary"
                             sx={{ maxWidth: "800px", mx: "auto", mt: 2 }}
                         >
-                            At Self-Craft Skills, we combine real-world
-                            practical skills with mindset development so you can
-                            learn faster, grow smarter, and achieve more.
+                            Self Craft Skills is a knowledge-sharing platform
+                            where you can explore diverse fields, build
+                            practical expertise, and develop a growth
+                            mindset—all designed to empower you to learn smarter
+                            and achieve more.
                         </Typography>
                     </Box>
                 </FadeInOnScroll>
 
-                {/* 3. A 2x2 grid for the feature cards */}
-                <Grid container spacing={4}>
+                <Grid container spacing={4} justifyContent="center">
                     {features.map((feature, index) => (
-                        <Grid size={{lg: 6, md: 6, sm: 12}} key={index}>
+                        <Grid size={{xs:12, sm:6, md:3}} key={index}>
                             <FadeInOnScroll>
-                                <Paper
-                                    elevation={2}
+                                <Box
                                     sx={{
-                                        p: 4,
-                                        textAlign: "center",
-                                        height: "100%",
-                                        borderRadius: "12px",
-                                        transition:
-                                            "transform 0.3s ease, box-shadow 0.3s ease",
-                                        "&:hover": {
-                                            transform: "translateY(-8px)",
-                                            boxShadow:
-                                                "0 12px 30px rgba(0,0,0,0.1)",
-                                        },
+                                        position: "relative",
+                                        p: 2,
                                     }}
                                 >
-                                    {feature.icon}
-                                    <Typography
-                                        variant="h6"
-                                        fontWeight="bold"
-                                        sx={{ mt: 2, mb: 1 }}
+                                    <Box
+                                        sx={{
+                                            background: feature.gradient,
+                                            borderRadius: "20px",
+                                            p: 3,
+                                            height: "100%",
+                                            color: "#fff",
+                                            boxShadow:
+                                                "0 8px 20px rgba(0, 0, 0, 0.15)",
+                                            transition: "all 0.3s ease",
+                                            "&:hover": {
+                                                transform: "scale(1.05)",
+                                                boxShadow:
+                                                    "0 12px 30px rgba(0, 0, 0, 0.25)",
+                                            },
+                                        }}
                                     >
-                                        {feature.title}
-                                    </Typography>
-                                    <Typography color="text.secondary">
-                                        {feature.description}
-                                    </Typography>
-                                </Paper>
+                                        <Box
+                                            sx={{
+                                                width: 64,
+                                                height: 64,
+                                                backgroundColor: "rgba(255,255,255,0.2)",
+                                                borderRadius: "50%",
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "center",
+                                                mb: 2,
+                                                mx: "auto",
+                                            }}
+                                        >
+                                            {feature.icon}
+                                        </Box>
+                                        <Typography
+                                            variant="h6"
+                                            fontWeight="bold"
+                                            align="center"
+                                            gutterBottom
+                                        >
+                                            {feature.title}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2"
+                                            align="center"
+                                            sx={{ lineHeight: 1.6 }}
+                                        >
+                                            {feature.description}
+                                        </Typography>
+                                    </Box>
+                                </Box>
                             </FadeInOnScroll>
                         </Grid>
                     ))}
                 </Grid>
 
-                {/* 4. New Call-to-Action Button */}
                 <FadeInOnScroll>
                     <Box sx={{ textAlign: "center", mt: { xs: 6, md: 8 } }}>
                         <Button
@@ -131,7 +172,7 @@ const About = () => {
                                 },
                             }}
                         >
-                            Start Learning Today
+                            Start your learning journey
                         </Button>
                     </Box>
                 </FadeInOnScroll>

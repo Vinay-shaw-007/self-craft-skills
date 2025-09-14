@@ -39,9 +39,23 @@ const HowItWorks = () => {
                 borderRadius: "24px", // Added rounded corners
                 background: "linear-gradient(45deg, #1f2937 30%, #111827 90%)",
                 color: "white",
+                zIndex: 1
             }}
         >
-            <Container>
+            <Container >
+                <Box
+                    sx={{
+                        position: "absolute",
+                        bottom: -400,
+                        left: -100,
+                        width: 200,
+                        height: 200,
+                        background: "linear-gradient(135deg, #55bcc6ff, #ffffffff)",
+                        borderRadius: "50%",
+                        opacity: 0.2,
+                        zIndex: 0,
+                    }}
+                />
                 <FadeInOnScroll>
                     <Typography
                         variant="h4"

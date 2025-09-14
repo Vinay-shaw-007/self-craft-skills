@@ -9,13 +9,41 @@ const Hero = () => {
                 py: { xs: 8, md: 12 },
                 textAlign: "center",
                 backgroundColor: "white",
-                // This new SVG background mimics the abstract "network" style you wanted
-                backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 800'%3e%3cg fill-opacity='0.2'%3e%3cpolygon fill='%23e6e6fa' points='1600 160 0 460 0 360 1600 60'/%3e%3cpolygon fill='%23dcdcf6' points='1600 260 0 560 0 460 1600 160'/%3e%3cpolygon fill='%23d1d1f2' points='1600 360 0 660 0 560 1600 260'/%3e%3cpolygon fill='%23c7c7ee' points='1600 460 0 760 0 660 1600 360'/%3e%3cpolygon fill='%23bcbaea' points='1600 800 0 800 0 760 1600 460'/%3e%3c/g%3e%3c/svg%3e")`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
+            //     backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%23e5e5e5' stroke-width='1'%3E%3Cpath d='M 40 0 L 0 0 0 40'%3E%3C/path%3E%3C/g%3E%3C/svg%3E")`,
+            //     backgroundSize: "25px 25px",
+            //     backgroundRepeat: "repeat",
             }}
         >
+            {/* Top-left pink circle */}
+<Box
+    sx={{
+        position: "absolute",
+        top: { xs: -30, md: -50 },
+        left: { xs: -30, md: -50 },
+        width: { xs: 150, md: 300 },
+        height: { xs: 150, md: 300 },
+        background: "linear-gradient(135deg, #FF9A8B, #FF6A88)",
+        borderRadius: "50%",
+        opacity: { xs: 0.2, md: 0.2 },
+        zIndex: 0,
+    }}
+/>
+
+{/* Bottom-right yellow-orange circle */}
+<Box
+    sx={{
+        position: "absolute",
+        bottom: { xs: -20, md: -60 },
+        right: { xs: -20, md: -40 },
+        width: { xs: 100, md: 200 },
+        height: { xs: 100, md: 200 },
+        background: "linear-gradient(135deg, #FFD93D, #FF6B6B)",
+        borderRadius: "50%",
+        opacity: { xs: 0.1, md: 0.2 },
+        zIndex: 0,
+    }}
+/>
+
             <Container>
                 <Typography
                     variant="h2"

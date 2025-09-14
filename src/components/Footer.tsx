@@ -171,13 +171,13 @@ const Footer = () => {
                             Contact Us
                         </Typography>
                         <Link
-                            href="mailto:selfcraftskills+support@gmail.com"
+                            href="mailto:support@selfcraftskills.com"
                             color="inherit"
                             underline="hover"
                             variant="body2"
                             sx={{ color: "#bdbdbd" }}
                         >
-                            selfcraftskills+support@gmail.com
+                            support@selfcraftskills.com
                         </Link>
                     </Grid>
                 </Grid>

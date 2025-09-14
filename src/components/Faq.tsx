@@ -102,10 +102,15 @@ const Faq = () => {
             //     backgroundColor: "#ffffffff",
             // }}
             sx={{
-                py: { xs: 6, md: 10 },
-                backgroundColor: "white",
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='%23dbe9f6' fill-opacity='0.4'%3E%3Cpolygon fill-rule='evenodd' points='8 4 12 6 8 8 6 12 4 8 0 6 4 4 6 0 8 4'/%3E%3C/g%3E%3C/svg%3E")`,
-            }}
+            //     py: { xs: 6, md: 10 },
+            // backgroundColor: "white",
+            // backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='%23dbe9f6' fill-opacity='0.4'%3E%3Cpolygon fill-rule='evenodd' points='8 4 12 6 8 8 6 12 4 8 0 6 4 4 6 0 8 4'/%3E%3C/g%3E%3C/svg%3E")`,          
+           background: "linear-gradient(180deg, #EDF5FD 0%, #FFFFFF 70%)",
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%23e5e5e5' stroke-width='1'%3E%3Cpath d='M 40 0 L 0 0 0 40'%3E%3C/path%3E%3C/g%3E%3C/svg%3E")`,
+                backgroundSize: "25px 25px",
+                backgroundRepeat: "repeat",
+        }}
+            
         >
             <Container maxWidth="md">
                 <FadeInOnScroll>
@@ -114,7 +119,7 @@ const Faq = () => {
                         component="h2"
                         align="center"
                         fontWeight="bold"
-                        fontFamily={"unset"}
+                        fontFamily={"revert-layer"}
                         gutterBottom
                     >
                         ❓ Frequently Asked Questions

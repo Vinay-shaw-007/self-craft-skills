@@ -219,7 +219,7 @@ const Header = () => {
                         >
                             Support
                         </Button>
-                        <Button
+                        {/* <Button
                             variant="contained"
                             href="https://forms.gle/HnFrNt84kW8cibSZ9"
                             target="_blank"
@@ -238,7 +238,7 @@ const Header = () => {
                             }}
                         >
                             Enroll Now
-                        </Button>
+                        </Button> */}
                         <IconButton
                             color="inherit"
                             onClick={handleDrawerToggle}

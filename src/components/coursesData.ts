@@ -5,6 +5,7 @@ import CommunicationBanner from "../assets/communication-course-banner.jpg";
 
 // 1. This is the missing interface definition that was causing the error
 interface CourseDetails {
+    [x: string]: any;
     summary: string;
     duration?: string;
     classLength?: string;
@@ -12,6 +13,7 @@ interface CourseDetails {
     goal?: string;
     whoIsThisFor?: string;
     bonuses?: string[];
+    keyFeatures?: string[];
     syllabus?: {
         week: string;
         takeaway: string;
@@ -39,6 +41,14 @@ const aiCourseDetails = {
     whoIsThisFor:
         "Students, working professionals, content creators, and entrepreneurs looking to boost their productivity and future-proof their skills.",
     bonuses: ["Certificate of Completion", "Exclusive Prompt Book"],
+    keyFeatures: [
+    'Weekly Live Classes',
+    'Beginner-Friendly',
+    'LIVE Q&A session',
+    'No prior experience required',
+    'Certificate of completion',
+    'Bonus: worth ₹4999'
+      ],
     syllabus: [
         {
             week: "WEEK 1 – Foundations of AI",
