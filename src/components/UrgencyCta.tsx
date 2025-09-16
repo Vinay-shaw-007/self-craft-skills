@@ -71,39 +71,45 @@ const UrgencyCta = () => {
                     </Typography>
                 </Box>
 
-                <Box sx={{ flex: "0 0 auto" }}>
-                    <Button
-                        component={RouterLink}
-                        to="/courses/ai-unlocked"
-                        variant="contained"
-                        startIcon={<RocketLaunchIcon />}
-                        sx={{
-                            borderRadius: "50px",
-                            px: 4,
-                            py: 1.5,
-                            fontWeight: "bold",
-                            background: "linear-gradient(135deg, #FF6B6B, #FFD93D)",
-                            color: "#000",
-                            boxShadow: "0 6px 20px rgba(255, 107, 107, 0.3)",
-                            transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                            "&:hover": {
-                                transform: "scale(1.05)",
-                                boxShadow: "0 8px 25px rgba(255, 107, 107, 0.4)",
-                            },
-                            animation: "pulse 2s infinite alternate",
-                            "@keyframes pulse": {
-                                "0%": {
-                                    transform: "scale(1)",
-                                },
-                                "100%": {
-                                    transform: "scale(1.05)",
-                                },
-                            },
-                        }}
-                    >
-                        Secure your spot now!
-                    </Button>
-                </Box>
+                <Box
+    sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: { xs: "center", sm: "flex-start" }, // Mobile = center, Desktop = left
+        flexWrap: "nowrap", // force ek line
+        gap: 2, // thoda space between text & button agar saath me use kare
+    }}
+>
+    <Button
+        component={RouterLink}
+        to="/courses/ai-unlocked"
+        variant="contained"
+        startIcon={<RocketLaunchIcon />}
+        sx={{
+            borderRadius: "50px",
+            px: 4,
+            py: 1.5,
+            fontWeight: "bold",
+            background: "linear-gradient(135deg, #FF6B6B, #FFD93D)",
+            color: "#000",
+            whiteSpace: "nowrap", // text wrap na ho
+            boxShadow: "0 6px 20px rgba(255, 107, 107, 0.3)",
+            transition: "transform 0.3s ease, box-shadow 0.3s ease",
+            "&:hover": {
+                transform: "scale(1.05)",
+                boxShadow: "0 8px 25px rgba(255, 107, 107, 0.4)",
+            },
+            animation: "pulse 2s infinite alternate",
+            "@keyframes pulse": {
+                "0%": { transform: "scale(1)" },
+                "100%": { transform: "scale(1.05)" },
+            },
+        }}
+    >
+        Secure your spot now!
+    </Button>
+</Box>
+
             </Paper>
         </Container>
     );

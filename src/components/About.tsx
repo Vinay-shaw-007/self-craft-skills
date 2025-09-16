@@ -50,21 +50,33 @@ const About = () => {
         //         backgroundRepeat: "repeat",
         //     }}
         >
-        
-            
             <Container>
                 <FadeInOnScroll>
                     <Box sx={{ textAlign: "center", mb: { xs: 6, md: 8 } }}>
                         {/* 2. New yellow title badge design */}
-                        <Paper sx={{
-                            display: 'inline-block',
-                            p: '8px 32px',
-                            borderRadius: '50px',
-                            backgroundColor: '#fef08a',
-                            boxShadow: '0 8px 16px rgba(250, 204, 21, 0.2)',
-                            mb: 3
-                        }}>
-                            <Typography variant="h5" component="h2" fontWeight="bold" >
+                        <Paper
+                            sx={{
+                                display: "inline-block",
+                                p: "8px 32px",
+                                borderRadius: "50px",
+                                backgroundColor: "#fef08a",
+                                boxShadow: "0 8px 16px rgba(250, 204, 21, 0.2)",
+                                mb: 3,
+                            }}
+                        >
+                            <Typography
+                                variant="h5"
+                                component="h2"
+                                fontWeight="bold"
+                                sx={{
+                                    fontSize: {
+                                        xs: "1.2rem",
+                                        sm: "1.25rem",
+                                        md: "1.5rem",
+                                    },
+                                    //   whiteSpace: 'nowrap',
+                                }}
+                            >
                                 ✨ About Self Craft Skills
                             </Typography>
                         </Paper>
@@ -84,7 +96,7 @@ const About = () => {
 
                 <Grid container spacing={4} justifyContent="center">
                     {features.map((feature, index) => (
-                        <Grid size={{xs:12, sm:6, md:3}} key={index}>
+                        <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
                             <FadeInOnScroll>
                                 <Box
                                     sx={{
@@ -113,7 +125,8 @@ const About = () => {
                                             sx={{
                                                 width: 64,
                                                 height: 64,
-                                                backgroundColor: "rgba(255,255,255,0.2)",
+                                                backgroundColor:
+                                                    "rgba(255,255,255,0.2)",
                                                 borderRadius: "50%",
                                                 display: "flex",
                                                 alignItems: "center",

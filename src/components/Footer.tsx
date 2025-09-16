@@ -13,6 +13,7 @@ import Logo from "../assets/logo.png";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import { LinkedIn } from "@mui/icons-material";
 
 const Footer = () => {
     return (
@@ -171,13 +172,13 @@ const Footer = () => {
                             Contact Us
                         </Typography>
                         <Link
-                            href="mailto:support@selfcraftskills.com"
+                            href="mailto:contact@selfcraftskills.com"
                             color="inherit"
                             underline="hover"
                             variant="body2"
                             sx={{ color: "#bdbdbd" }}
                         >
-                            support@selfcraftskills.com
+                            contact@selfcraftskills.com
                         </Link>
                     </Grid>
                 </Grid>
@@ -227,6 +228,15 @@ const Footer = () => {
                             sx={{ "&:hover": { color: "primary.main" } }}
                         >
                             <WhatsAppIcon />
+                        </Link>
+                        <Link
+                            href="https://linkedin.com/company/selfcraftskills"
+                            color="inherit"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            sx={{ "&:hover": { color: "primary.main" } }}
+                        >
+                            <LinkedIn />
                         </Link>
                     </Stack>
                 </Box>
