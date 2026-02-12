@@ -1,8 +1,11 @@
 // src/components/BackToTopButton.tsx
 import { Fab, Zoom, useScrollTrigger } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { useLocation } from "react-router-dom";
 
 const BackToTopButton = () => {
+    const location = useLocation();
+    const isCourseDetailPage = /^\/courses\/[^/]+/.test(location.pathname);
     const trigger = useScrollTrigger({
         disableHysteresis: true,
         threshold: 100, // Show button after scrolling 100px
@@ -24,8 +27,9 @@ const BackToTopButton = () => {
                 onClick={scrollToTop}
                 sx={{
                     position: "fixed",
-                    bottom: 16,
+                    bottom: { xs: isCourseDetailPage ? 96 : 16, md: 16 },
                     right: 16,
+                    zIndex: 1100,
                 }}
             >
                 <KeyboardArrowUpIcon />

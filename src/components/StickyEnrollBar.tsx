@@ -2,16 +2,15 @@
 import { Box, Typography, Button, Container } from "@mui/material";
 import type { Course } from "./coursesData";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import Logo from "../assets/logo.svg"; // Import your logo
+import Logo from "../assets/logo.svg";
 
 interface StickyEnrollBarProps {
     course: Course | undefined;
 }
 
 const StickyEnrollBar = ({ course }: StickyEnrollBarProps) => {
-    // Removed the scroll trigger to make the bar always visible
     if (!course || course.status !== "Open for Enrollment") {
-        return null; // Don't show the bar if the course is not open
+        return null;
     }
 
     return (
@@ -21,20 +20,21 @@ const StickyEnrollBar = ({ course }: StickyEnrollBarProps) => {
                 position: "fixed",
                 bottom: 0,
                 left: "50%",
-                py: 2,
+                py: { xs: 1.4, md: 1.8 },
                 width: { xs: "95%", md: "70%" },
                 borderRadius: "16px 16px 0 0",
-                // It layers a subtle pattern on top of your premium blue gradient
-                backgroundColor: "#0a192f", // Fallback color
-                backgroundImage: `
-                    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
-                    linear-gradient(45deg, #0a192f 30%, #1a237e 90%)
-                `,
+                backgroundColor: "#0a192f",
+                backgroundImage: {
+                    xs: "linear-gradient(45deg, #0a192f 30%, #1a237e 90%)",
+                    md: `
+                        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+                        linear-gradient(45deg, #0a192f 30%, #1a237e 90%)
+                    `,
+                },
                 color: "white",
-                boxShadow: "0 -5px 20px rgba(0,0,0,0.25)",
+                boxShadow: "0 -8px 24px rgba(15, 23, 42, 0.28)",
                 zIndex: 1000,
                 borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-                // --- 2. Animated Entrance ---
                 transform: "translateX(-50%)",
                 animation: "slideUp 0.5s ease-out forwards",
                 "@keyframes slideUp": {
@@ -49,10 +49,9 @@ const StickyEnrollBar = ({ course }: StickyEnrollBarProps) => {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "space-between",
-                        gap: 2,
+                        gap: { xs: 1.2, md: 2 },
                     }}
                 >
-                    {/* Left Side: Brand and Course Title */}
                     <Box
                         sx={{
                             display: "flex",
@@ -60,6 +59,9 @@ const StickyEnrollBar = ({ course }: StickyEnrollBarProps) => {
                             gap: 2,
                             overflow: "hidden",
                             flexShrink: 1,
+                            pr: { xs: 1, md: 2.5 },
+                            mr: { xs: 0.5, md: 1.5 },
+                            borderRight: "1px solid rgba(255,255,255,0.15)",
                         }}
                     >
                         <Box
@@ -72,25 +74,34 @@ const StickyEnrollBar = ({ course }: StickyEnrollBarProps) => {
                             }}
                         />
                         <Box>
-                            <Typography fontWeight="bold">
+                            <Typography
+                                fontWeight={700}
+                                sx={{
+                                    fontSize: { xs: "0.92rem", md: "1.02rem" },
+                                    lineHeight: 1.2,
+                                }}
+                            >
                                 {course.title}
                             </Typography>
                             <Typography
                                 variant="caption"
-                                sx={{ color: "#bdbdbd" }}
+                                sx={{
+                                    color: "#bdbdbd",
+                                    display: { xs: "none", sm: "block" },
+                                }}
                             >
                                 Start your learning journey today.
                             </Typography>
                         </Box>
                     </Box>
 
-                    {/* Right Side: Price and Button */}
                     <Box
                         sx={{
                             display: "flex",
                             alignItems: "center",
                             gap: { xs: 2, md: 3 },
                             ml: "auto",
+                            flexShrink: 0,
                         }}
                     >
                         <Box sx={{ textAlign: "right" }}>
@@ -102,14 +113,10 @@ const StickyEnrollBar = ({ course }: StickyEnrollBarProps) => {
                                     lineHeight: 1,
                                 }}
                             >
-                                ₹1999
+                                {"\u20B91999"}
                             </Typography>
-                            <Typography
-                                variant="h5"
-                                fontWeight="bold"
-                                sx={{ color: "#ffffffff" }}
-                            >
-                                ₹999
+                            <Typography variant="h5" fontWeight="bold" sx={{ color: "#fff" }}>
+                                {"\u20B9999"}
                             </Typography>
                         </Box>
                         <Button
@@ -120,17 +127,18 @@ const StickyEnrollBar = ({ course }: StickyEnrollBarProps) => {
                             rel="noopener noreferrer"
                             sx={{
                                 borderRadius: "50px",
-                                px: { xs: 2.5, md: 4 }, // mobile me kam padding
-                                py: { xs: 0.2, md: 1.5 }, // mobile me button patla
+                                px: { xs: 2.2, md: 3.6 },
+                                py: { xs: 0.45, md: 1.3 },
                                 fontWeight: "bold",
-                                fontSize: { xs: "0.85rem", md: "1rem" }, // mobile me chhota font
+                                fontSize: { xs: "0.8rem", md: "0.98rem" },
+                                minWidth: { xs: "136px", md: "170px" },
                                 background:
                                     "linear-gradient(45deg, #D32F2F 30%, #E57373 90%)",
                                 color: "white",
-                                boxShadow: "0 3px 10px rgba(211, 47, 47, 0.35)", // halka shadow mobile pe
+                                boxShadow: "0 8px 20px rgba(211, 47, 47, 0.35)",
                                 transition: "transform 0.2s ease",
                                 "&:hover": {
-                                    transform: "scale(1.05)",
+                                    transform: "translateY(-2px)",
                                 },
                             }}
                         >

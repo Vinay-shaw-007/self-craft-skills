@@ -7,7 +7,7 @@ import BoltIcon from "@mui/icons-material/Bolt";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
 
 const stats = [
-  { metric: "6 Weeks", label: "Course Duration", icon: <AccessTimeIcon sx={{ fontSize: 40, color: "#f59e0b" }} /> },
+  { metric: "4 Weeks", label: "Course Duration", icon: <AccessTimeIcon sx={{ fontSize: 40, color: "#f59e0b" }} /> },
   { metric: "30 Seats", label: "Per Cohort", icon: <PeopleIcon sx={{ fontSize: 40, color: "#10b981" }} /> },
   { metric: "1000+", label: "Bonus Prompts", icon: <BoltIcon sx={{ fontSize: 40, color: "#3b82f6" }} /> },
   { metric: "Live", label: "Q&A Sessions", icon: <LiveTvIcon sx={{ fontSize: 40, color: "#ef4444" }} /> },
@@ -18,7 +18,7 @@ const StatsBanner = () => {
     <Box
       sx={{
         py: { xs: 6, md: 8 },
-        background: "linear-gradient(90deg, #fef08a, #facc15)",
+        background: "linear-gradient(90deg, #fef3c7, #facc15 55%, #fbbf24)",
       }}
     >
       <Container>
@@ -28,24 +28,25 @@ const StatsBanner = () => {
               <Grid size={{xs:12, sm:6, md:3}} key={index}>
                 <Paper
                   sx={{
-                    p: 4,
+                    p: 3.5,
                     textAlign: "center",
-                    borderRadius: "20px",
-                    background: "rgba(255,255,255,0.8)",
+                    borderRadius: "16px",
+                    border: "1px solid #f3e7bf",
+                    background: "rgba(255,255,255,0.88)",
                     backdropFilter: "blur(10px)",
-                    boxShadow: "0 8px 30px rgba(0,0,0,0.1)",
+                    boxShadow: "0 10px 24px rgba(15, 23, 42, 0.1)",
                     transition: "all 0.3s ease",
                     "&:hover": {
-                      transform: "translateY(-8px)",
-                      boxShadow: "0 12px 40px rgba(0,0,0,0.15)",
+                      transform: "translateY(-5px)",
+                      boxShadow: "0 14px 30px rgba(15, 23, 42, 0.14)",
                     },
                   }}
                 >
                   <Box mb={2}>{stat.icon}</Box>
                   <Typography
                     variant="h4"
-                    fontWeight="bold"
-                    sx={{ color: "text.primary" }}
+                    fontWeight={700}
+                    sx={{ color: "#111827" }}
                   >
                     {stat.metric}
                   </Typography>
@@ -66,3 +67,4 @@ const StatsBanner = () => {
 };
 
 export default StatsBanner;
+

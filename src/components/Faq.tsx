@@ -13,24 +13,24 @@ import FadeInOnScroll from "./FadeInOnScroll";
 
 const faqData = [
     {
-        category: "🏫 About the Academy",
+        category: "About the Academy",
         questions: [
             {
                 q: "What is Self-Craft Skills?",
-                a: "Self Craft Skills is a knowledge-sharing platform where you can learn about various fields. We aim to make learning simple, practical, and useful for learners. ",
+                a: "Self Craft Skills is a knowledge-sharing platform where you can learn about various fields. We aim to make learning simple, practical, and useful for learners.",
             },
             {
                 q: "Why should I choose Self-Craft Skills?",
-                a: "We focus on application-based learning with live guidance and mentorship. Instead of just theory, you’ll gain knowledge you can actually use in studies, work, and everyday life.",
+                a: "We focus on application-based learning with live guidance and mentorship. Instead of just theory, you'll gain knowledge you can actually use in studies, work, and everyday life.",
             },
             {
-                q: "What’s the vision of Self-Craft Skills?",
-                a: "Our goal is to become a leading platform for modern & practical learning, through our courses",
+                q: "What's the vision of Self-Craft Skills?",
+                a: "Our goal is to become a leading platform for modern and practical learning through our courses.",
             },
         ],
     },
     {
-        category: "📚 Courses & Learning",
+        category: "Courses and Learning",
         questions: [
             {
                 q: "Who can join the courses?",
@@ -38,7 +38,7 @@ const faqData = [
             },
             {
                 q: "What courses do you currently offer?",
-                a: "We currently offer AI Unlocked: Zero to Hero, a 6-week beginner-friendly course on ChatGPT and AI productivity. Upcoming programs include Content Creation and Communication Skills.",
+                a: "We currently offer AI Unlocked: Zero to Hero, a 4-week beginner-friendly course on ChatGPT and AI productivity. Upcoming programs include Content Creation and Communication Skills.",
             },
             {
                 q: "How are classes conducted?",
@@ -59,7 +59,7 @@ const faqData = [
         ],
     },
     {
-        category: "📝 Registration, Payments & Refund",
+        category: "Registration, Payments and Refund",
         questions: [
             {
                 q: "How do I register for a course?",
@@ -71,12 +71,12 @@ const faqData = [
             },
             {
                 q: "How to claim your refund?",
-                a: "• A refund can be requested before the batch start date. • Once the batch has started, no refund will be issued. To claim “no-question-asked” refund, please follow the steps below: 1. Drop an email on: selfcraftskills+support@gmail.com with a subject line: “Online course refund | Registered email id”. 2. Attach your payment details (transaction ID / screenshot).   3. Refunds will be processed to the original payment method within 3–5 business days.",
+                a: "A refund can be requested before the batch start date. Once the batch has started, no refund will be issued. To claim a no-question-asked refund, email selfcraftskills@gmail.com with the subject 'Online course refund | Registered email id' and attach your payment details (transaction ID or screenshot). Refunds are processed to the original payment method within 3-5 business days.",
             },
         ],
     },
     {
-        category: "🎥 Learning vs Free Content",
+        category: "Learning vs Free Content",
         questions: [
             {
                 q: "How is this different from free YouTube tutorials?",
@@ -97,32 +97,32 @@ const Faq = () => {
 
     return (
         <Box
-            // sx={{
-            //     py: { xs: 6, md: 10 },
-            //     backgroundColor: "#ffffffff",
-            // }}
             sx={{
-            //     py: { xs: 6, md: 10 },
-            // backgroundColor: "white",
-            // backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='%23dbe9f6' fill-opacity='0.4'%3E%3Cpolygon fill-rule='evenodd' points='8 4 12 6 8 8 6 12 4 8 0 6 4 4 6 0 8 4'/%3E%3C/g%3E%3C/svg%3E")`,          
-           background: "linear-gradient(180deg, #EDF5FD 0%, #FFFFFF 70%)",
+                background: "linear-gradient(180deg, #EDF5FD 0%, #FFFFFF 70%)",
                 backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%23e5e5e5' stroke-width='1'%3E%3Cpath d='M 40 0 L 0 0 0 40'%3E%3C/path%3E%3C/g%3E%3C/svg%3E")`,
                 backgroundSize: "25px 25px",
                 backgroundRepeat: "repeat",
-        }}
-            
+            }}
         >
             <Container maxWidth="md">
                 <FadeInOnScroll>
                     <Typography
-                        variant="h4"
+                        variant="h3"
                         component="h2"
                         align="center"
-                        fontWeight="bold"
-                        fontFamily={"revert-layer"}
+                        fontWeight={700}
+                        sx={{
+                            color: "#111827",
+                            letterSpacing: "0.02em",
+                            fontSize: { xs: "1.9rem", md: "2.4rem" },
+                            mb: 1,
+                        }}
                         gutterBottom
                     >
-                        ❓ Frequently Asked Questions
+                        Frequently Asked{" "}
+                        <Box component="span" sx={{ color: "#d32f2f" }}>
+                            Questions
+                        </Box>
                     </Typography>
 
                     {faqData.map((category, categoryIndex) => (
@@ -146,19 +146,17 @@ const Faq = () => {
                                             elevation={1}
                                             sx={{
                                                 py: 1,
-                                                mb: 1.5, // Add margin between accordions
+                                                mb: 1.5,
                                                 borderRadius: "12px",
                                                 "&:before": { display: "none" },
-                                                // Add the transition and hover effects
                                                 transition:
                                                     "transform 0.3s ease, box-shadow 0.3s ease",
                                                 "&:hover": {
-                                                    transform:
-                                                        "translateY(-8px)",
+                                                    transform: "translateY(-8px)",
                                                     boxShadow:
                                                         "0 12px 30px rgba(0,0,0,0.1)",
                                                 },
-                                            }} // Removes the top border line
+                                            }}
                                         >
                                             <AccordionSummary
                                                 expandIcon={<ExpandMoreIcon />}

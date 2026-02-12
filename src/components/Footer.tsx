@@ -27,7 +27,7 @@ const Footer = () => {
             <Container>
                 <Grid container spacing={4}>
                     {/* Column 1: Brand Info */}
-                    <Grid size={10}>
+                    <Grid size={{ xs: 12, md: 4 }}>
                         <Box
                             sx={{
                                 display: "flex",
@@ -56,7 +56,7 @@ const Footer = () => {
                     </Grid>
 
                     {/* Column 2: Quick Links */}
-                    <Grid size={6}>
+                    <Grid size={{ xs: 6, md: 2 }}>
                         <Typography
                             variant="subtitle1"
                             fontWeight="bold"
@@ -100,7 +100,7 @@ const Footer = () => {
                     </Grid>
 
                     {/* Column 3: More Links */}
-                    <Grid size={6}>
+                    <Grid size={{ xs: 6, md: 3 }}>
                         <Typography
                             variant="subtitle1"
                             fontWeight="bold"
@@ -163,7 +163,7 @@ const Footer = () => {
                     </Grid>
 
                     {/* Column 4: Contact */}
-                    <Grid size={2}>
+                    <Grid size={{ xs: 12, md: 3 }}>
                         <Typography
                             variant="subtitle1"
                             fontWeight="bold"
@@ -172,13 +172,13 @@ const Footer = () => {
                             Contact Us
                         </Typography>
                         <Link
-                            href="mailto:contact@selfcraftskills.com"
+                            href="mailto:selfcraftskills@gmail.com"
                             color="inherit"
                             underline="hover"
                             variant="body2"
                             sx={{ color: "#bdbdbd" }}
                         >
-                            contact@selfcraftskills.com
+                            selfcraftskills@gmail.com
                         </Link>
                     </Grid>
                 </Grid>
@@ -198,7 +198,7 @@ const Footer = () => {
                     }}
                 >
                     <Typography variant="body2" sx={{ color: "#bdbdbd" }}>
-                        © {new Date().getFullYear()} Self-Craft Skills. All
+                        {"\u00A9"} {new Date().getFullYear()} Self-Craft Skills. All
                         Rights Reserved.
                     </Typography>
                     <Stack direction="row" spacing={2}>
@@ -246,3 +246,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

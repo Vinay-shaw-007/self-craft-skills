@@ -40,7 +40,7 @@ const RefundPolicyPage = () => {
                 </Typography>
                 <List sx={{ listStyleType: "decimal", pl: 4 }}>
                     <ListItem sx={{ display: "list-item" }}>
-                        <ListItemText primary="Drop an email on: selfcraftskills+support@gmail.com with a subject line: “Online course refund | Registered email id”." />
+                        <ListItemText primary="Drop an email on: selfcraftskills@gmail.com with a subject line: “Online course refund | Registered email id”." />
                     </ListItem>
                     <ListItem sx={{ display: "list-item" }}>
                         <ListItemText primary="Attach your payment details (transaction ID / screenshot)." />

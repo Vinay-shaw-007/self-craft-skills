@@ -14,6 +14,8 @@ import Footer from "./components/Footer";
 import BackToTopButton from "./components/BackToTopButton";
 import WhatsAppButton from "./components/WhatsAppButton";
 import CourseDetailPage from "./pages/CourseDetailPage";
+import SignUpPage from "./pages/SignUpPage"; // Import SignUpPage
+import LoginPage from "./pages/LoginPage"; // Import LoginPage
 
 function App() {
     return (
@@ -31,6 +33,8 @@ function App() {
                 <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
                 <Route path="/terms-and-conditions" element={<TermsPage />} />
                 <Route path="/refund-policy" element={<RefundPolicyPage />} />
+                <Route path="/signup" element={<SignUpPage />} />
+                <Route path="/login" element={<LoginPage />} />
             </Routes>
             <Box id="support">
                 <Footer />

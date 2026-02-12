@@ -1,7 +1,10 @@
 // src/components/MeetMentorSection.tsx
-import { Box, Container, Typography, Paper } from "@mui/material";
+import { Box, Container, Typography, Paper, Button, Chip, Stack } from "@mui/material";
 import FadeInOnScroll from "./FadeInOnScroll";
 import InstructorProfileImg from "../assets/instructor-profile.jpg";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+
+const mentorLinkedInUrl = "https://www.linkedin.com/in/navinshaw21";
 
 const MeetMentorSection = () => {
     return (
@@ -14,21 +17,20 @@ const MeetMentorSection = () => {
                             borderRadius: "24px",
                             background:
                                 "linear-gradient(45deg, #0a192f 30%, #1a237e 90%)",
-                            border: "2px solid #eee",
+                            border: "1px solid rgba(255,255,255,0.14)",
                             transition:
                                 "transform 0.3s ease, box-shadow 0.3s ease",
                             "&:hover": {
-                                transform: "translateY(-8px)",
-                                boxShadow: "0 12px 30px rgba(0,0,0,0.08)",
+                                transform: "translateY(-6px)",
+                                boxShadow: "0 16px 32px rgba(10, 25, 47, 0.35)",
                             },
                             p: { xs: 3, md: 5 },
                             display: "flex",
-                            flexDirection: { xs: "column", md: "row" }, // column on mobile, row on desktop
+                            flexDirection: { xs: "column", md: "row" },
                             alignItems: "center",
-                            gap: { xs: 4, md: 6 }, // spacing between image and text
+                            gap: { xs: 4, md: 6 },
                         }}
                     >
-                        {/* --- Image Section --- */}
                         <Box
                             sx={{
                                 flex: { xs: "0 0 auto", md: "0 0 40%" },
@@ -72,16 +74,25 @@ const MeetMentorSection = () => {
                             </Box>
                         </Box>
 
-                        {/* --- Text Section --- */}
                         <Box sx={{ flex: 1 }}>
+                            <Typography
+                                variant="overline"
+                                sx={{
+                                    color: "#93c5fd",
+                                    letterSpacing: "0.14em",
+                                    fontWeight: 600,
+                                }}
+                            >
+                                Mentor Spotlight
+                            </Typography>
                             <Typography
                                 variant="h4"
                                 fontWeight="bold"
                                 sx={{
-                                    color: "#ffffffff",
-                                    mb: 2,
-                                    textAlign: { xs: "center", md: "center" },
-                                    whiteSpace: "nowrap",
+                                    color: "#fff",
+                                    mt: 0.5,
+                                    mb: 1.6,
+                                    textAlign: { xs: "center", md: "left" },
                                 }}
                             >
                                 Meet Your Mentor
@@ -106,12 +117,50 @@ const MeetMentorSection = () => {
                                     textAlign: { xs: "center", md: "left" },
                                 }}
                             >
-                                Founder & Lead Instructor – Self-Craft Skills
+                                Founder & Lead Instructor - Self-Craft Skills
                             </Typography>
+                            <Stack
+                                direction="row"
+                                spacing={1}
+                                sx={{
+                                    mb: 2.2,
+                                    justifyContent: { xs: "center", md: "flex-start" },
+                                    flexWrap: "wrap",
+                                    rowGap: 1,
+                                }}
+                            >
+                                <Chip
+                                    label="3+ Years Experience"
+                                    size="small"
+                                    sx={{
+                                        backgroundColor: "rgba(255,255,255,0.12)",
+                                        color: "#e5e7eb",
+                                        border: "1px solid rgba(255,255,255,0.15)",
+                                    }}
+                                />
+                                <Chip
+                                    label="Creator Award 2024"
+                                    size="small"
+                                    sx={{
+                                        backgroundColor: "rgba(255,255,255,0.12)",
+                                        color: "#e5e7eb",
+                                        border: "1px solid rgba(255,255,255,0.15)",
+                                    }}
+                                />
+                                <Chip
+                                    label="YouTube Growth Mentor"
+                                    size="small"
+                                    sx={{
+                                        backgroundColor: "rgba(255,255,255,0.12)",
+                                        color: "#e5e7eb",
+                                        border: "1px solid rgba(255,255,255,0.15)",
+                                    }}
+                                />
+                            </Stack>
 
                             <Typography
                                 variant="body1"
-                                sx={{ my: 2, color: "#fff" }}
+                                sx={{ my: 2, color: "#fff", lineHeight: 1.75 }}
                             >
                                 Navin is an educator, content creator, and
                                 entrepreneur, officially selected to attend the
@@ -126,11 +175,11 @@ const MeetMentorSection = () => {
 
                             <Typography
                                 variant="body1"
-                                sx={{ my: 2, color: "#fff" }}
+                                sx={{ my: 2, color: "#fff", lineHeight: 1.75 }}
                             >
                                 Navin firmly believes that learning is a
                                 lifelong journey. Once a learner, always a
-                                learner — the key is to grow by learning from
+                                learner - the key is to grow by learning from
                                 every experience.
                             </Typography>
 
@@ -145,10 +194,10 @@ const MeetMentorSection = () => {
                                 <Typography
                                     variant="body1"
                                     fontStyle="italic"
-                                    sx={{ color: "#f5f5f5" }}
+                                    sx={{ color: "#f5f5f5", lineHeight: 1.7 }}
                                 >
-                                    “To empower you with future-ready skills
-                                    that truly craft your life.”
+                                    "To empower you with future-ready skills
+                                    that truly craft your life."
                                 </Typography>
                                 <Typography
                                     variant="caption"
@@ -160,6 +209,38 @@ const MeetMentorSection = () => {
                                 >
                                     - Navin Shaw
                                 </Typography>
+                            </Box>
+                            <Box
+                                sx={{
+                                    mt: 3,
+                                    display: "flex",
+                                    justifyContent: { xs: "center", md: "flex-start" },
+                                }}
+                            >
+                                <Button
+                                    variant="contained"
+                                    startIcon={<LinkedInIcon />}
+                                    href={mentorLinkedInUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    sx={{
+                                        borderRadius: "999px",
+                                        px: 3,
+                                        py: 1,
+                                        fontWeight: 600,
+                                        textTransform: "none",
+                                        background:
+                                            "linear-gradient(45deg, #D32F2F 30%, #E57373 90%)",
+                                        boxShadow: "0 8px 20px rgba(211, 47, 47, 0.35)",
+                                        "&:hover": {
+                                            transform: "translateY(-2px)",
+                                            boxShadow:
+                                                "0 12px 24px rgba(211, 47, 47, 0.42)",
+                                        },
+                                    }}
+                                >
+                                    View Mentor Profile
+                                </Button>
                             </Box>
                         </Box>
                     </Paper>

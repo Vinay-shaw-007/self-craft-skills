@@ -1,158 +1,295 @@
-// src/components/About.tsx
-import { Box, Typography, Container, Grid, Paper, Button } from "@mui/material";
+import {
+    Box,
+    Typography,
+    Container,
+    Grid,
+    Paper,
+    Button,
+    Stack,
+} from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import ModelTrainingIcon from "@mui/icons-material/ModelTraining";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import GroupsIcon from "@mui/icons-material/Groups";
 import FadeInOnScroll from "./FadeInOnScroll";
+import AboutImage from "../assets/Aboutimg.svg";
 
-// Features data for card layout
 const features = [
     {
-        icon: <ModelTrainingIcon sx={{ fontSize: "3.5rem", color: "#fff" }} />,
+        icon: <ModelTrainingIcon sx={{ fontSize: "1.8rem", color: "#d32f2f" }} />,
         title: "Diverse Learning Paths",
         description:
             "Explore courses tailored to your passion and career growth across various fields.",
-        gradient: "linear-gradient(135deg, #FF6B6B, #FFD93D)",
     },
     {
-        icon: <PsychologyIcon sx={{ fontSize: "3.5rem", color: "#fff" }} />,
+        icon: <PsychologyIcon sx={{ fontSize: "1.8rem", color: "#d32f2f" }} />,
         title: "Hands-on Learning",
         description:
             "Work on real-world projects with expert guidance and practical exercises.",
-        gradient: "linear-gradient(135deg, #6BCB77, #4D96FF)",
     },
     {
-        icon: <TrendingUpIcon sx={{ fontSize: "3.5rem", color: "#fff" }} />,
+        icon: <TrendingUpIcon sx={{ fontSize: "1.8rem", color: "#d32f2f" }} />,
         title: "Mindset Coaching",
         description:
             "Boost your confidence and resilience with actionable strategies and coaching.",
-        gradient: "linear-gradient(135deg, #FF7E5F, #FEB47B)",
     },
     {
-        icon: <GroupsIcon sx={{ fontSize: "3.5rem", color: "#fff" }} />,
+        icon: <GroupsIcon sx={{ fontSize: "1.8rem", color: "#d32f2f" }} />,
         title: "Community Support",
         description:
-            "Join an inspiring network of learners to share ideas, stay up-to-date, and become more productive. ",
-        gradient: "linear-gradient(135deg, #00C9FF, #92FE9D)",
+            "Join an inspiring network of learners to share ideas, stay up-to-date, and become more productive.",
     },
 ];
 
 const About = () => {
     return (
         <Box
-        //     sx={{
-        //         py: { xs: 6, md: 10 },
-        //         background: "linear-gradient(180deg, #EDF5FD 0%, #FFFFFF 70%)",
-        //         backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%23e5e5e5' stroke-width='1'%3E%3Cpath d='M 40 0 L 0 0 0 40'%3E%3C/path%3E%3C/g%3E%3C/svg%3E")`,
-        //         backgroundSize: "25px 25px",
-        //         backgroundRepeat: "repeat",
-        //     }}
+            sx={{
+                position: "relative",
+                overflow: "hidden",
+                py: { xs: 8, md: 12 },
+                background: "linear-gradient(180deg, #fff7f7 0%, #ffffff 70%)",
+            }}
         >
-            <Container>
+            <Box
+                sx={{
+                    position: "absolute",
+                    top: { xs: 48, md: 72 },
+                    right: { xs: -90, md: -150 },
+                    width: { xs: 170, md: 260 },
+                    height: { xs: 170, md: 260 },
+                    borderRadius: "50%",
+                    background:
+                        "radial-gradient(circle at 30% 30%, #FFE8B5 0%, #FFD6A5 65%, rgba(255,214,165,0) 100%)",
+                    opacity: 0.5,
+                    filter: "blur(4px)",
+                    zIndex: 0,
+                }}
+            />
+
+            <Box
+                sx={{
+                    position: "absolute",
+                    bottom: { xs: -60, md: -100 },
+                    left: { xs: -60, md: -100 },
+                    width: { xs: 200, md: 320 },
+                    height: { xs: 200, md: 320 },
+                    borderRadius: "50%",
+                    background: "linear-gradient(135deg, #FF9A8B, #FF6A88)",
+                    opacity: 0.1,
+                    zIndex: 0,
+                }}
+            />
+
+            <Container sx={{ position: "relative", zIndex: 1 }}>
                 <FadeInOnScroll>
-                    <Box sx={{ textAlign: "center", mb: { xs: 6, md: 8 } }}>
-                        {/* 2. New yellow title badge design */}
-                        <Paper
-                            sx={{
-                                display: "inline-block",
-                                p: "8px 32px",
-                                borderRadius: "50px",
-                                backgroundColor: "#fef08a",
-                                boxShadow: "0 8px 16px rgba(250, 204, 21, 0.2)",
-                                mb: 3,
-                            }}
-                        >
-                            <Typography
-                                variant="h5"
-                                component="h2"
-                                fontWeight="bold"
+                    <Box
+                        sx={{
+                            display: "grid",
+                            gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
+                            gap: { xs: 4, md: 7 },
+                            alignItems: "center",
+                            mb: { xs: 7, md: 9 },
+                        }}
+                    >
+                        <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
+                            <Paper
                                 sx={{
-                                    fontSize: {
-                                        xs: "1.2rem",
-                                        sm: "1.25rem",
-                                        md: "1.5rem",
-                                    },
-                                    //   whiteSpace: 'nowrap',
+                                    display: "inline-block",
+                                    px: 2.5,
+                                    py: 1,
+                                    borderRadius: "999px",
+                                    backgroundColor: "#ffebee",
+                                    border: "1px solid #ffcdd2",
+                                    mb: 2,
                                 }}
                             >
-                                ✨ About Self Craft Skills
+                                <Typography
+                                    variant="subtitle2"
+                                    fontWeight={700}
+                                    sx={{
+                                        color: "#d32f2f",
+                                        letterSpacing: "0.08em",
+                                        textTransform: "uppercase",
+                                    }}
+                                >
+                                    About Self Craft Skills
+                                </Typography>
+                            </Paper>
+
+                            <Typography
+                                variant="h3"
+                                component="h2"
+                                sx={{
+                                    fontWeight: 700,
+                                    color: "#1f1f1f",
+                                    fontSize: { xs: "2rem", md: "2.6rem" },
+                                    lineHeight: 1.2,
+                                }}
+                            >
+                                Learn Practical Skills with Clarity, Mentorship,
+                                and Momentum
                             </Typography>
-                        </Paper>
-                        <Typography
-                            variant="h6"
-                            color="text.secondary"
-                            sx={{ maxWidth: "800px", mx: "auto", mt: 2 }}
+
+                            <Typography
+                                variant="h6"
+                                color="text.secondary"
+                                sx={{
+                                    mt: 2,
+                                    maxWidth: 620,
+                                    mx: { xs: "auto", md: 0 },
+                                    fontWeight: 400,
+                                    lineHeight: 1.7,
+                                }}
+                            >
+                                Self Craft Skills helps learners build real,
+                                future-ready capabilities through guided learning,
+                                action-focused projects, and a supportive growth
+                                community.
+                            </Typography>
+
+                            <Stack
+                                spacing={1}
+                                sx={{
+                                    mt: 3,
+                                    alignItems: { xs: "center", md: "flex-start" },
+                                }}
+                            >
+                                <Typography sx={{ color: "#444" }}>
+                                    - Structured programs designed for real progress
+                                </Typography>
+                                <Typography sx={{ color: "#444" }}>
+                                    - Practical tasks with mentor-backed feedback
+                                </Typography>
+                                <Typography sx={{ color: "#444" }}>
+                                    - Skill growth that supports career confidence
+                                </Typography>
+                            </Stack>
+
+                            <Button
+                                component={RouterLink}
+                                to="/courses"
+                                variant="contained"
+                                sx={{
+                                    mt: 4,
+                                    borderRadius: "50px",
+                                    px: { xs: 4, md: 5 },
+                                    py: 1.5,
+                                    fontWeight: "bold",
+                                    fontSize: "1rem",
+                                    letterSpacing: "0.4px",
+                                    background:
+                                        "linear-gradient(45deg, #D32F2F 30%, #E57373 90%)",
+                                    color: "white",
+                                    boxShadow: "0 4px 15px rgba(211, 47, 47, 0.35)",
+                                    "&:hover": {
+                                        transform: "translateY(-2px)",
+                                        boxShadow:
+                                            "0 6px 20px rgba(211, 47, 47, 0.45)",
+                                    },
+                                }}
+                            >
+                                Explore Courses
+                            </Button>
+                        </Box>
+
+                        <Box
+                            sx={{
+                                width: "100%",
+                                maxWidth: 560,
+                                mx: "auto",
+                                borderRadius: 6,
+                                overflow: "hidden",
+                                boxShadow: "0 16px 40px rgba(0,0,0,0.12)",
+                            }}
                         >
-                            Self Craft Skills is a knowledge-sharing platform
-                            where you can explore diverse fields, build
-                            practical expertise, and develop a growth
-                            mindset—all designed to empower you to learn smarter
-                            and achieve more.
+                            <Box
+                                component="img"
+                                src={AboutImage}
+                                alt="Students learning and collaborating"
+                                sx={{
+                                    width: "100%",
+                                    height: "auto",
+                                    display: "block",
+                                }}
+                            />
+                        </Box>
+                    </Box>
+                </FadeInOnScroll>
+
+                <FadeInOnScroll>
+                    <Box sx={{ textAlign: "center", mb: 4 }}>
+                        <Typography
+                            variant="h4"
+                            sx={{
+                                fontWeight: 700,
+                                color: "#222",
+                                fontSize: { xs: "1.7rem", md: "2.1rem" },
+                            }}
+                        >
+                            Why Learners Choose Us
                         </Typography>
                     </Box>
                 </FadeInOnScroll>
 
-                <Grid container spacing={4} justifyContent="center">
+                <Grid container spacing={3} alignItems="stretch">
                     {features.map((feature, index) => (
-                        <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
+                        <Grid
+                            size={{ xs: 12, sm: 6, md: 3 }}
+                            key={index}
+                            sx={{ display: "flex" }}
+                        >
                             <FadeInOnScroll>
-                                <Box
-                                    sx={{
-                                        position: "relative",
-                                        p: 2,
-                                    }}
-                                >
-                                    <Box
+                                <Box sx={{ width: "100%", height: "100%" }}>
+                                    <Paper
                                         sx={{
-                                            background: feature.gradient,
-                                            borderRadius: "20px",
                                             p: 3,
+                                            borderRadius: "16px",
+                                            border: "1px solid #f1e4e4",
                                             height: "100%",
-                                            color: "#fff",
-                                            boxShadow:
-                                                "0 8px 20px rgba(0, 0, 0, 0.15)",
-                                            transition: "all 0.3s ease",
+                                            minHeight: 280,
+                                            width: "100%",
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            boxShadow: "0 8px 20px rgba(0,0,0,0.06)",
+                                            transition: "all 0.25s ease",
                                             "&:hover": {
-                                                transform: "scale(1.05)",
-                                                boxShadow:
-                                                    "0 12px 30px rgba(0, 0, 0, 0.25)",
+                                                transform: "translateY(-6px)",
+                                                boxShadow: "0 12px 30px rgba(0,0,0,0.1)",
                                             },
                                         }}
                                     >
                                         <Box
                                             sx={{
-                                                width: 64,
-                                                height: 64,
-                                                backgroundColor:
-                                                    "rgba(255,255,255,0.2)",
-                                                borderRadius: "50%",
+                                                width: 52,
+                                                height: 52,
+                                                backgroundColor: "#ffebee",
+                                                borderRadius: "14px",
                                                 display: "flex",
                                                 alignItems: "center",
                                                 justifyContent: "center",
                                                 mb: 2,
-                                                mx: "auto",
                                             }}
                                         >
                                             {feature.icon}
                                         </Box>
+
                                         <Typography
                                             variant="h6"
-                                            fontWeight="bold"
-                                            align="center"
-                                            gutterBottom
+                                            fontWeight={700}
+                                            sx={{ color: "#222", mb: 1 }}
                                         >
                                             {feature.title}
                                         </Typography>
+
                                         <Typography
                                             variant="body2"
-                                            align="center"
-                                            sx={{ lineHeight: 1.6 }}
+                                            sx={{ color: "#5f6368", lineHeight: 1.7 }}
                                         >
                                             {feature.description}
                                         </Typography>
-                                    </Box>
+                                    </Paper>
                                 </Box>
                             </FadeInOnScroll>
                         </Grid>
@@ -180,8 +317,7 @@ const About = () => {
                                     "transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out",
                                 "&:hover": {
                                     transform: "translateY(-3px)",
-                                    boxShadow:
-                                        "0 6px 20px rgba(211, 47, 47, 0.5)",
+                                    boxShadow: "0 6px 20px rgba(211, 47, 47, 0.5)",
                                 },
                             }}
                         >

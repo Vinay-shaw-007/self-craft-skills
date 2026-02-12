@@ -1,9 +1,12 @@
 // src/components/WhatsAppButton.tsx
 import { Fab, Typography } from "@mui/material";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import { useLocation } from "react-router-dom";
 
 const WhatsAppButton = () => {
     const whatsappGreen = "#25D366";
+    const location = useLocation();
+    const isCourseDetailPage = /^\/courses\/[^/]+/.test(location.pathname);
 
     return (
         <Fab
@@ -14,12 +17,13 @@ const WhatsAppButton = () => {
             rel="noopener noreferrer"
             sx={{
                 position: "fixed",
-                bottom: 16,
+                bottom: { xs: isCourseDetailPage ? 96 : 16, md: 16 },
                 left: 16,
                 backgroundColor: whatsappGreen,
                 color: "white",
                 textTransform: "none",
                 fontWeight: "bold",
+                zIndex: 1100,
                 "&:hover": {
                     backgroundColor: "#1EAE54", // A slightly darker green for hover
                 },

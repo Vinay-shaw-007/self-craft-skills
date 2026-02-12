@@ -9,7 +9,14 @@ const useScrollToHash = () => {
         if (location.hash) {
             const element = document.getElementById(location.hash.substring(1));
             if (element) {
-                element.scrollIntoView({ behavior: "smooth", block: "start" });
+                // Keep anchor content visible below the sticky header.
+                const headerOffset = 84;
+                const elementTop =
+                    element.getBoundingClientRect().top + window.scrollY;
+                window.scrollTo({
+                    top: Math.max(elementTop - headerOffset, 0),
+                    behavior: "smooth",
+                });
             }
         } else {
             window.scrollTo(0, 0); // Scroll to top if no hash

@@ -3,9 +3,7 @@ import AiBanner from "../assets/ai-course-banner.jpg";
 import ContentBanner from "../assets/content-course-banner.jpg";
 import CommunicationBanner from "../assets/communication-course-banner.jpg";
 
-// 1. This is the missing interface definition that was causing the error
 interface CourseDetails {
-    [x: string]: any;
     summary: string;
     duration?: string;
     classLength?: string;
@@ -19,134 +17,80 @@ interface CourseDetails {
         takeaway: string;
         topics: string[];
     }[];
+    finalCapstoneHeading?: string;
+    certificateHeading?: string;
 }
 
 export interface Course {
     id: string;
-    image: any;
+    image: string;
     title: string;
-    titleSvg: any | null;
+    titleSvg: string | null;
     status: "Open for Enrollment" | "Coming Soon";
-    details: CourseDetails; // This now correctly references the interface above
+    details: CourseDetails;
 }
 
-// This constant now correctly uses the defined CourseDetails type
-const aiCourseDetails = {
+const aiCourseDetails: CourseDetails = {
     summary:
-        "A 6-week immersive course on mastering AI tools and ChatGPT for professional and personal growth.",
-    duration: "6 Weeks (1-2 classes per week)",
-    classLength: "60–90 mins each",
+        "A 4-week immersive course on mastering AI tools and ChatGPT for professional and personal growth.",
+    duration: "4 Weeks (2-3 classes per week)",
+    classLength: "60-90 mins each",
     mode: "Online (Zoom)",
-    goal: "Build strong AI knowledge, practical hands-on skills, and awareness of today’s AI world.",
+    goal: "Build strong AI knowledge, practical hands-on skills, and awareness of today's AI world.",
     whoIsThisFor:
         "Students, working professionals, content creators, and entrepreneurs looking to boost their productivity and future-proof their skills.",
     bonuses: ["Certificate of Completion", "Exclusive Prompt Book"],
     keyFeatures: [
-    'Weekly Live Classes',
-    'Beginner-Friendly',
-    'LIVE Q&A session',
-    'No prior experience required',
-    'Certificate of completion',
-    'Bonus: worth ₹4999'
-      ],
+        "Weekly Live Classes",
+        "Beginner-Friendly",
+        "LIVE Q&A session",
+        "No prior experience required",
+        "Certificate of completion",
+        "Bonus: worth Rs.4999",
+    ],
     syllabus: [
         {
-            week: "WEEK 1 – Foundations of AI",
+            week: "WEEK 1 - AI Foundations + Smart Prompting",
             takeaway:
-                "Understand how AI works in daily life + write your first prompts.",
+                "Remove fear, build real understanding, and master prompting.",
             topics: [
-                "Introduction to AI (History, myths, and today’s reality)",
-                "AI vs Machine Learning vs Deep Learning – simplified",
-                "Different types and versions of AI models.",
-                "How AI is shaping daily lives",
-                "Ethical considerations & limitations of AI",
-                "Introduction to Large Language Models.",
-                "Free vs Paid versions, pros & cons.",
-                "Prompting 101: clarity, context, role-play.",
-                "Use cases: Writing, Summarizing, Translation & Explanation.",
-                "Hands-On: Summarizing + Writing tasks with ChatGPT.",
-                "Mini Project: Spot 5 AI uses in your daily life & share with the class. Write 3–5 personal productivity Prompts",
+                "Class 1 - Understanding AI in 2026",
+                "Class 2 - How Large Language Models Work",
+                "Class 3 - Prompt Engineering Mastery (Level 1)",
             ],
         },
         {
-            week: "WEEK 2: AI for Learning & Personal Growth",
-            takeaway: "Use AI as a tutor, planner, and growth assistant.",
-            topics: [
-                "Explaining tough concepts in simple words & story mode",
-                "Explain any topic in story mode",
-                "Write educational prompt: Act as a teacher, friend, explainer, etc",
-                "Learn structuring answers for exams",
-                "Creating study guides, flashcards, and summaries",
-                "AI for planning: study schedules, exam prep, & journaling",
-                "Habit tracking & Building",
-                "Fitness & Diet plans",
-                "Making timetables, daily routines, and to-do lists",
-                "Mini Project: Create your own AI-powered study guide.",
-                "QnA session",
-            ],
-        },
-        {
-            week: "WEEK 3: Unlocking Creativity with AI",
+            week: "WEEK 2 - AI for Study, Creativity & Multimodal Tools",
             takeaway:
-                "Use AI for storytelling, content creation & visual design.",
+                "Make AI deeply useful and introduce creative and multimodal AI.",
             topics: [
-                "Image generation AI tools",
-                "How text → image generation works",
-                "Demo: Generate an image from a prompt",
-                "AI in music, voice, and video",
-                "Creative writing with AI",
-                "Remixing styles & tone",
-                "Responsible use of creative AI tools",
-                "Hands-On: Create AI-generated image + creative content piece",
-                "Mini Project: Produce a short AI-generated story + matching image",
+                "Class 4 - AI as Study & Thinking Assistant",
+                "Class 5 - Multimodal AI (Text + Image + Voice + Video)",
+                "Class 6 - AI Workflows & Automation Thinking",
             ],
         },
         {
-            week: "WEEK 4: AI for Productivity & Work",
-            takeaway: "Build career tools & productivity systems with AI.",
+            week: "WEEK 3 - Building with AI (Creator -> Builder Mode)",
+            takeaway: "Students shift from users to creators.",
             topics: [
-                "Resume, cover letters & email writing",
-                "LinkedIn optimization",
-                "Mock interview roleplays with AI",
-                "AI for job/industry research",
-                "Career counselling",
-                "To-do list & note-taking",
-                "Decision making, weekly planner",
-                "AI in presentations",
-                "Mini Project: Use AI to generate a resume + cover letter, then do a mock interview.",
-                "QnA session",
+                "Class 7 - Logic, Problem Solving & AI Thinking",
+                "Class 8 - AI + Beginner Coding (Fear-Free)",
+                "Class 9 - Build a Guided AI Mini Project",
             ],
         },
         {
-            week: "WEEK 5: AI for Business & Branding",
+            week: "WEEK 4 - AI Career, Business & Future Systems",
             takeaway:
-                "Learn how to use AI for business, brand building & content.",
+                "Real-world clarity, earning pathways, and future readiness.",
             topics: [
-                "Brainstorming business ideas with AI",
-                "Market research & competitor analysis",
-                "Case Studies of professionals using AI",
-                "Content marketing with ChatGPT",
-                "Essential AI tools: Canva (design), Grammarly (writing), GPT (content), & more",
-                "AI in marketing",
-                "How to combine tools for workflows",
-                "Intro to Custom GPTs & AI Agents",
-                "Mini Project: Draft a 1-page business plan + brand content strategy using AI.",
-            ],
-        },
-        {
-            week: "WEEK 6: The Future with AI",
-            takeaway: "Stay future-ready with AI knowledge & tools.",
-            topics: [
-                "Generative AI evolution (text → image → video → agents)",
-                "The rise of AI Agents & automation",
-                "Future opportunities & risks",
-                "How to keep upgrading AI skills",
-                "Explore AI tools",
-                "Mini Project: Share a personal AI roadmap for the next 6 months.",
-                "Closing AMA",
+                "Class 10 - AI Careers & Earning Opportunities (2026-2035)",
+                "Class 11 - AI for Business & Personal Brand",
+                "Class 12 - Final Capstone Presentation + Feedback",
             ],
         },
     ],
+    finalCapstoneHeading: "FINAL CAPSTONE PROJECT",
+    certificateHeading: "CERTIFICATE",
 };
 
 export const coursesData: Course[] = [

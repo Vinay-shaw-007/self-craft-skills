@@ -27,6 +27,7 @@ const navItems = [
     { label: "Courses", href: "/courses" },
     { label: "FAQs", href: "/faq" },
 ];
+const showAuthButtons = false;
 
 const Header = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -42,6 +43,35 @@ const Header = () => {
 
     const handleDrawerToggle = () => {
         setDrawerOpen(!drawerOpen);
+    };
+
+    const minimalButtonSx = {
+        borderRadius: "999px",
+        textTransform: "none",
+        fontWeight: 500,
+        backgroundColor: "transparent",
+        color: "#2d2d2d",
+        border: "1px solid #e2e2e2",
+        boxShadow: "none",
+        transition: "all 0.2s ease",
+        "&:hover": {
+            backgroundColor: "#f6f6f6",
+            borderColor: "#cfcfcf",
+            boxShadow: "none",
+            transform: "none",
+        },
+    };
+
+    const minimalPrimaryButtonSx = {
+        ...minimalButtonSx,
+        borderColor: "#d32f2f",
+        color: "#d32f2f",
+        "&:hover": {
+            backgroundColor: "rgba(211, 47, 47, 0.06)",
+            borderColor: "#b71c1c",
+            boxShadow: "none",
+            transform: "none",
+        },
     };
 
     const drawer = (
@@ -93,25 +123,38 @@ const Header = () => {
                     Enroll Now
                 </Button>
                 <Button
-                    variant="contained"
+                    variant="outlined"
                     component={RouterLink}
                     to="/#support"
                     startIcon={<SupportAgentIcon />}
                     fullWidth
-                    sx={{
-                        borderRadius: "50px",
-                        textTransform: "none",
-                        // display: { xs: "none", md: "inline-flex" },
-                        background:
-                            "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
-                        color: "white",
-                        boxShadow: "0 3px 5px 2px rgba(33, 203, 243, .3)",
-                        transition: "transform 0.2s",
-                        "&:hover": { transform: "translateY(-2px)" },
-                    }}
+                    sx={{ ...minimalButtonSx, my: 1 }}
                 >
                     Support
                 </Button>
+                {/* Added Login and Sign Up buttons to mobile drawer */}
+                {showAuthButtons && (
+                    <Button
+                        variant="outlined"
+                        component={RouterLink}
+                        to="/login"
+                        fullWidth
+                        sx={{ ...minimalButtonSx, my: 1 }}
+                    >
+                        Login
+                    </Button>
+                )}
+                {showAuthButtons && (
+                    <Button
+                        variant="outlined"
+                        component={RouterLink}
+                        to="/signup"
+                        fullWidth
+                        sx={{ ...minimalPrimaryButtonSx, my: 1 }}
+                    >
+                        Sign Up
+                    </Button>
+                )}
             </Box>
         </Box>
     );
@@ -161,8 +204,13 @@ const Header = () => {
                         <Typography
                             variant="h6"
                             component="div"
-                            fontWeight="medium"
-                            sx={{ color: "#333" }}
+                            sx={{
+                                color: "#111",
+                                fontSize: { xs: "0.78rem", md: "0.86rem" },
+                                fontWeight: 500,
+                                letterSpacing: "0.24em",
+                                textTransform: "uppercase",
+                            }}
                         >
                             Self Craft Skills
                         </Typography>
@@ -200,45 +248,48 @@ const Header = () => {
 
                     <Stack direction="row" spacing={1} alignItems="center">
                         <Button
-                            variant="contained"
+                            variant="outlined"
                             component={RouterLink}
                             to="/#support"
                             startIcon={<SupportAgentIcon />}
                             sx={{
-                                borderRadius: "50px",
-                                textTransform: "none",
+                                ...minimalButtonSx,
                                 display: { xs: "none", md: "inline-flex" },
-                                background:
-                                    "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
-                                color: "white",
-                                boxShadow:
-                                    "0 3px 5px 2px rgba(33, 203, 243, .3)",
-                                transition: "transform 0.2s",
-                                "&:hover": { transform: "translateY(-2px)" },
                             }}
                         >
                             Support
                         </Button>
-                        {/* <Button
-                            variant="contained"
-                            href="https://forms.gle/HnFrNt84kW8cibSZ9"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            sx={{
-                                borderRadius: "50px",
-                                textTransform: "none",
-                                fontWeight: "bold",
-                                display: { xs: "none", md: "inline-flex" },
-                                background:
-                                    "linear-gradient(45deg, #D32F2F 30%, #E57373 90%)",
-                                color: "white",
-                                boxShadow: "0 4px 15px rgba(211, 47, 47, 0.4)",
-                                transition: "transform 0.2s",
-                                "&:hover": { transform: "translateY(-2px)" },
-                            }}
-                        >
-                            Enroll Now
-                        </Button> */}
+                        {showAuthButtons && (
+                            <Button
+                                variant="outlined"
+                                component={RouterLink}
+                                to="/login"
+                                sx={{
+                                    ...minimalButtonSx,
+                                    display: { xs: "none", md: "inline-flex" },
+                                }}
+                            >
+                                Login
+                            </Button>
+                        )}
+                        {showAuthButtons && (
+                            <Button
+                                variant="outlined"
+                                component={RouterLink}
+                                to="/signup"
+                                sx={{
+                                    ...minimalPrimaryButtonSx,
+                                    display: { xs: "inline-flex", md: "inline-flex" },
+                                    // Match Login button sizing
+                                    fontSize: { xs: "0.7rem", md: "0.8rem" },
+                                    px: { xs: 1.5, md:1 },
+                                    py: { xs: 0.5, md: 1 },
+                                    minWidth: { xs: "70px", md: "70px" },
+                                }}
+                            >
+                                Sign Up
+                            </Button>
+                        )}
                         <IconButton
                             color="inherit"
                             onClick={handleDrawerToggle}
