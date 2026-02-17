@@ -21,6 +21,7 @@ import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import SchoolIcon from '@mui/icons-material/School';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
+import useBatchCountdown from "../hooks/useBatchCountdown";
 
 // Helper to get an icon for each feature
 const getFeatureIcon = (featureText: string) => {
@@ -34,6 +35,8 @@ const getFeatureIcon = (featureText: string) => {
 }
 
 const Courses = () => {
+    const { days, hours, minutes, seconds, isLive } = useBatchCountdown();
+
     return (
         <Box
             sx={{
@@ -89,6 +92,104 @@ const Courses = () => {
                 >
                     Choose your path to growth with our programs.
                 </Typography>
+                <Box
+                    sx={{
+                        mb: 4,
+                        p: { xs: 2.25, md: 3 },
+                        borderRadius: 4,
+                        textAlign: "center",
+                        background:
+                            "radial-gradient(circle at 85% 0%, rgba(255,110,110,0.24), transparent 40%), radial-gradient(circle at 0% 100%, rgba(255,145,77,0.2), transparent 35%), linear-gradient(135deg, #090c16 0%, #141b2d 55%, #1f2438 100%)",
+                        border: "1px solid rgba(255,255,255,0.16)",
+                        boxShadow: "0 18px 38px rgba(7, 10, 20, 0.48)",
+                        maxWidth: 760,
+                        mx: "auto",
+                        position: "relative",
+                        overflow: "hidden",
+                    }}
+                >
+                    <Box
+                        sx={{
+                            position: "absolute",
+                            inset: 0,
+                            background:
+                                "linear-gradient(120deg, rgba(255,255,255,0.08), rgba(255,255,255,0.01) 55%)",
+                            pointerEvents: "none",
+                        }}
+                    />
+                    <Typography
+                        sx={{
+                            position: "relative",
+                            color: "#ffd8bf",
+                            fontWeight: 800,
+                            letterSpacing: "0.08em",
+                            textTransform: "uppercase",
+                            fontSize: { xs: "0.78rem", md: "0.88rem" },
+                        }}
+                    >
+                        First Batch Starts March 12, 2026
+                    </Typography>
+                    <Typography
+                        sx={{
+                            position: "relative",
+                            mt: 0.75,
+                            color: "rgba(255,255,255,0.95)",
+                            fontWeight: 700,
+                            fontSize: "0.95rem",
+                        }}
+                    >
+                        {isLive ? "Batch is live now" : "Enroll now to secure your seat"}
+                    </Typography>
+                    <Box
+                        sx={{
+                            mt: 1.5,
+                            display: "grid",
+                            gridTemplateColumns:
+                                "repeat(4, minmax(68px, 1fr))",
+                            gap: 1,
+                            maxWidth: 420,
+                            mx: "auto",
+                            position: "relative",
+                        }}
+                    >
+                        {[
+                            { label: "Days", value: days },
+                            { label: "Hours", value: hours },
+                            { label: "Minutes", value: minutes },
+                            { label: "Seconds", value: seconds },
+                        ].map((item) => (
+                            <Box
+                                key={item.label}
+                                sx={{
+                                    borderRadius: 2.5,
+                                    p: 1,
+                                    textAlign: "center",
+                                    backgroundColor: "rgba(255,255,255,0.08)",
+                                    border: "1px solid rgba(255,255,255,0.2)",
+                                    backdropFilter: "blur(5px)",
+                                }}
+                            >
+                                <Typography
+                                    sx={{
+                                        fontWeight: 800,
+                                        color: "#ffcfb8",
+                                        lineHeight: 1.1,
+                                    }}
+                                >
+                                    {String(item.value).padStart(2, "0")}
+                                </Typography>
+                                <Typography
+                                    sx={{
+                                        fontSize: "0.72rem",
+                                        color: "rgba(255,255,255,0.78)",
+                                    }}
+                                >
+                                    {item.label}
+                                </Typography>
+                            </Box>
+                        ))}
+                    </Box>
+                </Box>
                 <Grid container spacing={4} justifyContent="center">
                     {coursesData.map((course) => (
                         <Grid key={course.id} size={{ lg: 4, md: 4, xs: 12 }}>

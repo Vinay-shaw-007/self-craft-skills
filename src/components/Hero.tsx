@@ -2,8 +2,11 @@
 import { Box, Typography, Button, Container } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom"; // 1. Import RouterLink
 import HomeImage from "../assets/home.svg";
+import useBatchCountdown from "../hooks/useBatchCountdown";
 
 const Hero = () => {
+    const { days, hours, minutes, seconds, isLive } = useBatchCountdown();
+
     return (
         <Box
             sx={{
@@ -108,6 +111,86 @@ const Hero = () => {
                                 Across Different Fields.
                             </span>
                         </Typography>
+                        <Box
+                            sx={{
+                                mt: 2,
+                                p: 2,
+                                borderRadius: 3,
+                                background:
+                                    "linear-gradient(135deg, rgba(211, 47, 47, 0.12), rgba(229, 115, 115, 0.08))",
+                                border: "1px solid rgba(211, 47, 47, 0.25)",
+                                maxWidth: 560,
+                                mx: { xs: "auto", md: 0 },
+                            }}
+                        >
+                            <Typography
+                                sx={{
+                                    color: "#B71C1C",
+                                    fontWeight: 700,
+                                    fontSize: { xs: "0.95rem", md: "1.05rem" },
+                                    textTransform: "uppercase",
+                                    letterSpacing: "0.05em",
+                                }}
+                            >
+                                First Batch Starts March 12, 2026
+                            </Typography>
+                            <Typography
+                                sx={{
+                                    mt: 1,
+                                    color: "#5f2c2c",
+                                    fontWeight: 600,
+                                    fontSize: "0.95rem",
+                                }}
+                            >
+                                {isLive ? "Batch is live now" : "Seats are filling fast"}
+                            </Typography>
+                            <Box
+                                sx={{
+                                    mt: 1.5,
+                                    display: "grid",
+                                    gridTemplateColumns:
+                                        "repeat(4, minmax(60px, 1fr))",
+                                    gap: 1,
+                                }}
+                            >
+                                {[
+                                    { label: "Days", value: days },
+                                    { label: "Hours", value: hours },
+                                    { label: "Minutes", value: minutes },
+                                    { label: "Seconds", value: seconds },
+                                ].map((item) => (
+                                    <Box
+                                        key={item.label}
+                                        sx={{
+                                            borderRadius: 2,
+                                            p: 1,
+                                            textAlign: "center",
+                                            backgroundColor: "white",
+                                            border:
+                                                "1px solid rgba(211, 47, 47, 0.2)",
+                                        }}
+                                    >
+                                        <Typography
+                                            sx={{
+                                                fontWeight: 800,
+                                                color: "#D32F2F",
+                                                lineHeight: 1.1,
+                                            }}
+                                        >
+                                            {String(item.value).padStart(2, "0")}
+                                        </Typography>
+                                        <Typography
+                                            sx={{
+                                                fontSize: "0.7rem",
+                                                color: "text.secondary",
+                                            }}
+                                        >
+                                            {item.label}
+                                        </Typography>
+                                    </Box>
+                                ))}
+                            </Box>
+                        </Box>
                         <Typography
                             variant="h6"
                             component="p"

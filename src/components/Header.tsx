@@ -20,6 +20,7 @@ import {
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../assets/logo.png";
+import useBatchCountdown from "../hooks/useBatchCountdown";
 
 // 1. "Support" has been added to the navigation list for the drawer
 const navItems = [
@@ -32,6 +33,7 @@ const showAuthButtons = false;
 const Header = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const { days, hours, minutes, seconds, isLive } = useBatchCountdown();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -104,6 +106,21 @@ const Header = () => {
             </List>
             {/* 2. Added a prominent "Enroll Now" button to the bottom of the drawer */}
             <Divider sx={{ my: 1 }} />
+            <Typography
+                sx={{
+                    px: 2,
+                    py: 1,
+                    color: "#B71C1C",
+                    fontWeight: 700,
+                    fontSize: "0.78rem",
+                    letterSpacing: "0.04em",
+                    textTransform: "uppercase",
+                }}
+            >
+                {isLive
+                    ? "First Batch Is Live"
+                    : `First Batch Starts In ${days}d ${String(hours).padStart(2, "0")}h ${String(minutes).padStart(2, "0")}m ${String(seconds).padStart(2, "0")}s`}
+            </Typography>
             <Box sx={{ columnGap: 2, rowGap: 2, p: 1 }}>
                 <Button
                     component="a"
@@ -247,6 +264,26 @@ const Header = () => {
                     </Box>
 
                     <Stack direction="row" spacing={1} alignItems="center">
+                        <Box
+                            sx={{
+                                display: { xs: "none", md: "flex" },
+                                alignItems: "center",
+                                border: "1px solid #f1c7c7",
+                                backgroundColor: "#fff6f6",
+                                color: "#B71C1C",
+                                borderRadius: "999px",
+                                px: 1.5,
+                                py: 0.75,
+                                fontSize: "0.76rem",
+                                fontWeight: 700,
+                                letterSpacing: "0.03em",
+                                whiteSpace: "nowrap",
+                            }}
+                        >
+                            {isLive
+                                ? "First Batch Is Live"
+                                : `First Batch Starts In ${days}d ${String(hours).padStart(2, "0")}h ${String(minutes).padStart(2, "0")}m`}
+                        </Box>
                         <Button
                             variant="outlined"
                             component={RouterLink}
