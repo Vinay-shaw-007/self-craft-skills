@@ -27,8 +27,8 @@ const steps = [
   },
   {
     icon: <PaymentIcon sx={{ fontSize: 40, color: "white" }} />,
-    title: "Simple Payments",
-    description: "Pay securely using Google Forms with QR code integration.",
+    title: "Secure Payment",
+    description: "Fast, trusted payments through Razorpay, Instant enrollment confirmation..",
     gradient: "linear-gradient(135deg, #f7971e 0%, #ffd200 100%)",
   },
 ];

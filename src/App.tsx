@@ -16,6 +16,7 @@ import WhatsAppButton from "./components/WhatsAppButton";
 import CourseDetailPage from "./pages/CourseDetailPage";
 import SignUpPage from "./pages/SignUpPage"; // Import SignUpPage
 import LoginPage from "./pages/LoginPage"; // Import LoginPage
+import EnrollmentFormPage from "./pages/EnrollmentFormPage";
 
 function App() {
     return (
@@ -35,6 +36,7 @@ function App() {
                 <Route path="/refund-policy" element={<RefundPolicyPage />} />
                 <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/enroll/complete" element={<EnrollmentFormPage />} />
             </Routes>
             <Box id="support">
                 <Footer />

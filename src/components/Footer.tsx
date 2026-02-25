@@ -130,8 +130,7 @@ const Footer = () => {
                                 FAQs
                             </Link>
                             <Link
-                                component={RouterLink}
-                                to="/refund-policy"
+                                href="/refund-policy.html"
                                 color="inherit"
                                 underline="hover"
                                 variant="body2"
@@ -140,8 +139,7 @@ const Footer = () => {
                                 Refund Policy
                             </Link>
                             <Link
-                                component={RouterLink}
-                                to="/terms-and-conditions"
+                                href="/terms-and-conditions.html"
                                 color="inherit"
                                 underline="hover"
                                 variant="body2"
@@ -150,8 +148,7 @@ const Footer = () => {
                                 Terms & Conditions
                             </Link>
                             <Link
-                                component={RouterLink}
-                                to="/privacy-policy"
+                                href="/privacy-policy.html"
                                 color="inherit"
                                 underline="hover"
                                 variant="body2"

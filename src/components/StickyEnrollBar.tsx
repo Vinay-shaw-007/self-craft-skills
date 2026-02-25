@@ -3,6 +3,7 @@ import { Box, Typography, Button, Container } from "@mui/material";
 import type { Course } from "./coursesData";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Logo from "../assets/logo.svg";
+import { startEnrollmentPayment } from "../utils/enrollmentPayment";
 
 interface StickyEnrollBarProps {
     course: Course | undefined;
@@ -122,9 +123,7 @@ const StickyEnrollBar = ({ course }: StickyEnrollBarProps) => {
                         <Button
                             variant="contained"
                             endIcon={<ArrowForwardIcon />}
-                            href="https://forms.gle/HnFrNt84kW8cibSZ9"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            onClick={startEnrollmentPayment}
                             sx={{
                                 borderRadius: "50px",
                                 px: { xs: 2.2, md: 3.6 },

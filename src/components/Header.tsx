@@ -21,6 +21,7 @@ import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../assets/logo.png";
 import useBatchCountdown from "../hooks/useBatchCountdown";
+import { startEnrollmentPayment } from "../utils/enrollmentPayment";
 
 // 1. "Support" has been added to the navigation list for the drawer
 const navItems = [
@@ -123,10 +124,7 @@ const Header = () => {
             </Typography>
             <Box sx={{ columnGap: 2, rowGap: 2, p: 1 }}>
                 <Button
-                    component="a"
-                    href="https://forms.gle/HnFrNt84kW8cibSZ9"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    onClick={startEnrollmentPayment}
                     variant="contained"
                     fullWidth
                     sx={{

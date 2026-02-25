@@ -35,15 +35,15 @@ const PrivacyPolicyPage = () => {
                     color="text.secondary"
                     sx={{ mb: 4 }}
                 >
-                    Effective Date: 6 September 2025
+                    Effective Date: February 26, 2026
                 </Typography>
 
                 <Typography paragraph color="text.secondary">
-                    At Self-Craft Skills, we value your trust and are committed
-                    to protecting your privacy. This Privacy Policy explains how
-                    we collect, use, and safeguard your personal information
-                    when you interact with our website, register for our
-                    courses, or communicate with us.
+                    At Self Craft Skills, we respect your privacy and are
+                    committed to protecting your personal information. This
+                    Privacy Policy explains how we collect, use, and safeguard
+                    your data when you interact with our website or enroll in
+                    our courses.
                 </Typography>
 
                 <Typography
@@ -51,10 +51,10 @@ const PrivacyPolicyPage = () => {
                     fontWeight="bold"
                     sx={{ mt: 4, mb: 2 }}
                 >
-                    Information We Collect
+                    1. Information We Collect
                 </Typography>
                 <Typography paragraph color="text.secondary">
-                    When you register or contact us, we may collect the
+                    When you register, enroll, or contact us, we may collect the
                     following information:
                 </Typography>
                 <List>
@@ -62,7 +62,7 @@ const PrivacyPolicyPage = () => {
                         "Full Name",
                         "Email Address",
                         "Phone Number / WhatsApp Number",
-                        "Age (for course eligibility)",
+                        "Age (for course eligibility, if applicable)",
                     ].map((item) => (
                         <ListItem key={item} disablePadding>
                             <ListItemIcon>
@@ -81,17 +81,17 @@ const PrivacyPolicyPage = () => {
                     fontWeight="bold"
                     sx={{ mt: 4, mb: 2 }}
                 >
-                    How We Use Your Information
+                    2. How We Use Your Information
                 </Typography>
                 <Typography paragraph color="text.secondary">
-                    We use your information for:
+                    Your information is used strictly for:
                 </Typography>
                 <List>
                     {[
                         "Course registration and enrollment",
-                        "Sending course updates, reminders, and resources",
-                        "Providing customer support and answering your queries",
-                        "Sharing important announcements related to Self-Craft Skills",
+                        "Sending class updates, reminders, and learning resources",
+                        "Providing customer support and responding to queries",
+                        "Sharing important announcements related to Self Craft Skills",
                     ].map((item) => (
                         <ListItem key={item} disablePadding>
                             <ListItemIcon>
@@ -105,8 +105,8 @@ const PrivacyPolicyPage = () => {
                     ))}
                 </List>
                 <Typography paragraph sx={{ mt: 2 }} color="text.secondary">
-                    We do not sell, rent, or share your information with third
-                    parties for marketing purposes.
+                    We do not sell, rent, or share your personal data with
+                    third-party marketers.
                 </Typography>
 
                 <Typography
@@ -114,13 +114,19 @@ const PrivacyPolicyPage = () => {
                     fontWeight="bold"
                     sx={{ mt: 4, mb: 2 }}
                 >
-                    Data Security
+                    3. Payments & Data Security
                 </Typography>
                 <Typography paragraph color="text.secondary">
-                    We take reasonable measures to protect your personal
-                    information. Payments are processed securely through trusted
-                    third-party providers (Google Forms/UPI/QR), and we do not
-                    store sensitive payment details.
+                    Payments are processed securely through trusted third-party
+                    payment gateways such as Razorpay.
+                </Typography>
+                <Typography paragraph color="text.secondary">
+                    We do not store or process sensitive payment information such
+                    as card details, UPI credentials, or banking data.
+                </Typography>
+                <Typography paragraph color="text.secondary">
+                    Reasonable security measures are taken to protect your
+                    personal information from unauthorized access.
                 </Typography>
 
                 <Typography
@@ -128,16 +134,16 @@ const PrivacyPolicyPage = () => {
                     fontWeight="bold"
                     sx={{ mt: 4, mb: 2 }}
                 >
-                    Your Rights
+                    4. Your Rights
                 </Typography>
                 <Typography paragraph color="text.secondary">
                     You have the right to:
                 </Typography>
                 <List>
                     {[
-                        "Request access to the personal information we hold about you",
-                        "Ask for corrections if your information is inaccurate",
-                        "Request deletion of your data after course completion",
+                        "Request access to the personal data we hold about you",
+                        "Request corrections to inaccurate or incomplete information",
+                        "Request deletion of your personal data after course completion, subject to legal and operational requirements",
                     ].map((item) => (
                         <ListItem key={item} disablePadding>
                             <ListItemIcon>
@@ -156,11 +162,11 @@ const PrivacyPolicyPage = () => {
                     fontWeight="bold"
                     sx={{ mt: 4, mb: 2 }}
                 >
-                    Contact Us
+                    5. Contact Us
                 </Typography>
                 <Typography paragraph color="text.secondary">
                     If you have any questions about this Privacy Policy or wish
-                    to update/delete your information, you can reach us at:
+                    to update or delete your information, please contact us at:
                 </Typography>
                 <List>
                     <ListItem>
