@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef } from "react";
 import { Box, Button, Container, Paper, Typography } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 import { enrollmentMeta } from "../utils/enrollmentPayment";
@@ -11,7 +11,7 @@ const WHATSAPP_NUMBER = "917890041604";
 const EnrollmentFormPage = () => {
     const [searchParams] = useSearchParams();
     const paymentId = searchParams.get("payment_id")?.trim() ?? "";
-    const [iframeLoads, setIframeLoads] = useState(0);
+    const iframeLoadsRef = useRef(0);
     const hasOpenedWhatsApp = useRef(false);
 
     const whatsappUrl = useMemo(() => {
@@ -38,16 +38,11 @@ const EnrollmentFormPage = () => {
     }, [paymentId]);
 
     const handleIframeLoad = () => {
-        setIframeLoads((previous) => {
-            const next = previous + 1;
-
-            if (next >= 2 && !hasOpenedWhatsApp.current) {
-                hasOpenedWhatsApp.current = true;
-                window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-            }
-
-            return next;
-        });
+        iframeLoadsRef.current += 1;
+        if (iframeLoadsRef.current >= 2 && !hasOpenedWhatsApp.current) {
+            hasOpenedWhatsApp.current = true;
+            window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+        }
     };
 
     if (!paymentId) {
