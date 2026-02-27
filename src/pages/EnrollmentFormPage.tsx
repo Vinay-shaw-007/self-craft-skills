@@ -1,18 +1,29 @@
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { Box, Button, Container, Paper, Typography } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
-import { enrollmentMeta } from "../utils/enrollmentPayment";
+import {
+    enrollmentMeta,
+    getStoredEnrollmentPaymentId,
+    storeEnrollmentPaymentId,
+} from "../utils/enrollmentPayment";
 
 const GOOGLE_FORM_VIEW_URL =
     "https://docs.google.com/forms/d/e/1FAIpQLScFHglJRuPu5QZOo6jkxxB7yX3L9NGnxJbhmZap2uD6EsA9Wg/viewform";
-const PAYMENT_ID_ENTRY_KEY = "entry.1787582391";
+const PAYMENT_ID_ENTRY_KEY = "entry.1663560164";
 const WHATSAPP_NUMBER = "917890041604";
 
 const EnrollmentFormPage = () => {
     const [searchParams] = useSearchParams();
-    const paymentId = searchParams.get("payment_id")?.trim() ?? "";
+    const paymentIdFromQuery = searchParams.get("payment_id")?.trim() ?? "";
+    const paymentId = paymentIdFromQuery || getStoredEnrollmentPaymentId();
     const iframeLoadsRef = useRef(0);
     const hasOpenedWhatsApp = useRef(false);
+
+    useEffect(() => {
+        if (paymentIdFromQuery) {
+            storeEnrollmentPaymentId(paymentIdFromQuery);
+        }
+    }, [paymentIdFromQuery]);
 
     const whatsappUrl = useMemo(() => {
         const message = [

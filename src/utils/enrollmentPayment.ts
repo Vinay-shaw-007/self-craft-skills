@@ -2,6 +2,7 @@ const RAZORPAY_SCRIPT_URL = "https://checkout.razorpay.com/v1/checkout.js";
 const RAZORPAY_KEY_ID = "rzp_live_SKUTPQDrl2Uump";
 const ENROLLMENT_AMOUNT_PAISE = 99900;
 const COURSE_NAME = "AI Unlocked: Zero to Hero";
+const ENROLLMENT_PAYMENT_STORAGE_KEY = "scs_enrollment_payment_id";
 
 let razorpayScriptPromise: Promise<boolean> | null = null;
 
@@ -30,7 +31,31 @@ const loadRazorpayScript = (): Promise<boolean> => {
     return razorpayScriptPromise;
 };
 
+export const getStoredEnrollmentPaymentId = (): string => {
+    if (typeof window === "undefined") {
+        return "";
+    }
+
+    return window.localStorage.getItem(ENROLLMENT_PAYMENT_STORAGE_KEY) ?? "";
+};
+
+export const storeEnrollmentPaymentId = (paymentId: string): void => {
+    if (typeof window === "undefined" || !paymentId) {
+        return;
+    }
+
+    window.localStorage.setItem(ENROLLMENT_PAYMENT_STORAGE_KEY, paymentId);
+};
+
 export const startEnrollmentPayment = async (): Promise<void> => {
+    const existingPaymentId = getStoredEnrollmentPaymentId();
+    if (existingPaymentId) {
+        const redirectUrl = new URL("/enroll/complete", window.location.origin);
+        redirectUrl.searchParams.set("payment_id", existingPaymentId);
+        window.location.assign(redirectUrl.toString());
+        return;
+    }
+
     const isLoaded = await loadRazorpayScript();
     if (!isLoaded || !window.Razorpay) {
         window.alert("Payment not completed. Please try again.");
@@ -49,6 +74,7 @@ export const startEnrollmentPayment = async (): Promise<void> => {
                 return;
             }
 
+            storeEnrollmentPaymentId(response.razorpay_payment_id);
             const redirectUrl = new URL(
                 "/enroll/complete",
                 window.location.origin,

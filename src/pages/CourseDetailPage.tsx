@@ -40,6 +40,7 @@ import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import PsychologyAltOutlinedIcon from "@mui/icons-material/PsychologyAltOutlined";
 import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
+import HowItWorks from "../components/HowItWorks";
 
 const CourseDetailPage = () => {
     useScrollToHash();
@@ -540,6 +541,7 @@ const CourseDetailPage = () => {
                         </Grid>
                     </Grid>
                 </Paper>
+                <HowItWorks />
 
                 <Paper
                     sx={{

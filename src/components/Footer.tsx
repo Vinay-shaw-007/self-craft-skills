@@ -111,13 +111,13 @@ const Footer = () => {
                         <Stack spacing={1}>
                             <Link
                                 component={RouterLink}
-                                to="/courses#how-it-works"
+                                to="/courses/ai-unlocked#enrollment-process"
                                 color="inherit"
                                 underline="hover"
                                 variant="body2"
                                 sx={{ color: "#bdbdbd" }}
                             >
-                                How It Works
+                                Enrollment Process
                             </Link>
                             <Link
                                 component={RouterLink}
