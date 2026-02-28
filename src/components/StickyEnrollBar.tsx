@@ -1,9 +1,7 @@
 // src/components/StickyEnrollBar.tsx
-import { Box, Typography, Button, Container } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import type { Course } from "./coursesData";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import Logo from "../assets/logo.svg";
-import { startEnrollmentPayment } from "../utils/enrollmentPayment";
 
 interface StickyEnrollBarProps {
     course: Course | undefined;
@@ -14,28 +12,30 @@ const StickyEnrollBar = ({ course }: StickyEnrollBarProps) => {
         return null;
     }
 
+    const scrollToPricingPlans = () => {
+        const section = document.getElementById("pricing-plans");
+        if (!section) {
+            window.location.hash = "pricing-plans";
+            return;
+        }
+
+        const headerOffset = 92;
+        const targetTop = section.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+            top: Math.max(targetTop - headerOffset, 0),
+            behavior: "smooth",
+        });
+    };
+
     return (
         <Box
             component="footer"
             sx={{
                 position: "fixed",
-                bottom: 0,
+                bottom: { xs: 14, md: 22 },
                 left: "50%",
-                py: { xs: 1.4, md: 1.8 },
-                width: { xs: "95%", md: "70%" },
-                borderRadius: "16px 16px 0 0",
-                backgroundColor: "#0a192f",
-                backgroundImage: {
-                    xs: "linear-gradient(45deg, #0a192f 30%, #1a237e 90%)",
-                    md: `
-                        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
-                        linear-gradient(45deg, #0a192f 30%, #1a237e 90%)
-                    `,
-                },
-                color: "white",
-                boxShadow: "0 -8px 24px rgba(15, 23, 42, 0.28)",
+                width: { xs: "94%", md: "min(860px, 88vw)" },
                 zIndex: 1000,
-                borderTop: "1px solid rgba(255, 255, 255, 0.1)",
                 transform: "translateX(-50%)",
                 animation: "slideUp 0.5s ease-out forwards",
                 "@keyframes slideUp": {
@@ -44,108 +44,133 @@ const StickyEnrollBar = ({ course }: StickyEnrollBarProps) => {
                 },
             }}
         >
-            <Container>
+            <Box
+                sx={{
+                    position: "absolute",
+                    top: { xs: -30, md: -32 },
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    px: { xs: 1.3, md: 1.9 },
+                    py: 0.46,
+                    borderRadius: "7px 7px 0 0",
+                    background: "linear-gradient(90deg, #4a73ef 0%, #5f88ff 100%)",
+                    border: "1px solid rgba(154, 189, 255, 0.95)",
+                    borderBottom: 0,
+                    whiteSpace: "nowrap",
+                    zIndex: 1,
+                }}
+            >
+                <Typography
+                    component="span"
+                    sx={{
+                        fontSize: { xs: "0.74rem", md: "0.86rem" },
+                        fontWeight: 700,
+                        letterSpacing: "0.03em",
+                        color: "#f8fbff",
+                        lineHeight: 1,
+                    }}
+                >
+                    Starting From
+                </Typography>{" "}
+                <Typography
+                    component="span"
+                    sx={{
+                        fontSize: { xs: "0.9rem", md: "1.01rem" },
+                        fontWeight: 700,
+                        letterSpacing: "0.01em",
+                        color: "#f8fbff",
+                        lineHeight: 1,
+                    }}
+                >
+                    {"\u20B9579/-"}
+                </Typography>
+            </Box>
+
+            <Box
+                sx={{
+                    position: "relative",
+                    zIndex: 2,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: { xs: 1.2, md: 2 },
+                    py: { xs: 1.2, md: 1.35 },
+                    px: { xs: 1.3, md: 1.9 },
+                    borderRadius: "16px",
+                    background:
+                        "linear-gradient(110deg, #041b45 0%, #052455 55%, #082b62 100%)",
+                    color: "white",
+                    boxShadow: "0 12px 28px rgba(3, 12, 31, 0.36)",
+                    border: "1px solid rgba(146, 184, 255, 0.24)",
+                    backdropFilter: "blur(6px)",
+                }}
+            >
                 <Box
                     sx={{
                         display: "flex",
                         alignItems: "center",
-                        justifyContent: "space-between",
-                        gap: { xs: 1.2, md: 2 },
+                        minWidth: 0,
+                        pr: { xs: 0.8, md: 1.5 },
                     }}
                 >
                     <Box
                         sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 2,
                             overflow: "hidden",
-                            flexShrink: 1,
-                            pr: { xs: 1, md: 2.5 },
-                            mr: { xs: 0.5, md: 1.5 },
-                            borderRight: "1px solid rgba(255,255,255,0.15)",
                         }}
                     >
-                        <Box
-                            component="img"
-                            src={Logo}
-                            alt="Logo"
+                        <Typography
+                            fontWeight={700}
                             sx={{
-                                height: "40px",
-                                display: { xs: "none", md: "block" },
-                            }}
-                        />
-                        <Box>
-                            <Typography
-                                fontWeight={700}
-                                sx={{
-                                    fontSize: { xs: "0.92rem", md: "1.02rem" },
-                                    lineHeight: 1.2,
-                                }}
-                            >
-                                {course.title}
-                            </Typography>
-                            <Typography
-                                variant="caption"
-                                sx={{
-                                    color: "#bdbdbd",
-                                    display: { xs: "none", sm: "block" },
-                                }}
-                            >
-                                Start your learning journey today.
-                            </Typography>
-                        </Box>
-                    </Box>
-
-                    <Box
-                        sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: { xs: 2, md: 3 },
-                            ml: "auto",
-                            flexShrink: 0,
-                        }}
-                    >
-                        <Box sx={{ textAlign: "right" }}>
-                            <Typography
-                                variant="body1"
-                                sx={{
-                                    textDecoration: "line-through",
-                                    color: "#9ca3af",
-                                    lineHeight: 1,
-                                }}
-                            >
-                                {"\u20B91999"}
-                            </Typography>
-                            <Typography variant="h5" fontWeight="bold" sx={{ color: "#fff" }}>
-                                {"\u20B9999"}
-                            </Typography>
-                        </Box>
-                        <Button
-                            variant="contained"
-                            endIcon={<ArrowForwardIcon />}
-                            onClick={startEnrollmentPayment}
-                            sx={{
-                                borderRadius: "50px",
-                                px: { xs: 2.2, md: 3.6 },
-                                py: { xs: 0.45, md: 1.3 },
-                                fontWeight: "bold",
-                                fontSize: { xs: "0.8rem", md: "0.98rem" },
-                                minWidth: { xs: "136px", md: "170px" },
-                                background:
-                                    "linear-gradient(45deg, #D32F2F 30%, #E57373 90%)",
-                                color: "white",
-                                boxShadow: "0 8px 20px rgba(211, 47, 47, 0.35)",
-                                transition: "transform 0.2s ease",
-                                "&:hover": {
-                                    transform: "translateY(-2px)",
-                                },
+                                fontSize: { xs: "0.95rem", md: "1.1rem" },
+                                lineHeight: 1.22,
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                whiteSpace: "nowrap",
+                                color: "#f1f6ff",
                             }}
                         >
-                            Enroll Now
-                        </Button>
+                            {course.title}
+                        </Typography>
+                        <Typography
+                            variant="caption"
+                            sx={{
+                                color: "rgba(207, 223, 247, 0.92)",
+                                display: { xs: "none", sm: "block" },
+                                mt: 0.15,
+                                fontSize: { sm: "0.76rem", md: "0.82rem" },
+                            }}
+                        >
+                            Start your journey by choosing your learning plan.
+                        </Typography>
                     </Box>
                 </Box>
-            </Container>
+
+                <Button
+                    variant="contained"
+                    endIcon={<ArrowForwardIcon />}
+                    onClick={scrollToPricingPlans}
+                    sx={{
+                        borderRadius: "999px",
+                        px: { xs: 2.2, md: 3.6 },
+                        py: { xs: 0.68, md: 0.95 },
+                        fontWeight: 700,
+                        fontSize: { xs: "0.92rem", md: "1.02rem" },
+                        minWidth: { xs: "136px", md: "184px" },
+                        textTransform: "none",
+                        color: "#f8fbff",
+                        background:
+                            "linear-gradient(90deg, #4a74f4 0%, #5d85ff 100%)",
+                        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.18)",
+                        "&:hover": {
+                            background:
+                                "linear-gradient(90deg, #3f65d8 0%, #5376e4 100%)",
+                            transform: "translateY(-1px)",
+                        },
+                    }}
+                >
+                    Enroll Now
+                </Button>
+            </Box>
         </Box>
     );
 };

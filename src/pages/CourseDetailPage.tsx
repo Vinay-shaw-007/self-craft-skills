@@ -20,7 +20,7 @@ import {
 import useScrollToHash from "../hooks/useScrollToHash";
 import { coursesData } from "../components/coursesData";
 import StickyEnrollBar from "../components/StickyEnrollBar";
-import BonusSection from "../components/BonusSection";
+import PricingPlansSection from "../components/BonusSection";
 import BannerImage from "../assets/banner.png";
 import MeetMentorSection from "../components/MeetMentorSection";
 // Icons
@@ -682,7 +682,7 @@ const CourseDetailPage = () => {
                 </Paper>
             </Container>
             <MeetMentorSection />
-            <BonusSection />
+            <PricingPlansSection courseTitle={course.title} />
             <StatsBanner />
             <StickyEnrollBar course={course} />
         </Box>

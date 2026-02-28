@@ -1,6 +1,6 @@
 const RAZORPAY_SCRIPT_URL = "https://checkout.razorpay.com/v1/checkout.js";
 const RAZORPAY_KEY_ID = "rzp_live_SKUTPQDrl2Uump";
-const ENROLLMENT_AMOUNT_PAISE = 99900;
+const DEFAULT_ENROLLMENT_AMOUNT_PAISE = 57900;
 const COURSE_NAME = "AI Unlocked: Zero to Hero";
 const ENROLLMENT_PAYMENT_STORAGE_KEY = "scs_enrollment_payment_id";
 
@@ -47,7 +47,17 @@ export const storeEnrollmentPaymentId = (paymentId: string): void => {
     window.localStorage.setItem(ENROLLMENT_PAYMENT_STORAGE_KEY, paymentId);
 };
 
-export const startEnrollmentPayment = async (): Promise<void> => {
+interface EnrollmentPaymentConfig {
+    amountPaise?: number;
+    planName?: string;
+}
+
+export const startEnrollmentPayment = async (
+    config: EnrollmentPaymentConfig = {},
+): Promise<void> => {
+    const amountPaise = config.amountPaise ?? DEFAULT_ENROLLMENT_AMOUNT_PAISE;
+    const planNameSuffix = config.planName ? ` - ${config.planName}` : "";
+
     const existingPaymentId = getStoredEnrollmentPaymentId();
     if (existingPaymentId) {
         const redirectUrl = new URL("/enroll/complete", window.location.origin);
@@ -64,10 +74,10 @@ export const startEnrollmentPayment = async (): Promise<void> => {
 
     const options: RazorpayOptions = {
         key: RAZORPAY_KEY_ID,
-        amount: ENROLLMENT_AMOUNT_PAISE,
+        amount: amountPaise,
         currency: "INR",
         name: "Self Craft Skills",
-        description: COURSE_NAME,
+        description: `${COURSE_NAME}${planNameSuffix}`,
         handler: (response) => {
             if (!response?.razorpay_payment_id) {
                 window.alert("Payment not completed. Please try again.");

@@ -124,7 +124,9 @@ const Header = () => {
             </Typography>
             <Box sx={{ columnGap: 2, rowGap: 2, p: 1 }}>
                 <Button
-                    onClick={startEnrollmentPayment}
+                    onClick={() => {
+                        void startEnrollmentPayment();
+                    }}
                     variant="contained"
                     fullWidth
                     sx={{
