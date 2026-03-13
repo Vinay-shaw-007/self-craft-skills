@@ -2,11 +2,8 @@
 import { Box, Typography, Button, Container } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom"; // 1. Import RouterLink
 import HomeImage from "../assets/home.svg";
-import useBatchCountdown from "../hooks/useBatchCountdown";
 
 const Hero = () => {
-    const { days, hours, minutes, seconds, isLive } = useBatchCountdown();
-
     return (
         <Box
             sx={{
@@ -114,82 +111,62 @@ const Hero = () => {
                         <Box
                             sx={{
                                 mt: 2,
-                                p: 2,
-                                borderRadius: 3,
+                                px: { xs: 2, md: 2.4 },
+                                py: { xs: 1.8, md: 2.1 },
+                                borderRadius: 4,
                                 background:
-                                    "linear-gradient(135deg, rgba(211, 47, 47, 0.12), rgba(229, 115, 115, 0.08))",
-                                border: "1px solid rgba(211, 47, 47, 0.25)",
+                                    "linear-gradient(135deg, rgba(255, 245, 245, 0.98) 0%, rgba(255, 233, 233, 0.96) 100%)",
+                                border: "1px solid rgba(211, 47, 47, 0.16)",
+                                boxShadow:
+                                    "0 18px 40px rgba(211, 47, 47, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.85)",
                                 maxWidth: 560,
                                 mx: { xs: "auto", md: 0 },
+                                position: "relative",
+                                overflow: "hidden",
                             }}
                         >
-                            <Typography
-                                sx={{
-                                    color: "#B71C1C",
-                                    fontWeight: 700,
-                                    fontSize: { xs: "0.95rem", md: "1.05rem" },
-                                    textTransform: "uppercase",
-                                    letterSpacing: "0.05em",
-                                }}
-                            >
-                                First Batch Starts March 12, 2026
-                            </Typography>
-                            <Typography
-                                sx={{
-                                    mt: 1,
-                                    color: "#5f2c2c",
-                                    fontWeight: 600,
-                                    fontSize: "0.95rem",
-                                }}
-                            >
-                                {isLive ? "Batch is live now" : "Seats are filling fast"}
-                            </Typography>
                             <Box
                                 sx={{
-                                    mt: 1.5,
-                                    display: "grid",
-                                    gridTemplateColumns:
-                                        "repeat(4, minmax(60px, 1fr))",
-                                    gap: 1,
+                                    position: "absolute",
+                                    top: -24,
+                                    right: -24,
+                                    width: 110,
+                                    height: 110,
+                                    borderRadius: "50%",
+                                    background:
+                                        "radial-gradient(circle, rgba(255, 138, 128, 0.32) 0%, rgba(255, 138, 128, 0) 72%)",
+                                }}
+                            />
+                            <Typography
+                                sx={{
+                                    position: "relative",
+                                    display: "inline-flex",
+                                    alignItems: "center",
+                                    px: 1.3,
+                                    py: 0.55,
+                                    borderRadius: "999px",
+                                    backgroundColor: "rgba(183, 28, 28, 0.08)",
+                                    color: "#9f1717",
+                                    fontWeight: 700,
+                                    fontSize: { xs: "0.78rem", md: "0.84rem" },
+                                    textTransform: "uppercase",
+                                    letterSpacing: "0.12em",
                                 }}
                             >
-                                {[
-                                    { label: "Days", value: days },
-                                    { label: "Hours", value: hours },
-                                    { label: "Minutes", value: minutes },
-                                    { label: "Seconds", value: seconds },
-                                ].map((item) => (
-                                    <Box
-                                        key={item.label}
-                                        sx={{
-                                            borderRadius: 2,
-                                            p: 1,
-                                            textAlign: "center",
-                                            backgroundColor: "white",
-                                            border:
-                                                "1px solid rgba(211, 47, 47, 0.2)",
-                                        }}
-                                    >
-                                        <Typography
-                                            sx={{
-                                                fontWeight: 800,
-                                                color: "#D32F2F",
-                                                lineHeight: 1.1,
-                                            }}
-                                        >
-                                            {String(item.value).padStart(2, "0")}
-                                        </Typography>
-                                        <Typography
-                                            sx={{
-                                                fontSize: "0.7rem",
-                                                color: "text.secondary",
-                                            }}
-                                        >
-                                            {item.label}
-                                        </Typography>
-                                    </Box>
-                                ))}
-                            </Box>
+                                FRESH BATCH STARTING SOON!
+                            </Typography>
+                            <Typography
+                                sx={{
+                                    position: "relative",
+                                    mt: 1.15,
+                                    color: "#2a1414",
+                                    fontWeight: 800,
+                                    fontSize: { xs: "1.1rem", md: "1.28rem" },
+                                    lineHeight: 1.25,
+                                }}
+                            >
+                                Reserve Your Spot Today
+                            </Typography>
                         </Box>
                         <Typography
                             variant="h6"

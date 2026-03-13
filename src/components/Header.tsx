@@ -20,8 +20,7 @@ import {
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../assets/logo.png";
-import useBatchCountdown from "../hooks/useBatchCountdown";
-import { startEnrollmentPayment } from "../utils/enrollmentPayment";
+import { coursesData } from "./coursesData";
 
 // 1. "Support" has been added to the navigation list for the drawer
 const navItems = [
@@ -30,11 +29,16 @@ const navItems = [
     { label: "FAQs", href: "/faq" },
 ];
 const showAuthButtons = false;
+const enrollmentCourse = coursesData.find(
+    (course) => course.status === "Open for Enrollment"
+);
+const enrollmentHref = enrollmentCourse
+    ? `/courses/${enrollmentCourse.id}#pricing-plans`
+    : "/courses";
 
 const Header = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
-    const { days, hours, minutes, seconds, isLive } = useBatchCountdown();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -109,24 +113,31 @@ const Header = () => {
             <Divider sx={{ my: 1 }} />
             <Typography
                 sx={{
-                    px: 2,
-                    py: 1,
-                    color: "#B71C1C",
-                    fontWeight: 700,
-                    fontSize: "0.78rem",
-                    letterSpacing: "0.04em",
+                    mx: 2,
+                    mb: 0.5,
+                    px: 1.5,
+                    py: 0.85,
+                    borderRadius: "16px",
+                    background:
+                        "linear-gradient(135deg, rgba(255, 244, 244, 1) 0%, rgba(255, 233, 233, 0.94) 100%)",
+                    border: "1px solid rgba(211, 47, 47, 0.12)",
+                    boxShadow:
+                        "0 10px 24px rgba(211, 47, 47, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.88)",
+                    color: "#9f1717",
+                    fontWeight: 800,
+                    fontSize: "0.76rem",
+                    letterSpacing: "0.1em",
                     textTransform: "uppercase",
+                    textAlign: "center",
                 }}
             >
-                {isLive
-                    ? "First Batch Is Live"
-                    : `First Batch Starts In ${days}d ${String(hours).padStart(2, "0")}h ${String(minutes).padStart(2, "0")}m ${String(seconds).padStart(2, "0")}s`}
+                FRESH BATCH STARTING SOON!
             </Typography>
             <Box sx={{ columnGap: 2, rowGap: 2, p: 1 }}>
                 <Button
-                    onClick={() => {
-                        void startEnrollmentPayment();
-                    }}
+                    component={RouterLink}
+                    to={enrollmentHref}
+                    onClick={handleDrawerToggle}
                     variant="contained"
                     fullWidth
                     sx={{
@@ -268,21 +279,49 @@ const Header = () => {
                             sx={{
                                 display: { xs: "none", md: "flex" },
                                 alignItems: "center",
-                                border: "1px solid #f1c7c7",
-                                backgroundColor: "#fff6f6",
-                                color: "#B71C1C",
+                                position: "relative",
+                                overflow: "hidden",
+                                border: "1px solid rgba(211, 47, 47, 0.14)",
+                                background:
+                                    "linear-gradient(135deg, rgba(255, 247, 247, 0.98) 0%, rgba(255, 235, 235, 0.95) 100%)",
+                                color: "#9f1717",
                                 borderRadius: "999px",
-                                px: 1.5,
-                                py: 0.75,
-                                fontSize: "0.76rem",
-                                fontWeight: 700,
-                                letterSpacing: "0.03em",
+                                px: 1.9,
+                                py: 0.8,
+                                fontSize: "0.74rem",
+                                fontWeight: 800,
+                                letterSpacing: "0.11em",
                                 whiteSpace: "nowrap",
+                                boxShadow:
+                                    "0 12px 28px rgba(211, 47, 47, 0.08), inset 0 1px 0 rgba(255,255,255,0.9)",
                             }}
                         >
-                            {isLive
-                                ? "First Batch Is Live"
-                                : `First Batch Starts In ${days}d ${String(hours).padStart(2, "0")}h ${String(minutes).padStart(2, "0")}m`}
+                            <Box
+                                sx={{
+                                    position: "absolute",
+                                    top: -18,
+                                    right: -10,
+                                    width: 56,
+                                    height: 56,
+                                    borderRadius: "50%",
+                                    background:
+                                        "radial-gradient(circle, rgba(255, 138, 128, 0.28) 0%, rgba(255, 138, 128, 0) 72%)",
+                                }}
+                            />
+                            <Box
+                                sx={{
+                                    width: 8,
+                                    height: 8,
+                                    borderRadius: "50%",
+                                    background:
+                                        "linear-gradient(135deg, #ff7b72 0%, #d32f2f 100%)",
+                                    boxShadow: "0 0 0 4px rgba(211, 47, 47, 0.08)",
+                                    mr: 1.1,
+                                    position: "relative",
+                                    zIndex: 1,
+                                }}
+                            />
+                            FRESH BATCH STARTING SOON
                         </Box>
                         <Button
                             variant="outlined"

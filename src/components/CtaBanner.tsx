@@ -4,11 +4,8 @@ import { Link as RouterLink } from "react-router-dom";
 import FadeInOnScroll from "./FadeInOnScroll";
 import GroupsIcon from "@mui/icons-material/Groups"; 
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch"; 
-import useBatchCountdown from "../hooks/useBatchCountdown";
 
 const CtaBanner = () => {
-  const { days, hours, minutes, seconds, isLive } = useBatchCountdown();
-
   return (
     <Box
       sx={{
@@ -99,40 +96,8 @@ const CtaBanner = () => {
               First Batch Starts March 12, 2026
             </Typography>
             <Typography variant="body2" sx={{ color: "#bdbdbd", mt: 0.5 }}>
-              {isLive ? "Batch is live now." : "Enroll now to secure your seat."}
+              Enroll now to secure your seat.
             </Typography>
-            <Box
-              sx={{
-                mt: 2,
-                display: "grid",
-                gridTemplateColumns: "repeat(4, minmax(64px, 1fr))",
-                gap: 1,
-              }}
-            >
-              {[
-                { label: "D", value: days },
-                { label: "H", value: hours },
-                { label: "M", value: minutes },
-                { label: "S", value: seconds },
-              ].map((item) => (
-                <Box
-                  key={item.label}
-                  sx={{
-                    borderRadius: 2,
-                    p: 1,
-                    backgroundColor: "rgba(255,255,255,0.14)",
-                    border: "1px solid rgba(255,255,255,0.2)",
-                  }}
-                >
-                  <Typography sx={{ fontWeight: 800, lineHeight: 1 }}>
-                    {String(item.value).padStart(2, "0")}
-                  </Typography>
-                  <Typography sx={{ fontSize: "0.7rem", color: "#d7d7d7" }}>
-                    {item.label}
-                  </Typography>
-                </Box>
-              ))}
-            </Box>
           </Paper>
 
           {/* CTA Button */}

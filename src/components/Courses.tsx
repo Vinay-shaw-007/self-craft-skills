@@ -21,7 +21,6 @@ import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import SchoolIcon from '@mui/icons-material/School';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
-import useBatchCountdown from "../hooks/useBatchCountdown";
 
 // Helper to get an icon for each feature
 const getFeatureIcon = (featureText: string) => {
@@ -35,8 +34,6 @@ const getFeatureIcon = (featureText: string) => {
 }
 
 const Courses = () => {
-    const { days, hours, minutes, seconds, isLive } = useBatchCountdown();
-
     return (
         <Box
             sx={{
@@ -127,7 +124,7 @@ const Courses = () => {
                             fontSize: { xs: "0.78rem", md: "0.88rem" },
                         }}
                     >
-                        First Batch Starts March 12, 2026
+                        FRESH BATCH STARTING SOON!
                     </Typography>
                     <Typography
                         sx={{
@@ -138,57 +135,8 @@ const Courses = () => {
                             fontSize: "0.95rem",
                         }}
                     >
-                        {isLive ? "Batch is live now" : "Enroll now to secure your seat"}
+                        Enroll now to secure your seat
                     </Typography>
-                    <Box
-                        sx={{
-                            mt: 1.5,
-                            display: "grid",
-                            gridTemplateColumns:
-                                "repeat(4, minmax(68px, 1fr))",
-                            gap: 1,
-                            maxWidth: 420,
-                            mx: "auto",
-                            position: "relative",
-                        }}
-                    >
-                        {[
-                            { label: "Days", value: days },
-                            { label: "Hours", value: hours },
-                            { label: "Minutes", value: minutes },
-                            { label: "Seconds", value: seconds },
-                        ].map((item) => (
-                            <Box
-                                key={item.label}
-                                sx={{
-                                    borderRadius: 2.5,
-                                    p: 1,
-                                    textAlign: "center",
-                                    backgroundColor: "rgba(255,255,255,0.08)",
-                                    border: "1px solid rgba(255,255,255,0.2)",
-                                    backdropFilter: "blur(5px)",
-                                }}
-                            >
-                                <Typography
-                                    sx={{
-                                        fontWeight: 800,
-                                        color: "#ffcfb8",
-                                        lineHeight: 1.1,
-                                    }}
-                                >
-                                    {String(item.value).padStart(2, "0")}
-                                </Typography>
-                                <Typography
-                                    sx={{
-                                        fontSize: "0.72rem",
-                                        color: "rgba(255,255,255,0.78)",
-                                    }}
-                                >
-                                    {item.label}
-                                </Typography>
-                            </Box>
-                        ))}
-                    </Box>
                 </Box>
                 <Grid container spacing={4} justifyContent="center">
                     {coursesData.map((course) => (
