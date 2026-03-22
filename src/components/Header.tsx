@@ -1,402 +1,202 @@
-// src/components/Header.tsx
-import { useState, useEffect } from "react";
-import { NavLink as RouterNavLink, Link as RouterLink } from "react-router-dom";
+import { useEffect, useState } from "react";
 import {
-    AppBar,
-    Toolbar,
-    Box,
-    Button,
-    Link,
-    Stack,
-    IconButton,
-    Drawer,
-    List,
-    ListItem,
-    ListItemText,
-    Typography,
-    Container,
-    Divider,
+    AppBar, Box, Button, Container, Drawer, IconButton,
+    Link, List, ListItemButton, Stack, Toolbar, Typography, Divider,
 } from "@mui/material";
-import SupportAgentIcon from "@mui/icons-material/SupportAgent";
-import MenuIcon from "@mui/icons-material/Menu";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
+import { Link as RouterLink, NavLink as RouterNavLink } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import { coursesData } from "./coursesData";
 
-// 1. "Support" has been added to the navigation list for the drawer
 const navItems = [
     { label: "Home", href: "/" },
-    { label: "Courses", href: "/courses" },
+    { label: "Programs", href: "/courses" },
     { label: "FAQs", href: "/faq" },
 ];
-const showAuthButtons = false;
-const enrollmentCourse = coursesData.find(
-    (course) => course.status === "Open for Enrollment"
-);
-const enrollmentHref = enrollmentCourse
-    ? `/courses/${enrollmentCourse.id}#pricing-plans`
-    : "/courses";
+
+const enrollmentCourse = coursesData.find((c) => c.status === "Open for Enrollment");
+const enrollmentHref = enrollmentCourse ? `/courses/${enrollmentCourse.id}` : "/courses";
 
 const Header = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 10);
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+        const onScroll = () => setScrolled(window.scrollY > 10);
+        window.addEventListener("scroll", onScroll);
+        return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
-    const handleDrawerToggle = () => {
-        setDrawerOpen(!drawerOpen);
-    };
-
-    const minimalButtonSx = {
-        borderRadius: "999px",
-        textTransform: "none",
-        fontWeight: 500,
-        backgroundColor: "transparent",
-        color: "#2d2d2d",
-        border: "1px solid #e2e2e2",
-        boxShadow: "none",
-        transition: "all 0.2s ease",
-        "&:hover": {
-            backgroundColor: "#f6f6f6",
-            borderColor: "#cfcfcf",
-            boxShadow: "none",
-            transform: "none",
-        },
-    };
-
-    const minimalPrimaryButtonSx = {
-        ...minimalButtonSx,
-        borderColor: "#d32f2f",
-        color: "#d32f2f",
-        "&:hover": {
-            backgroundColor: "rgba(211, 47, 47, 0.06)",
-            borderColor: "#b71c1c",
-            boxShadow: "none",
-            transform: "none",
-        },
-    };
-
-    const drawer = (
-        <Box
-            onClick={handleDrawerToggle}
-            sx={{ textAlign: "center", width: 250 }}
-        >
-            <img
-                src={Logo}
-                alt="Self-Craft Skills Logo"
-                style={{ height: "40px", margin: "16px 0" }}
-            />
-            <List>
-                {navItems.map((item) => (
-                    <ListItem key={item.label} disablePadding>
-                        <Link
-                            component={RouterLink}
-                            to={item.href}
-                            underline="none"
-                            sx={{
-                                color: "#333",
-                                width: "100%",
-                                padding: "8px 16px",
-                            }}
-                        >
-                            <ListItemText primary={item.label} />
-                        </Link>
-                    </ListItem>
-                ))}
-            </List>
-            {/* 2. Added a prominent "Enroll Now" button to the bottom of the drawer */}
-            <Divider sx={{ my: 1 }} />
-            <Typography
-                sx={{
-                    mx: 2,
-                    mb: 0.5,
-                    px: 1.5,
-                    py: 0.85,
-                    borderRadius: "16px",
-                    background:
-                        "linear-gradient(135deg, rgba(255, 244, 244, 1) 0%, rgba(255, 233, 233, 0.94) 100%)",
-                    border: "1px solid rgba(211, 47, 47, 0.12)",
-                    boxShadow:
-                        "0 10px 24px rgba(211, 47, 47, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.88)",
-                    color: "#9f1717",
-                    fontWeight: 800,
-                    fontSize: "0.76rem",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    textAlign: "center",
-                }}
-            >
-                FRESH BATCH STARTING SOON!
-            </Typography>
-            <Box sx={{ columnGap: 2, rowGap: 2, p: 1 }}>
-                <Button
-                    component={RouterLink}
-                    to={enrollmentHref}
-                    onClick={handleDrawerToggle}
-                    variant="contained"
-                    fullWidth
-                    sx={{
-                        borderRadius: "50px",
-                        fontWeight: "bold",
-                        my: 1,
-                        background:
-                            "linear-gradient(45deg, #D32F2F 30%, #E57373 90%)",
-                    }}
-                >
-                    Enroll Now
-                </Button>
-                <Button
-                    variant="outlined"
-                    component={RouterLink}
-                    to="/#support"
-                    startIcon={<SupportAgentIcon />}
-                    fullWidth
-                    sx={{ ...minimalButtonSx, my: 1 }}
-                >
-                    Support
-                </Button>
-                {/* Added Login and Sign Up buttons to mobile drawer */}
-                {showAuthButtons && (
-                    <Button
-                        variant="outlined"
-                        component={RouterLink}
-                        to="/login"
-                        fullWidth
-                        sx={{ ...minimalButtonSx, my: 1 }}
-                    >
-                        Login
-                    </Button>
-                )}
-                {showAuthButtons && (
-                    <Button
-                        variant="outlined"
-                        component={RouterLink}
-                        to="/signup"
-                        fullWidth
-                        sx={{ ...minimalPrimaryButtonSx, my: 1 }}
-                    >
-                        Sign Up
-                    </Button>
-                )}
-            </Box>
-        </Box>
-    );
-
-    // Style for active NavLink
-    const activeLinkStyle = {
-        color: "#D32F2F", // Your primary brand red
-        fontWeight: "bold",
-    };
-
     return (
-        <AppBar
-            component="nav"
-            position="sticky"
-            elevation={0}
-            sx={{
-                transition: "background-color 0.3s ease, box-shadow 0.3s ease",
-                backgroundColor: isScrolled
-                    ? "rgba(255, 255, 255, 0.9)"
-                    : "transparent",
-                backdropFilter: isScrolled ? "blur(10px)" : "none",
-                boxShadow: isScrolled ? "0 2px 10px rgba(0,0,0,0.05)" : "none",
-                borderBottom: isScrolled
-                    ? "1px solid #eee"
-                    : "1px solid transparent",
-            }}
-        >
-            <Container maxWidth="xl">
-                <Toolbar
-                    disableGutters
-                    sx={{ justifyContent: "space-between" }}
-                >
-                    <Box
-                        component={RouterNavLink}
-                        to="/#hero"
-                        sx={{
-                            display: "flex",
+        <AppBar position="sticky" elevation={0} sx={{ backgroundColor: "transparent", color: "#111", boxShadow: "none" }}>
+            {/* Marquee announcement */}
+            <Box sx={{
+                background: "#111",
+                color: "#fff",
+                overflow: "hidden",
+                py: 0.8,
+            }}>
+                <Box sx={{
+                    display: "flex",
+                    animation: "ticker 25s linear infinite",
+                    whiteSpace: "nowrap",
+                    width: "fit-content",
+                }}>
+                    {[...Array(4)].map((_, i) => (
+                        <Typography key={i} component="span" sx={{
+                            fontSize: "0.78rem",
+                            fontWeight: 500,
+                            letterSpacing: "0.08em",
+                            textTransform: "uppercase",
+                            mx: 4,
+                            display: "inline-flex",
                             alignItems: "center",
-                            textDecoration: "none",
-                        }}
-                    >
-                        <img
-                            src={Logo}
-                            alt="Self-Craft Skills Logo"
-                            style={{ height: "50px", marginRight: "12px" }}
-                        />
-                        <Typography
-                            variant="h6"
-                            component="div"
-                            sx={{
-                                color: "#111",
-                                fontSize: { xs: "0.78rem", md: "0.86rem" },
-                                fontWeight: 500,
-                                letterSpacing: "0.24em",
-                                textTransform: "uppercase",
-                            }}
-                        >
-                            Self Craft Skills
+                            gap: 1.5,
+                        }}>
+                            <Box component="span" sx={{ color: "#6C5CE7" }}>●</Box>
+                            AI Course is live now for students, professionals, and creators
+                            <Box component="span" sx={{ color: "#FD79A8" }}>●</Box>
+                            Open for enrollment — Limited seats
+                        </Typography>
+                    ))}
+                </Box>
+            </Box>
+
+            {/* Main nav */}
+            <Box sx={{
+                background: scrolled ? "rgba(250, 250, 250, 0.85)" : "rgba(250, 250, 250, 0.6)",
+                backdropFilter: "blur(24px) saturate(180%)",
+                borderBottom: scrolled ? "1px solid rgba(0,0,0,0.06)" : "1px solid transparent",
+                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+            }}>
+                <Container maxWidth="lg">
+                    <Toolbar disableGutters sx={{ minHeight: { xs: 64, md: 72 }, justifyContent: "space-between" }}>
+                        {/* Logo */}
+                        <Box component={RouterLink} to="/" sx={{ display: "flex", alignItems: "center", gap: 1, textDecoration: "none", color: "inherit" }}>
+                            <Box component="img" src={Logo} alt="Logo" sx={{ width: 36, height: 36 }} />
+                            <Typography sx={{
+                                fontFamily: '"Space Grotesk", sans-serif',
+                                fontWeight: 700,
+                                fontSize: "1rem",
+                                letterSpacing: "-0.02em",
+                            }}>
+                                SELF CRAFT SKILLS
+                            </Typography>
+                        </Box>
+
+                        {/* Center nav */}
+                        <Box sx={{
+                            display: { xs: "none", md: "flex" },
+                            alignItems: "center",
+                            gap: 0.5,
+                            p: 0.5,
+                            borderRadius: "14px",
+                            border: "1px solid rgba(0,0,0,0.06)",
+                            background: "rgba(255,255,255,0.7)",
+                        }}>
+                            {navItems.map((item) => (
+                                <RouterNavLink key={item.label} to={item.href} style={{ textDecoration: "none" }}>
+                                    {({ isActive }) => (
+                                        <Link underline="none" sx={{
+                                            px: 2, py: 0.8,
+                                            borderRadius: "10px",
+                                            fontSize: "0.88rem",
+                                            fontWeight: 500,
+                                            color: isActive ? "#111" : "#666",
+                                            backgroundColor: isActive ? "#fff" : "transparent",
+                                            boxShadow: isActive ? "0 1px 3px rgba(0,0,0,0.08)" : "none",
+                                            transition: "all 0.2s ease",
+                                            "&:hover": { color: "#111", backgroundColor: isActive ? "#fff" : "rgba(0,0,0,0.03)" },
+                                        }}>
+                                            {item.label}
+                                        </Link>
+                                    )}
+                                </RouterNavLink>
+                            ))}
+                        </Box>
+
+                        {/* Right actions */}
+                        <Stack direction="row" spacing={1} alignItems="center">
+                            <Button
+                                component={RouterLink}
+                                to={enrollmentHref}
+                                sx={{
+                                    display: { xs: "none", md: "inline-flex" },
+                                    px: 2.5, py: 1,
+                                    borderRadius: "12px",
+                                    color: "#fff",
+                                    fontWeight: 600,
+                                    fontSize: "0.88rem",
+                                    background: "#111",
+                                    "&:hover": { background: "#222" },
+                                }}
+                            >
+                                Enroll now
+                                <ArrowOutwardRoundedIcon sx={{ ml: 0.5, fontSize: 16 }} />
+                            </Button>
+                            <IconButton onClick={() => setDrawerOpen(true)} sx={{
+                                display: { xs: "flex", md: "none" },
+                                border: "1px solid rgba(0,0,0,0.08)",
+                                borderRadius: "10px",
+                                width: 40, height: 40,
+                            }}>
+                                <MenuRoundedIcon />
+                            </IconButton>
+                        </Stack>
+                    </Toolbar>
+                </Container>
+            </Box>
+
+            {/* Mobile drawer */}
+            <Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)}
+                sx={{
+                    "& .MuiDrawer-paper": {
+                        width: 320, background: "#fafafa",
+                        borderLeft: "none",
+                    },
+                }}>
+                <Box sx={{ p: 3 }}>
+                    <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 3 }}>
+                        <Typography sx={{ fontFamily: '"Space Grotesk"', fontWeight: 700 }}>Menu</Typography>
+                        <IconButton onClick={() => setDrawerOpen(false)}><CloseRoundedIcon /></IconButton>
+                    </Stack>
+
+                    <Box sx={{
+                        p: 2, mb: 3, borderRadius: "16px",
+                        background: "linear-gradient(135deg, #6C5CE7, #0984E3)",
+                        color: "#fff",
+                    }}>
+                        <Typography sx={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", opacity: 0.7 }}>
+                            Now enrolling
+                        </Typography>
+                        <Typography sx={{ mt: 0.5, fontWeight: 600, fontSize: "0.95rem" }}>
+                            Join the next live cohort before seats fill up.
                         </Typography>
                     </Box>
 
-                    <Box sx={{ display: { xs: "none", md: "flex" }, gap: 4 }}>
+                    <List sx={{ py: 0 }}>
                         {navItems.map((item) => (
-                            <RouterNavLink
-                                key={item.label}
-                                to={item.href}
-                                style={{ textDecoration: "none" }}
-                            >
-                                {({ isActive }) => (
-                                    <Link
-                                        underline="none"
-                                        sx={{
-                                            whiteSpace: "nowrap",
-                                            fontSize: "1rem",
-
-                                            transition: "color 0.2s",
-                                            "&:hover": {
-                                                color: "primary.main",
-                                            },
-                                            ...(isActive
-                                                ? activeLinkStyle
-                                                : { color: "#333" }),
-                                        }}
-                                    >
-                                        {item.label}
-                                    </Link>
-                                )}
-                            </RouterNavLink>
+                            <ListItemButton key={item.label} component={RouterLink} to={item.href}
+                                onClick={() => setDrawerOpen(false)}
+                                sx={{ borderRadius: "12px", mb: 0.5, py: 1.5 }}>
+                                <Typography fontWeight={600}>{item.label}</Typography>
+                            </ListItemButton>
                         ))}
-                    </Box>
-
-                    <Stack direction="row" spacing={1} alignItems="center">
-                        <Box
-                            sx={{
-                                display: { xs: "none", md: "flex" },
-                                alignItems: "center",
-                                position: "relative",
-                                overflow: "hidden",
-                                border: "1px solid rgba(211, 47, 47, 0.14)",
-                                background:
-                                    "linear-gradient(135deg, rgba(255, 247, 247, 0.98) 0%, rgba(255, 235, 235, 0.95) 100%)",
-                                color: "#9f1717",
-                                borderRadius: "999px",
-                                px: 1.9,
-                                py: 0.8,
-                                fontSize: "0.74rem",
-                                fontWeight: 800,
-                                letterSpacing: "0.11em",
-                                whiteSpace: "nowrap",
-                                boxShadow:
-                                    "0 12px 28px rgba(211, 47, 47, 0.08), inset 0 1px 0 rgba(255,255,255,0.9)",
-                            }}
-                        >
-                            <Box
-                                sx={{
-                                    position: "absolute",
-                                    top: -18,
-                                    right: -10,
-                                    width: 56,
-                                    height: 56,
-                                    borderRadius: "50%",
-                                    background:
-                                        "radial-gradient(circle, rgba(255, 138, 128, 0.28) 0%, rgba(255, 138, 128, 0) 72%)",
-                                }}
-                            />
-                            <Box
-                                sx={{
-                                    width: 8,
-                                    height: 8,
-                                    borderRadius: "50%",
-                                    background:
-                                        "linear-gradient(135deg, #ff7b72 0%, #d32f2f 100%)",
-                                    boxShadow: "0 0 0 4px rgba(211, 47, 47, 0.08)",
-                                    mr: 1.1,
-                                    position: "relative",
-                                    zIndex: 1,
-                                }}
-                            />
-                            FRESH BATCH STARTING SOON
-                        </Box>
-                        <Button
-                            variant="outlined"
-                            component={RouterLink}
-                            to="/#support"
-                            startIcon={<SupportAgentIcon />}
-                            sx={{
-                                ...minimalButtonSx,
-                                display: { xs: "none", md: "inline-flex" },
-                            }}
-                        >
-                            Support
-                        </Button>
-                        {showAuthButtons && (
-                            <Button
-                                variant="outlined"
-                                component={RouterLink}
-                                to="/login"
-                                sx={{
-                                    ...minimalButtonSx,
-                                    display: { xs: "none", md: "inline-flex" },
-                                }}
-                            >
-                                Login
-                            </Button>
-                        )}
-                        {showAuthButtons && (
-                            <Button
-                                variant="outlined"
-                                component={RouterLink}
-                                to="/signup"
-                                sx={{
-                                    ...minimalPrimaryButtonSx,
-                                    display: { xs: "inline-flex", md: "inline-flex" },
-                                    // Match Login button sizing
-                                    fontSize: { xs: "0.7rem", md: "0.8rem" },
-                                    px: { xs: 1.5, md:1 },
-                                    py: { xs: 0.5, md: 1 },
-                                    minWidth: { xs: "70px", md: "70px" },
-                                }}
-                            >
-                                Sign Up
-                            </Button>
-                        )}
-                        <IconButton
-                            color="inherit"
-                            onClick={handleDrawerToggle}
-                            sx={{ display: { md: "none" }, color: "#333" }}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                    </Stack>
-                </Toolbar>
-            </Container>
-
-            <Box component="nav">
-                <Drawer
-                    variant="temporary"
-                    anchor="right"
-                    open={drawerOpen}
-                    onClose={handleDrawerToggle}
-                    ModalProps={{
-                        keepMounted: true, // Better open performance on mobile.
-                    }}
-                    sx={{
-                        display: { xs: "block", md: "none" },
-                        "& .MuiDrawer-paper": {
-                            boxSizing: "border-box",
-                            width: 250,
-                        },
-                    }}
-                >
-                    {drawer}
-                </Drawer>
-            </Box>
+                    </List>
+                    <Divider sx={{ my: 2 }} />
+                    <Button fullWidth component={RouterLink} to={enrollmentHref}
+                        onClick={() => setDrawerOpen(false)}
+                        sx={{
+                            py: 1.4, borderRadius: "12px", color: "#fff",
+                            background: "#111", fontWeight: 600,
+                            "&:hover": { background: "#222" },
+                        }}>
+                        Enroll now <ArrowOutwardRoundedIcon sx={{ ml: 0.5, fontSize: 16 }} />
+                    </Button>
+                </Box>
+            </Drawer>
         </AppBar>
     );
 };

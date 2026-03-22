@@ -1,133 +1,118 @@
-// src/components/CtaBanner.tsx
-import { Box, Container, Typography, Button, Paper } from "@mui/material";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import FadeInOnScroll from "./FadeInOnScroll";
-import GroupsIcon from "@mui/icons-material/Groups"; 
-import RocketLaunchIcon from "@mui/icons-material/RocketLaunch"; 
+import BoltRoundedIcon from "@mui/icons-material/BoltRounded";
+import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 
 const CtaBanner = () => {
-  return (
-    <Box
-      sx={{
-        py: { xs: 8, md: 12 },
-        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='%23dbe9f6' fill-opacity='0.4'%3E%3Cpolygon fill-rule='evenodd' points='8 4 12 6 8 8 6 12 4 8 0 6 4 4 6 0 8 4'/%3E%3C/g%3E%3C/svg%3E")`,
-      }}
-    >
-    <Container maxWidth="md" sx={{ my: { xs: 6, md: 10 } }}>
-      <FadeInOnScroll>
-        <Paper
-          elevation={6}
-          sx={{
-            borderRadius: "24px",
-            p: { xs: 4, md: 6 },
-            textAlign: "center",
-            background: "linear-gradient(135deg, #0a192f 30%, #1a237e 90%)",
-            
-            color: "#fff",
-            position: "relative",
-            overflow: "hidden",
-          }}
-        >
-          {/* Subtle background decoration */}
-          <RocketLaunchIcon
-            sx={{
-              position: "absolute",
-              top: -40,
-              right: -40,
-              fontSize: "220px",
-              color: "rgba(255,255,255,0.06)",
-              transform: "rotate(-20deg)",
-            }}
-          />
+    return (
+        <Box sx={{ py: { xs: 4, md: 6 } }}>
+            <Container maxWidth="md">
+                <FadeInOnScroll>
+                    {/* Gradient border wrapper */}
+                    <Box sx={{
+                        p: 0.5,
+                        borderRadius: "24px",
+                        background: "linear-gradient(135deg, #6C5CE7, #0984E3, #00B894, #FD79A8)",
+                    }}>
+                        <Box sx={{
+                            position: "relative",
+                            overflow: "hidden",
+                            p: { xs: 4, md: 6 },
+                            borderRadius: "21px",
+                            background: "#0a0a0a",
+                            color: "#fff",
+                            textAlign: "center",
+                        }} className="noise-overlay">
+                            {/* Glow orbs */}
+                            <Box sx={{
+                                position: "absolute", top: -80, right: -80,
+                                width: 250, height: 250, borderRadius: "50%",
+                                background: "radial-gradient(circle, rgba(108, 92, 231, 0.15), transparent 70%)",
+                                filter: "blur(40px)",
+                            }} />
+                            <Box sx={{
+                                position: "absolute", bottom: -60, left: -60,
+                                width: 200, height: 200, borderRadius: "50%",
+                                background: "radial-gradient(circle, rgba(253, 121, 168, 0.1), transparent 70%)",
+                                filter: "blur(40px)",
+                            }} />
 
-          {/* Heading */}
-          <Typography
-            variant="h3"
-            fontWeight="bold"
-            sx={{
-              fontSize: { xs: "2rem", md: "2.8rem" },
-              mb: 2,
-            }}
-          >
-            The Future Will Not Wait. Why Should You?
-          </Typography>
+                            <Box sx={{ position: "relative", zIndex: 1 }}>
+                                <Typography sx={{
+                                    fontSize: "0.72rem", fontWeight: 600,
+                                    letterSpacing: "0.12em", textTransform: "uppercase",
+                                    color: "rgba(255,255,255,0.4)", mb: 1,
+                                }}>
+                                    Don't wait
+                                </Typography>
+                                <Typography variant="h3" sx={{
+                                    fontSize: { xs: "1.8rem", md: "2.6rem" },
+                                    mb: 2,
+                                }}>
+                                    The Future Will Not Wait. Why Should You?
+                                </Typography>
 
-          <Typography
-            variant="h6"
-            sx={{
-              color: "#e0e0e0",
-              maxWidth: "700px",
-              mx: "auto",
-              mb: 4,
-            }}
-          >
-            Upgrade your career and personal growth with <b>Self-Craft Skills</b> live programs.
-          </Typography>
+                                <Typography sx={{
+                                    color: "rgba(255,255,255,0.5)",
+                                    maxWidth: 580, mx: "auto",
+                                    mb: 3, lineHeight: 1.7,
+                                }}>
+                                    Upgrade your career and personal growth with <strong style={{ color: "rgba(255,255,255,0.8)" }}>Self-Craft Skills</strong> live programs.
+                                </Typography>
 
-          {/* Urgency Card inside */}
-          <Paper
-            elevation={3}
-            sx={{
-              p: { xs: 2, md: 3 },
-              borderRadius: "16px",
-              backgroundColor: "rgba(255,255,255,0.1)",
-              backdropFilter: "blur(6px)",
-              maxWidth: "500px",
-              mx: "auto",
-              mb: 3,
-            }}
-          >
-            <Box display="flex" justifyContent="center" alignItems="center" gap={1}>
-              <GroupsIcon sx={{ color: "#FFD700" }} />
-              <Typography
-                fontWeight="bold"
-                variant="h6"
-                sx={{
-                  background: "linear-gradient(45deg, #FFD700, #FFA500)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  fontSize: { xs: "1.1rem", md: "1.4rem" },
-                }}
-              >
-                Only 30 Seats are Available
-              </Typography>
-            </Box>
-            <Typography variant="body2" sx={{ color: "#bdbdbd", mt: 1 }}>
-              First Batch Starts March 12, 2026
-            </Typography>
-            <Typography variant="body2" sx={{ color: "#bdbdbd", mt: 0.5 }}>
-              Enroll now to secure your seat.
-            </Typography>
-          </Paper>
+                                {/* Urgency card */}
+                                <Box sx={{
+                                    maxWidth: 400, mx: "auto", mb: 3.5,
+                                    p: 2, borderRadius: "14px",
+                                    border: "1px solid rgba(255,255,255,0.08)",
+                                    background: "rgba(255,255,255,0.04)",
+                                }}>
+                                    <Stack direction="row" spacing={1} justifyContent="center" alignItems="center">
+                                        <BoltRoundedIcon sx={{ color: "#FDCB6E", fontSize: 20 }} />
+                                        <Typography sx={{
+                                            fontFamily: '"Space Grotesk"',
+                                            fontWeight: 700, fontSize: "1.1rem",
+                                            background: "linear-gradient(135deg, #FDCB6E, #E17055)",
+                                            WebkitBackgroundClip: "text",
+                                            WebkitTextFillColor: "transparent",
+                                        }}>
+                                            Only 30 Seats are Available
+                                        </Typography>
+                                    </Stack>
+                                    <Typography sx={{
+                                        color: "rgba(255,255,255,0.35)",
+                                        fontSize: "0.82rem", mt: 0.8,
+                                    }}>
+                                        Enroll now to secure your seat.
+                                    </Typography>
+                                </Box>
 
-          {/* CTA Button */}
-          <Button
-            component={RouterLink}
-            to="/courses"
-            variant="contained"
-            size="large"
-            sx={{
-              borderRadius: "50px",
-              px: 5,
-              py: 1.5,
-              fontWeight: "bold",
-              fontSize: "1.1rem",
-              letterSpacing: "0.5px",
-              background: "linear-gradient(45deg, #D32F2F, #E57373)",
-              boxShadow: "0 6px 20px rgba(211, 47, 47, 0.5)",
-              "&:hover": {
-                transform: "translateY(-3px)",
-                boxShadow: "0 8px 25px rgba(211, 47, 47, 0.6)",
-              },
-            }}
-          >
-            Get Started Today
-          </Button>
-        </Paper>
-      </FadeInOnScroll>
-    </Container>
-    </Box>
-  );
+                                <Button
+                                    component={RouterLink}
+                                    to="/courses"
+                                    endIcon={<ArrowOutwardRoundedIcon sx={{ fontSize: 16 }} />}
+                                    sx={{
+                                        px: 3.5, py: 1.4,
+                                        borderRadius: "14px",
+                                        color: "#111",
+                                        fontWeight: 700,
+                                        fontSize: "0.95rem",
+                                        background: "#fff",
+                                        "&:hover": { background: "#f0f0f0", transform: "translateY(-2px)" },
+                                        transition: "all 0.2s ease",
+                                        boxShadow: "0 8px 32px rgba(255,255,255,0.1)",
+                                    }}
+                                >
+                                    Get Started Today
+                                </Button>
+                            </Box>
+                        </Box>
+                    </Box>
+                </FadeInOnScroll>
+            </Container>
+        </Box>
+    );
 };
 
 export default CtaBanner;

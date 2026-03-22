@@ -1,4 +1,3 @@
-// src/pages/CoursesPage.tsx
 import Courses from "../components/Courses";
 import useScrollToHash from "../hooks/useScrollToHash";
 

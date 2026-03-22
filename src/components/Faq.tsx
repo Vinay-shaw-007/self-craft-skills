@@ -1,87 +1,40 @@
-// src/components/Faq.tsx
 import React, { useState } from "react";
 import {
-    Box,
-    Container,
-    Typography,
-    Accordion,
-    AccordionSummary,
-    AccordionDetails,
+    Accordion, AccordionDetails, AccordionSummary,
+    Box, Chip, Container, Grid, Stack, Typography,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 import FadeInOnScroll from "./FadeInOnScroll";
 
 const faqData = [
     {
-        category: "About the Academy",
+        category: "About the academy",
+        emoji: "01",
         questions: [
-            {
-                q: "What is Self-Craft Skills?",
-                a: "Self Craft Skills is a knowledge-sharing platform where you can learn about various fields. We aim to make learning simple, practical, and useful for learners.",
-            },
-            {
-                q: "Why should I choose Self-Craft Skills?",
-                a: "We focus on application-based learning with live guidance and mentorship. Instead of just theory, you'll gain knowledge you can actually use in studies, work, and everyday life.",
-            },
-            {
-                q: "What's the vision of Self-Craft Skills?",
-                a: "Our goal is to become a leading platform for modern and practical learning through our courses.",
-            },
+            { q: "What is Self-Craft Skills?", a: "Self Craft Skills is a knowledge-sharing platform where you can learn about various fields. We aim to make learning simple, practical, and useful for learners." },
+            { q: "Why should I choose Self-Craft Skills?", a: "We focus on application-based learning with live guidance and mentorship. Instead of just theory, you'll gain knowledge you can actually use in studies, work, and everyday life." },
+            { q: "What is the vision of Self-Craft Skills?", a: "Our goal is to become a leading platform for modern and practical learning through our courses." },
         ],
     },
     {
-        category: "Courses and Learning",
+        category: "Courses and learning",
+        emoji: "02",
         questions: [
-            {
-                q: "Who can join the courses?",
-                a: "Our programs are designed for both students and working professionals who want to improve productivity, communication, and career readiness.",
-            },
-            {
-                q: "What courses do you currently offer?",
-                a: "We currently offer AI Unlocked: Zero to Hero, a 4-week beginner-friendly course on ChatGPT and AI productivity. Upcoming programs include Content Creation and Communication Skills.",
-            },
-            {
-                q: "How are classes conducted?",
-                a: "Sessions are held live online (via Zoom) and include interactive exercises, practical demonstrations, and group discussions. Learners also stay connected through our WhatsApp community.",
-            },
-            {
-                q: "Do I need prior experience to join?",
-                a: "No. Our courses are beginner-friendly and structured step by step. All you need is interest and willingness to learn.",
-            },
-            {
-                q: "Will I get class recordings?",
-                a: "Yes. Session recordings will be available for revision or if you miss a class.",
-            },
-            {
-                q: "Do I receive a certificate after completion?",
-                a: "Yes. A certificate of completion is provided at the end of the course.",
-            },
+            { q: "Who can join the courses?", a: "Our programs are designed for both students and working professionals who want to improve productivity, communication, and career readiness." },
+            { q: "What courses do you currently offer?", a: "We currently offer AI Unlocked: Zero to Hero, a 4-week beginner-friendly course on ChatGPT and AI productivity. Upcoming programs include Content Creation and Communication Skills." },
+            { q: "How are classes conducted?", a: "Sessions are held live online and include interactive exercises, practical demonstrations, and group discussions. Learners also stay connected through our WhatsApp community." },
+            { q: "Do I need prior experience to join?", a: "No. Our courses are beginner-friendly and structured step by step. All you need is interest and willingness to learn." },
+            { q: "Will I get class recordings?", a: "Yes. Session recordings will be available for revision or if you miss a class." },
         ],
     },
     {
-        category: "Registration, Payments and Refund",
+        category: "Registration and refund",
+        emoji: "03",
         questions: [
-            {
-                q: "How do I register for a course?",
-                a: 'You can register directly through our website via the "Enroll Now" button or via the WhatsApp registration link. Payments are processed securely.',
-            },
-            {
-                q: "Is there a refund policy?",
-                a: "Yes. A full refund is available before the course batch starts. Once classes begin, fees are non-refundable.",
-            },
-            {
-                q: "How to claim your refund?",
-                a: "A refund can be requested before the batch start date. Once the batch has started, no refund will be issued. To claim a no-question-asked refund, email selfcraftskills@gmail.com with the subject 'Online course refund | Registered email id' and attach your payment details (transaction ID or screenshot). Refunds are processed to the original payment method within 3-5 business days.",
-            },
-        ],
-    },
-    {
-        category: "Learning vs Free Content",
-        questions: [
-            {
-                q: "How is this different from free YouTube tutorials?",
-                a: "Free videos often lack structure. Our programs are organized step by step, include live mentorship, and give you direct support throughout your journey.",
-            },
+            { q: "How do I register for a course?", a: 'You can register directly through our website via the "Enroll Now" button or via the WhatsApp registration link. Payments are processed securely.' },
+            { q: "Is there a refund policy?", a: "Yes. A full refund is available before the course batch starts. Once classes begin, fees are non-refundable." },
+            { q: "How can I claim my refund?", a: "Email selfcraftskills@gmail.com before the batch start date with your payment details. Refunds are processed back to the original payment method within 3 to 5 business days." },
         ],
     },
 ];
@@ -89,96 +42,118 @@ const faqData = [
 const Faq = () => {
     const [expanded, setExpanded] = useState<string | false>(false);
 
-    const handleChange =
-        (panel: string) =>
-        (_event: React.SyntheticEvent, isExpanded: boolean) => {
-            setExpanded(isExpanded ? panel : false);
-        };
+    const handleChange = (panel: string) => (_e: React.SyntheticEvent, isExpanded: boolean) => {
+        setExpanded(isExpanded ? panel : false);
+    };
 
     return (
-        <Box
-            sx={{
-                background: "linear-gradient(180deg, #EDF5FD 0%, #FFFFFF 70%)",
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%23e5e5e5' stroke-width='1'%3E%3Cpath d='M 40 0 L 0 0 0 40'%3E%3C/path%3E%3C/g%3E%3C/svg%3E")`,
-                backgroundSize: "25px 25px",
-                backgroundRepeat: "repeat",
-            }}
-        >
-            <Container maxWidth="md">
+        <Box sx={{ py: { xs: 10, md: 14 } }}>
+            <Container maxWidth="lg">
                 <FadeInOnScroll>
-                    <Typography
-                        variant="h3"
-                        component="h2"
-                        align="center"
-                        fontWeight={700}
-                        sx={{
-                            color: "#111827",
-                            letterSpacing: "0.02em",
-                            fontSize: { xs: "1.9rem", md: "2.4rem" },
-                            mb: 1,
-                        }}
-                        gutterBottom
-                    >
-                        Frequently Asked{" "}
-                        <Box component="span" sx={{ color: "#d32f2f" }}>
-                            Questions
-                        </Box>
-                    </Typography>
-
-                    {faqData.map((category, categoryIndex) => (
-                        <Box key={categoryIndex} sx={{ mt: 4 }}>
-                            <Typography
-                                variant="h5"
-                                component="h3"
-                                fontWeight={500}
-                                sx={{ mb: 2 }}
-                            >
-                                {category.category}
-                            </Typography>
-                            <FadeInOnScroll>
-                                {category.questions.map((faq, faqIndex) => {
-                                    const panelId = `panel${categoryIndex}-${faqIndex}`;
-                                    return (
-                                        <Accordion
-                                            key={panelId}
-                                            expanded={expanded === panelId}
-                                            onChange={handleChange(panelId)}
-                                            elevation={1}
-                                            sx={{
-                                                py: 1,
-                                                mb: 1.5,
-                                                borderRadius: "12px",
-                                                "&:before": { display: "none" },
-                                                transition:
-                                                    "transform 0.3s ease, box-shadow 0.3s ease",
-                                                "&:hover": {
-                                                    transform: "translateY(-8px)",
-                                                    boxShadow:
-                                                        "0 12px 30px rgba(0,0,0,0.1)",
-                                                },
-                                            }}
-                                        >
-                                            <AccordionSummary
-                                                expandIcon={<ExpandMoreIcon />}
-                                                aria-controls={`${panelId}-content`}
-                                                id={`${panelId}-header`}
-                                            >
-                                                <Typography fontWeight={500}>
-                                                    {faq.q}
-                                                </Typography>
-                                            </AccordionSummary>
-                                            <AccordionDetails>
-                                                <Typography color="text.secondary">
-                                                    {faq.a}
-                                                </Typography>
-                                            </AccordionDetails>
-                                        </Accordion>
-                                    );
-                                })}
-                            </FadeInOnScroll>
-                        </Box>
-                    ))}
+                    <Box sx={{ textAlign: "center", mb: { xs: 5, md: 7 } }}>
+                        <Chip label="FAQ" sx={{
+                            backgroundColor: "#f5f5f5", color: "#666",
+                            fontWeight: 600, borderRadius: "8px",
+                            border: "1px solid rgba(0,0,0,0.06)",
+                            mb: 2,
+                        }} />
+                        <Typography variant="h2" sx={{
+                            fontSize: { xs: "2rem", md: "2.8rem" },
+                            color: "#111",
+                        }}>
+                            Common questions from{" "}
+                            <Box component="span" sx={{
+                                background: "linear-gradient(135deg, #6C5CE7, #0984E3)",
+                                WebkitBackgroundClip: "text",
+                                WebkitTextFillColor: "transparent",
+                            }}>new learners</Box>.
+                        </Typography>
+                    </Box>
                 </FadeInOnScroll>
+
+                <Grid container spacing={3}>
+                    {faqData.map((category, ci) => (
+                        <Grid key={category.category} size={{ xs: 12, md: 4 }}>
+                            <FadeInOnScroll>
+                                <Box sx={{
+                                    p: 3,
+                                    borderRadius: "20px",
+                                    border: "1px solid rgba(0,0,0,0.06)",
+                                    background: "#fff",
+                                    height: "100%",
+                                }}>
+                                    {/* Category header */}
+                                    <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 2.5 }}>
+                                        <Box sx={{
+                                            width: 36, height: 36,
+                                            borderRadius: "10px",
+                                            background: "#111",
+                                            color: "#fff",
+                                            display: "grid", placeItems: "center",
+                                            fontSize: "0.78rem",
+                                            fontWeight: 700,
+                                            fontFamily: '"Space Grotesk"',
+                                        }}>
+                                            {category.emoji}
+                                        </Box>
+                                        <Typography sx={{
+                                            fontFamily: '"Space Grotesk"',
+                                            fontWeight: 600,
+                                            fontSize: "0.95rem",
+                                            color: "#111",
+                                        }}>
+                                            {category.category}
+                                        </Typography>
+                                    </Stack>
+
+                                    {/* Questions */}
+                                    {category.questions.map((faq, fi) => {
+                                        const panelId = `p${ci}-${fi}`;
+                                        const isOpen = expanded === panelId;
+                                        return (
+                                            <Accordion key={panelId}
+                                                expanded={isOpen}
+                                                onChange={handleChange(panelId)}
+                                                disableGutters elevation={0}
+                                                sx={{
+                                                    mb: 1,
+                                                    borderRadius: "12px !important",
+                                                    overflow: "hidden",
+                                                    border: isOpen ? "1px solid rgba(108, 92, 231, 0.15)" : "1px solid rgba(0,0,0,0.04)",
+                                                    background: isOpen ? "#faf9ff" : "#fafafa",
+                                                    "&:before": { display: "none" },
+                                                    transition: "all 0.2s ease",
+                                                }}>
+                                                <AccordionSummary
+                                                    expandIcon={isOpen
+                                                        ? <RemoveRoundedIcon sx={{ fontSize: 18, color: "#6C5CE7" }} />
+                                                        : <AddRoundedIcon sx={{ fontSize: 18, color: "#999" }} />
+                                                    }
+                                                    sx={{ minHeight: 48, px: 2, "& .MuiAccordionSummary-content": { my: 1 } }}>
+                                                    <Typography sx={{
+                                                        fontWeight: 600, fontSize: "0.86rem",
+                                                        color: isOpen ? "#111" : "#444",
+                                                        lineHeight: 1.4,
+                                                    }}>
+                                                        {faq.q}
+                                                    </Typography>
+                                                </AccordionSummary>
+                                                <AccordionDetails sx={{ px: 2, pb: 2 }}>
+                                                    <Typography sx={{
+                                                        color: "#666", lineHeight: 1.7,
+                                                        fontSize: "0.84rem",
+                                                    }}>
+                                                        {faq.a}
+                                                    </Typography>
+                                                </AccordionDetails>
+                                            </Accordion>
+                                        );
+                                    })}
+                                </Box>
+                            </FadeInOnScroll>
+                        </Grid>
+                    ))}
+                </Grid>
             </Container>
         </Box>
     );

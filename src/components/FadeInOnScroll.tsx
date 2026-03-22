@@ -6,17 +6,18 @@ import { useInView } from "react-intersection-observer";
 
 interface Props {
     children: ReactNode;
+    style?: React.CSSProperties;
 }
 
-const FadeInOnScroll = ({ children }: Props) => {
+const FadeInOnScroll = ({ children, style }: Props) => {
     const { ref, inView } = useInView({
-        // triggerOnce: true, // Only trigger the animation once
-        threshold: 0.1, // Trigger when 10% of the element is in view
+        threshold: 0.1,
     });
 
     return (
         <Box
             ref={ref}
+            style={style}
             sx={{
                 transition: "opacity 0.7s ease-out, transform 0.7s ease-out",
                 opacity: inView ? 1 : 0,
