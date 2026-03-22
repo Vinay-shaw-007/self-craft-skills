@@ -1,9 +1,9 @@
 // src/components/coursesData.ts
-import AiBanner from "../assets/ai-course-banner.jpg";
-import ContentBanner from "../assets/content-course-banner.jpg";
-import CommunicationBanner from "../assets/communication-course-banner.jpg";
+import AiBanner from "../assets/ai-course-banner.svg";
+import ContentBanner from "../assets/content-course-banner.svg";
+import CommunicationBanner from "../assets/communication-course-banner.svg";
 
-interface CourseDetails {
+interface CourseDetails {                  
     summary: string;
     duration?: string;
     classLength?: string;
@@ -46,7 +46,7 @@ const aiCourseDetails: CourseDetails = {
         "LIVE Q&A session",
         "No prior experience required",
         "Certificate of completion",
-        "Bonus: worth Rs.4999",
+        "Bonus: worth Rs.4999 (Free)",
     ],
     syllabus: [
         {

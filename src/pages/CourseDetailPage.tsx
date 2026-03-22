@@ -1,58 +1,54 @@
-// src/pages/CourseDetailPage.tsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, type SyntheticEvent } from "react";
 import { useParams } from "react-router-dom";
 import {
-    Box,
-    Container,
-    Typography,
-    Alert,
-    Grid,
-    Paper,
-    List,
-    ListItem,
-    ListItemIcon,
-    ListItemText,
     Accordion,
-    AccordionSummary,
     AccordionDetails,
-    CardMedia,
+    AccordionSummary,
+    Alert,
+    Box,
+    Button,
+    Chip,
+    Container,
+    Grid,
+    Stack,
+    Typography,
 } from "@mui/material";
-import useScrollToHash from "../hooks/useScrollToHash";
-import { coursesData } from "../components/coursesData";
-import StickyEnrollBar from "../components/StickyEnrollBar";
-import PricingPlansSection from "../components/BonusSection";
-import BannerImage from "../assets/banner.png";
-import MeetMentorSection from "../components/MeetMentorSection";
-// Icons
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
+import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import ScheduleIcon from "@mui/icons-material/Schedule";
+import LaptopChromebookIcon from "@mui/icons-material/LaptopChromebook";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
 import StairsIcon from "@mui/icons-material/Stairs";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import SchoolIcon from "@mui/icons-material/School";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import ScheduleIcon from "@mui/icons-material/Schedule";
-import LaptopChromebookIcon from "@mui/icons-material/LaptopChromebook";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
-import StatsBanner from "../components/StatsBanner";
+import ArrowDownwardRoundedIcon from "@mui/icons-material/ArrowDownwardRounded";
+import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 import SchoolOutlinedIcon from "@mui/icons-material/SchoolOutlined";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import PsychologyAltOutlinedIcon from "@mui/icons-material/PsychologyAltOutlined";
 import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
+import useScrollToHash from "../hooks/useScrollToHash";
+import { coursesData } from "../components/coursesData";
 import HowItWorks from "../components/HowItWorks";
+import MeetMentorSection from "../components/MeetMentorSection";
+import PricingPlansSection from "../components/BonusSection";
+import StatsBanner from "../components/StatsBanner";
+import StickyEnrollBar from "../components/StickyEnrollBar";
 
 const CourseDetailPage = () => {
     useScrollToHash();
     const { courseId } = useParams<{ courseId: string }>();
     const course = coursesData.find((c) => c.id === courseId);
-
-    // This is the line that controls the accordions. It's now set to 'false'.
     const [expandedPanel, setExpandedPanel] = useState<string | false>(false);
+    const [activeAudience, setActiveAudience] = useState(0);
 
     const handleAccordionChange =
         (panel: string) =>
-        (_event: React.SyntheticEvent, isExpanded: boolean) => {
+        (_event: SyntheticEvent, isExpanded: boolean) => {
             setExpandedPanel(isExpanded ? panel : false);
         };
 
@@ -62,37 +58,18 @@ const CourseDetailPage = () => {
         "LIVE Q&A session",
         "No prior experience required",
         "Certificate of completion",
-        "Bonus: worth \u20B94999",
+        "Bonus: worth Rs.4999 (Free)",
     ];
 
     const getFeatureIcon = (featureText: string) => {
-        if (featureText.includes("Live")) {
-            return <LiveTvIcon color="info" fontSize="inherit" />;
-        }
-        if (featureText.includes("Beginner")) {
-            return <StairsIcon color="info" fontSize="inherit" />;
-        }
-        if (featureText.includes("Q&A")) {
-            return <QuestionAnswerIcon color="info" fontSize="inherit" />;
-        }
-        if (featureText.includes("prior experience")) {
-            return <SchoolIcon color="info" fontSize="inherit" />;
-        }
-        if (featureText.toLowerCase().includes("certificate")) {
-            return <WorkspacePremiumIcon color="info" fontSize="inherit" />;
-        }
-        if (featureText.toLowerCase().includes("bonus")) {
-            return <CardGiftcardIcon color="info" fontSize="inherit" />;
-        }
-        return <CheckCircleOutlineIcon color="info" fontSize="inherit" />;
+        if (featureText.includes("Live")) return <LiveTvIcon sx={{ color: "#0984E3", fontSize: 18 }} />;
+        if (featureText.includes("Beginner")) return <StairsIcon sx={{ color: "#00B894", fontSize: 18 }} />;
+        if (featureText.includes("Q&A")) return <QuestionAnswerIcon sx={{ color: "#6C5CE7", fontSize: 18 }} />;
+        if (featureText.includes("prior experience")) return <SchoolIcon sx={{ color: "#00B894", fontSize: 18 }} />;
+        if (featureText.toLowerCase().includes("certificate")) return <WorkspacePremiumIcon sx={{ color: "#E17055", fontSize: 18 }} />;
+        if (featureText.toLowerCase().includes("bonus")) return <CardGiftcardIcon sx={{ color: "#FD79A8", fontSize: 18 }} />;
+        return <CheckRoundedIcon sx={{ color: "#00B894", fontSize: 18 }} />;
     };
-
-    const keyFeatures = (course?.details.keyFeatures ?? fallbackKeyFeatures).map(
-        (text) => ({
-            text,
-            icon: getFeatureIcon(text),
-        })
-    );
 
     const audienceCards = [
         {
@@ -100,38 +77,38 @@ const CourseDetailPage = () => {
             description:
                 "Build practical AI skills early and stand out in academics, internships, and placements.",
             icon: <SchoolOutlinedIcon />,
-            accent: "#2563eb",
+            color: "#6C5CE7",
+            bg: "#f3f1ff",
         },
         {
             title: "Working Professionals",
             description:
                 "Use AI tools to improve speed, productivity, and decision-making in day-to-day work.",
             icon: <WorkOutlineIcon />,
-            accent: "#7c3aed",
+            color: "#00B894",
+            bg: "#e6f9f3",
         },
         {
             title: "Lifelong Learners",
             description:
                 "Learn with a structured path and mentor guidance even if you are starting from zero.",
             icon: <PsychologyAltOutlinedIcon />,
-            accent: "#d32f2f",
+            color: "#FD79A8",
+            bg: "#fce4ec",
         },
         {
-            title: "Creators & Freelancers",
+            title: "Creators and Freelancers",
             description:
                 "Create smarter workflows, better content, and stronger personal branding with AI.",
             icon: <AutoAwesomeOutlinedIcon />,
-            accent: "#0f766e",
+            color: "#0984E3",
+            bg: "#e8f4fd",
         },
     ];
 
-    const [activeAudience, setActiveAudience] = useState(0);
-
     useEffect(() => {
         const intervalId = window.setInterval(() => {
-            setActiveAudience(
-                (prev) => (prev + 1) % audienceCards.length
-            );
+            setActiveAudience((prev) => (prev + 1) % audienceCards.length);
         }, 2600);
 
         return () => window.clearInterval(intervalId);
@@ -139,548 +116,529 @@ const CourseDetailPage = () => {
 
     if (!course) {
         return (
-            <Box sx={{ py: 6 }}>
-                {" "}
+            <Box sx={{ py: 8 }}>
                 <Container>
-                    {" "}
-                    <Alert severity="error">Course not found!</Alert>{" "}
-                </Container>{" "}
+                    <Alert severity="error">Course not found.</Alert>
+                </Container>
             </Box>
         );
     }
 
     if (!course.details.syllabus) {
         return (
-            <Box sx={{ py: 6 }}>
+            <Box sx={{ py: 8 }}>
                 <Container>
-                    <Typography variant="h4" fontWeight="bold">
-                        {course.title}
-                    </Typography>
-                    <Typography sx={{ mt: 2 }}>
+                    <Typography variant="h2" color="#111">{course.title}</Typography>
+                    <Typography sx={{ mt: 2, color: "#666", lineHeight: 1.8 }}>
                         {course.details.summary}
                     </Typography>
-                    <Typography sx={{ mt: 4, fontStyle: "italic" }}>
-                        Full syllabus and details for this course are coming
-                        soon!
+                    <Typography sx={{ mt: 3, fontStyle: "italic", color: "#999" }}>
+                        Full syllabus and detailed presentation are coming soon.
                     </Typography>
                 </Container>
             </Box>
         );
     }
 
-    return (
-        <Box
-            sx={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%23e5e5e5' stroke-width='1'%3E%3Cpath d='M 40 0 L 0 0 0 40'%3E%3C/path%3E%3C/g%3E%3C/svg%3E")`,
-                backgroundSize: "25px 25px",
-                backgroundRepeat: "repeat",
-            }}
-        >
-            <Box
-            // sx={{
-            //     py: { xs: 8, md: 12 },
-            //     textAlign: "center",
-            //     color: "white",
-            //     background:
-            //         "linear-gradient(45deg, #1f2937 30%, #111827 90%)",
-            // }}
-            >
-                {/* <Container> */}
-                {/* {course.titleSvg ? (
-                        <img
-                            src={course.titleSvg}
-                            alt={course.title}
-                            style={{
-                                height: "80px",
-                                filter: "brightness(0) invert(1) drop-shadow(0 0 4px rgba(255, 255, 255, 0.5))",
-                            }}
-                        />
-                    ) : (
-                        <Typography
-                            variant="h3"
-                            component="h1"
-                            fontWeight="bold"
-                        >
-                            {course.title}
-                        </Typography>
-                    )}
-                    <Typography variant="h6" sx={{ mt: 2, color: "#e0e0e0" }}>
-                        {course.details.summary}
-                    </Typography> */}
+    const keyFeatures = (course.details.keyFeatures ?? fallbackKeyFeatures).map((text) => ({
+        text,
+        icon: getFeatureIcon(text),
+    }));
 
-                {/* </Container> */}
-                <CardMedia
-                    component="img"
-                    image={BannerImage}
-                    alt={course.title}
-                    sx={{
-                        width: "100%",
-                        maxHeight: 400,
-                        objectFit: "cover",
-                        borderRadius: "8px",
-                        mb: 3,
-                    }}
-                />
+    const metaCards = [
+        {
+            label: "Duration",
+            value: course.details.duration ?? "4 weeks",
+            icon: <CalendarMonthIcon sx={{ color: "#6C5CE7" }} />,
+        },
+        {
+            label: "Class length",
+            value: course.details.classLength ?? "60-90 mins",
+            icon: <ScheduleIcon sx={{ color: "#00B894" }} />,
+        },
+        {
+            label: "Mode",
+            value: course.details.mode ?? "Online",
+            icon: <LaptopChromebookIcon sx={{ color: "#FD79A8" }} />,
+        },
+    ];
+
+    const scrollToPricingPlans = () => {
+        const section = document.getElementById("pricing-plans");
+        if (!section) return;
+        const headerOffset = 92;
+        const targetTop = section.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+            top: Math.max(targetTop - headerOffset, 0),
+            behavior: "smooth",
+        });
+    };
+
+    return (
+        <Box sx={{ pb: { xs: 18, md: 12 } }}>
+            {/* Hero section - dark */}
+            <Box sx={{
+                position: "relative",
+                overflow: "hidden",
+                pt: { xs: 4, md: 5 },
+                pb: { xs: 6, md: 8 },
+                background: "linear-gradient(180deg, #0a0a0a 0%, #111 60%, #1a1a2e 100%)",
+                color: "#fff",
+            }} className="noise-overlay">
+                {/* Glow orbs */}
+                <Box sx={{
+                    position: "absolute", top: -200, right: -100,
+                    width: 500, height: 500, borderRadius: "50%",
+                    background: "radial-gradient(circle, rgba(108, 92, 231, 0.12), transparent 70%)",
+                    filter: "blur(80px)",
+                }} />
+                <Box sx={{
+                    position: "absolute", bottom: -150, left: -100,
+                    width: 400, height: 400, borderRadius: "50%",
+                    background: "radial-gradient(circle, rgba(9, 132, 227, 0.08), transparent 70%)",
+                    filter: "blur(80px)",
+                }} />
+
+                <Container sx={{ position: "relative", zIndex: 1 }}>
+                    <Grid container spacing={{ xs: 4, md: 5 }} alignItems="center">
+                        <Grid size={{ xs: 12, md: 7 }}>
+                            <Chip label="Live Course" size="small" sx={{
+                                borderRadius: "8px",
+                                color: "#00B894",
+                                backgroundColor: "rgba(0, 184, 148, 0.1)",
+                                border: "1px solid rgba(0, 184, 148, 0.2)",
+                                fontWeight: 600,
+                            }} />
+                            <Typography variant="h1" sx={{
+                                mt: 2,
+                                maxWidth: 820,
+                                fontSize: { xs: "2.2rem", md: "3rem", lg: "3.5rem" },
+                                lineHeight: { xs: 1.1, md: 1.04 },
+                            }}>
+                                {course.title}
+                            </Typography>
+                            <Typography sx={{
+                                mt: 2, maxWidth: 680,
+                                color: "rgba(255,255,255,0.5)",
+                                fontSize: { xs: "0.98rem", md: "1.04rem" },
+                                lineHeight: 1.7,
+                            }}>
+                                {course.details.summary}
+                            </Typography>
+
+                            <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap" sx={{ mt: 2.5 }}>
+                                {keyFeatures.slice(0, 4).map((feature) => (
+                                    <Box key={feature.text} sx={{
+                                        px: 1.5, py: 0.5,
+                                        borderRadius: "8px",
+                                        border: "1px solid rgba(255,255,255,0.08)",
+                                        background: "rgba(255,255,255,0.04)",
+                                        color: "rgba(255,255,255,0.6)",
+                                        fontSize: "0.82rem",
+                                        fontWeight: 500,
+                                    }}>
+                                        {feature.text}
+                                    </Box>
+                                ))}
+                            </Stack>
+
+                            <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5} sx={{ mt: 3 }}>
+                                <Button
+                                    onClick={scrollToPricingPlans}
+                                    endIcon={<ArrowOutwardRoundedIcon sx={{ fontSize: 16 }} />}
+                                    sx={{
+                                        width: { xs: "100%", sm: "auto" },
+                                        borderRadius: "12px",
+                                        px: 3.2, py: 1.3,
+                                        color: "#111", fontWeight: 700,
+                                        background: "#fff",
+                                        "&:hover": { background: "#f0f0f0" },
+                                        boxShadow: "0 8px 32px rgba(255,255,255,0.1)",
+                                    }}
+                                >
+                                    View pricing plans
+                                </Button>
+                                <Button
+                                    href="#curriculum"
+                                    startIcon={<ArrowDownwardRoundedIcon />}
+                                    sx={{
+                                        width: { xs: "100%", sm: "auto" },
+                                        borderRadius: "12px",
+                                        px: 3, py: 1.2,
+                                        color: "rgba(255,255,255,0.6)",
+                                        border: "1px solid rgba(255,255,255,0.1)",
+                                        "&:hover": {
+                                            background: "rgba(255,255,255,0.04)",
+                                            color: "#fff",
+                                        },
+                                    }}
+                                >
+                                    See curriculum
+                                </Button>
+                            </Stack>
+
+                            <Grid container spacing={1.4} sx={{ mt: 2.5 }}>
+                                {metaCards.map((card) => (
+                                    <Grid key={card.label} size={{ xs: 12, sm: 4 }}>
+                                        <Box sx={{
+                                            p: 2,
+                                            borderRadius: "14px",
+                                            border: "1px solid rgba(255,255,255,0.06)",
+                                            background: "rgba(255,255,255,0.04)",
+                                        }}>
+                                            <Stack direction="row" spacing={1} alignItems="center">
+                                                {card.icon}
+                                                <Box>
+                                                    <Typography sx={{
+                                                        fontSize: "0.72rem", fontWeight: 600,
+                                                        letterSpacing: "0.06em", textTransform: "uppercase",
+                                                        color: "rgba(255,255,255,0.35)",
+                                                    }}>
+                                                        {card.label}
+                                                    </Typography>
+                                                    <Typography sx={{
+                                                        mt: 0.2, fontWeight: 600,
+                                                        fontSize: "0.95rem",
+                                                    }}>
+                                                        {card.value}
+                                                    </Typography>
+                                                </Box>
+                                            </Stack>
+                                        </Box>
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        </Grid>
+
+                        <Grid size={{ xs: 12, md: 5 }}>
+                            <Box sx={{ position: "relative", maxWidth: 520, mx: "auto" }}>
+                                <Box sx={{
+                                    borderRadius: "20px",
+                                    overflow: "hidden",
+                                    border: "1px solid rgba(255,255,255,0.08)",
+                                    boxShadow: "0 24px 48px rgba(0,0,0,0.3)",
+                                }}>
+                                    <Box
+                                        component="img"
+                                        src={course.image}
+                                        alt={course.title}
+                                        sx={{
+                                            width: "100%",
+                                            height: { xs: 280, md: 370 },
+                                            objectFit: "cover",
+                                            display: "block",
+                                        }}
+                                    />
+                                </Box>
+                            </Box>
+                        </Grid>
+                    </Grid>
+                </Container>
+
+                {/* Bottom gradient fade to white */}
+                <Box sx={{
+                    position: "absolute", bottom: 0, left: 0, right: 0,
+                    height: 120,
+                    background: "linear-gradient(to bottom, transparent, #fafafa)",
+                    pointerEvents: "none",
+                }} />
             </Box>
 
-            <Container sx={{ py: 6 }}>
-                <Paper
+            {/* Curriculum section */}
+            <Container sx={{ mt: { xs: -2, md: -3 } }}>
+                <Box
+                    id="curriculum"
                     sx={{
-                        p: { xs: 2.5, md: 4 },
-                        borderRadius: "24px",
-                        border: "1px solid #f2e7e7",
-                        boxShadow: "0 16px 40px rgba(15, 23, 42, 0.08)",
-                        background:
-                            "linear-gradient(180deg, #fffdf8 0%, #ffffff 45%, #fffaf9 100%)",
+                        p: { xs: 3, md: 4 },
+                        borderRadius: "20px",
+                        border: "1px solid rgba(0,0,0,0.06)",
+                        background: "#fff",
+                        scrollMarginTop: "110px",
                     }}
                 >
-                    <Grid container spacing={{ xs: 3, md: 5 }}>
+                    <Grid container spacing={{ xs: 3, md: 4 }}>
                         <Grid size={{ xs: 12, md: 8 }}>
-                            <Typography
-                                variant="overline"
-                                sx={{
-                                    color: "#d32f2f",
-                                    fontWeight: 600,
-                                    letterSpacing: "0.14em",
-                                }}
-                            >
-                                Learning Roadmap
+                            <Typography sx={{
+                                fontSize: "0.72rem", fontWeight: 600,
+                                letterSpacing: "0.12em", textTransform: "uppercase",
+                                color: "#999",
+                            }}>
+                                Curriculum roadmap
                             </Typography>
-                            <Typography
-                                variant="h4"
-                                fontWeight={700}
-                                gutterBottom
-                                sx={{
-                                    color: "#111827",
-                                    fontSize: { xs: "2rem", md: "2.4rem" },
-                                }}
-                            >
-                                Course{" "}
-                                <Box
-                                    component="span"
-                                    sx={{ color: "#d32f2f" }}
-                                >
-                                    Curriculum
-                                </Box>
+                            <Typography variant="h3" sx={{
+                                mt: 1,
+                                fontSize: { xs: "1.9rem", md: "2.5rem" },
+                                color: "#111",
+                            }}>
+                                What learners cover week by week.
                             </Typography>
-                            {course.details.syllabus.map((week, index) => {
-                                const panelId = `panel${index}`;
-                                return (
-                                    <Accordion
-                                        key={index}
-                                        expanded={expandedPanel === panelId}
-                                        onChange={handleAccordionChange(
-                                            panelId
-                                        )}
-                                        sx={{
-                                            mb: 1.5,
-                                            "&:before": { display: "none" },
-                                            borderRadius: "12px",
-                                            border: "1px solid #efe7e7",
-                                            backgroundColor: "#fff",
-                                            boxShadow:
-                                                "0 6px 16px rgba(15, 23, 42, 0.06)",
-                                            transition:
-                                                "transform 0.3s ease, box-shadow 0.3s ease",
-                                            "&:hover": {
-                                                transform: "translateY(-3px)",
-                                                boxShadow:
-                                                    "0 12px 24px rgba(15, 23, 42, 0.08)",
-                                            },
-                                        }}
-                                    >
-                                        <AccordionSummary
-                                            expandIcon={
-                                                <ExpandMoreIcon
-                                                    sx={{ color: "#d32f2f" }}
-                                                />
-                                            }
+
+                            <Box sx={{ mt: 2.5 }}>
+                                {course.details.syllabus.map((week, index) => {
+                                    const panelId = `panel${index}`;
+                                    const isOpen = expandedPanel === panelId;
+                                    return (
+                                        <Accordion
+                                            key={week.week}
+                                            expanded={isOpen}
+                                            onChange={handleAccordionChange(panelId)}
+                                            disableGutters
+                                            elevation={0}
                                             sx={{
-                                                borderRadius: "12px",
-                                                "&.Mui-expanded": {
-                                                    minHeight: 48,
-                                                    backgroundColor: "#fff4f4",
-                                                },
-                                                "& .MuiAccordionSummary-content.Mui-expanded":
-                                                    {
-                                                        my: 1.5,
-                                                    },
+                                                mb: 1,
+                                                borderRadius: "12px !important",
+                                                overflow: "hidden",
+                                                border: isOpen
+                                                    ? "1px solid rgba(108, 92, 231, 0.15)"
+                                                    : "1px solid rgba(0,0,0,0.04)",
+                                                background: isOpen ? "#faf9ff" : "#fafafa",
+                                                "&:before": { display: "none" },
+                                                transition: "all 0.2s ease",
                                             }}
                                         >
-                                            <Typography
-                                                fontWeight={600}
+                                            <AccordionSummary
+                                                expandIcon={isOpen
+                                                    ? <RemoveRoundedIcon sx={{ fontSize: 18, color: "#6C5CE7" }} />
+                                                    : <AddRoundedIcon sx={{ fontSize: 18, color: "#999" }} />
+                                                }
                                                 sx={{
-                                                    color: "#111827",
-                                                    fontSize: {
-                                                        xs: "1.05rem",
-                                                        md: "1.2rem",
-                                                    },
+                                                    px: 2, py: 0.4,
+                                                    "& .MuiAccordionSummary-content": { my: 1 },
                                                 }}
                                             >
-                                                {week.week}
-                                            </Typography>
-                                        </AccordionSummary>
-                                        <AccordionDetails
-                                            sx={{
-                                                backgroundColor: "#fffafb",
-                                                borderTop: "1px solid #f5e7e7",
-                                            }}
-                                        >
-                                            {week.takeaway ? (
-                                                <Box
-                                                    sx={{
-                                                        mb: 1.5,
-                                                        px: 1.5,
-                                                        py: 1.1,
-                                                        borderRadius: "10px",
-                                                        border: "1px solid #fde2e2",
-                                                        background:
-                                                            "linear-gradient(180deg, #fff7f7 0%, #fffdfd 100%)",
-                                                    }}
-                                                >
-                                                    <Typography
-                                                        variant="caption"
-                                                        sx={{
-                                                            display: "block",
-                                                            color: "#d32f2f",
-                                                            fontWeight: 700,
-                                                            letterSpacing: "0.06em",
-                                                            textTransform: "uppercase",
-                                                            mb: 0.35,
-                                                        }}
-                                                    >
-                                                        Goal
+                                                <Box>
+                                                    <Typography sx={{
+                                                        fontWeight: 700,
+                                                        color: isOpen ? "#111" : "#333",
+                                                        fontSize: { xs: "0.92rem", md: "1rem" },
+                                                    }}>
+                                                        {week.week}
                                                     </Typography>
-                                                    <Typography
-                                                        variant="body2"
-                                                        sx={{
-                                                            color: "#374151",
-                                                            lineHeight: 1.65,
-                                                        }}
-                                                    >
+                                                    <Typography sx={{
+                                                        mt: 0.3, color: "#999",
+                                                        fontSize: "0.84rem",
+                                                        lineHeight: 1.5,
+                                                    }}>
                                                         {week.takeaway}
                                                     </Typography>
                                                 </Box>
-                                            ) : null}
-                                            <List>
-                                                {week.topics.map((topic, i) => (
-                                                    <ListItem
-                                                        key={i}
-                                                        disablePadding
-                                                    >
-                                                        <ListItemIcon
-                                                            sx={{
-                                                                minWidth:
-                                                                    "40px",
-                                                            }}
-                                                        >
-                                                            <CheckCircleOutlineIcon
-                                                                color="info"
-                                                                fontSize="small"
-                                                            />
-                                                        </ListItemIcon>
-                                                        <ListItemText
-                                                            primary={topic}
-                                                            primaryTypographyProps={{
-                                                                variant: "body2",
-                                                                fontWeight: 400,
-                                                                color: "#374151",
-                                                            }}
-                                                        />
-                                                    </ListItem>
-                                                ))}
-                                            </List>
-                                        </AccordionDetails>
-                                    </Accordion>
-                                );
-                            })}
-                            <Paper
-                                elevation={0}
-                                sx={{
-                                    mt: 1.5,
-                                    mb: 1.5,
-                                    p: 2,
-                                    borderRadius: "12px",
-                                    border: "1px solid #efe7e7",
-                                    backgroundColor: "#fff",
-                                    boxShadow: "0 6px 16px rgba(15, 23, 42, 0.06)",
-                                }}
-                            >
-                                <Typography
-                                    fontWeight={600}
-                                    sx={{
-                                        color: "#111827",
-                                        fontSize: { xs: "1.05rem", md: "1.2rem" },
-                                    }}
-                                >
-                                    {course.details.finalCapstoneHeading ||
-                                        "Final Capstone Project"}
-                                </Typography>
-                            </Paper>
-                            <Paper
-                                elevation={0}
-                                sx={{
-                                    mb: 1.5,
-                                    p: 2,
-                                    borderRadius: "12px",
-                                    border: "1px solid #efe7e7",
-                                    backgroundColor: "#fff",
-                                    boxShadow: "0 6px 16px rgba(15, 23, 42, 0.06)",
-                                }}
-                            >
-                                <Typography
-                                    fontWeight={600}
-                                    sx={{
-                                        color: "#111827",
-                                        fontSize: { xs: "1.05rem", md: "1.2rem" },
-                                    }}
-                                >
-                                    {course.details.certificateHeading ||
-                                        "Certificate"}
-                                </Typography>
-                            </Paper>
+                                            </AccordionSummary>
+                                            <AccordionDetails sx={{ px: 2, pb: 2 }}>
+                                                <Stack spacing={0.5}>
+                                                    {week.topics.map((topic) => (
+                                                        <Stack key={topic} direction="row" spacing={0.8} alignItems="flex-start">
+                                                            <CheckRoundedIcon sx={{ color: "#00B894", fontSize: 16, mt: "3px" }} />
+                                                            <Typography sx={{
+                                                                color: "#444",
+                                                                fontSize: "0.88rem",
+                                                                lineHeight: 1.6,
+                                                            }}>
+                                                                {topic}
+                                                            </Typography>
+                                                        </Stack>
+                                                    ))}
+                                                </Stack>
+                                            </AccordionDetails>
+                                        </Accordion>
+                                    );
+                                })}
+                            </Box>
+
+                            <Grid container spacing={1.5} sx={{ mt: 1.5 }}>
+                                <Grid size={{ xs: 12, sm: 6 }}>
+                                    <Box sx={{
+                                        p: 2, borderRadius: "12px",
+                                        background: "#f3f1ff",
+                                        border: "1px solid rgba(108, 92, 231, 0.1)",
+                                    }}>
+                                        <Typography sx={{ fontWeight: 700, color: "#111", fontSize: "0.92rem" }}>
+                                            {course.details.finalCapstoneHeading ?? "Final Capstone Project"}
+                                        </Typography>
+                                    </Box>
+                                </Grid>
+                                <Grid size={{ xs: 12, sm: 6 }}>
+                                    <Box sx={{
+                                        p: 2, borderRadius: "12px",
+                                        background: "#e8f4fd",
+                                        border: "1px solid rgba(9, 132, 227, 0.1)",
+                                    }}>
+                                        <Typography sx={{ fontWeight: 700, color: "#111", fontSize: "0.92rem" }}>
+                                            {course.details.certificateHeading ?? "Certificate"}
+                                        </Typography>
+                                    </Box>
+                                </Grid>
+                            </Grid>
                         </Grid>
 
+                        {/* Sidebar */}
                         <Grid size={{ xs: 12, md: 4 }}>
-                            <Box sx={{ position: "sticky", top: 100 }}>
-                                <Paper
-                                    elevation={0}
-                                    sx={{
-                                        p: 2.2,
-                                        mb: 2,
-                                        borderRadius: "16px",
-                                        border: "1px solid #e8f0fe",
-                                        background:
-                                            "linear-gradient(180deg, #f9fcff 0%, #ffffff 100%)",
-                                    }}
-                                >
-                                    <Typography
-                                        variant="subtitle1"
-                                        fontWeight={600}
-                                        sx={{ mb: 0.8, color: "#111827" }}
-                                    >
-                                        What You Get
+                            <Box sx={{ position: { xs: "static", md: "sticky" }, top: 104 }}>
+                                <Box sx={{
+                                    p: 2.5, mb: 2,
+                                    borderRadius: "16px",
+                                    background: "#fafafa",
+                                    border: "1px solid rgba(0,0,0,0.06)",
+                                }}>
+                                    <Typography sx={{
+                                        fontFamily: '"Space Grotesk"',
+                                        fontWeight: 700, color: "#111",
+                                        fontSize: "0.95rem",
+                                    }}>
+                                        What you get
                                     </Typography>
-                                    <List sx={{ py: 0 }}>
+                                    <Stack spacing={0.8} sx={{ mt: 1.5 }}>
                                         {keyFeatures.map((feature) => (
-                                            <ListItem
-                                                key={feature.text}
-                                                disablePadding
-                                                sx={{ py: 0.35 }}
-                                            >
-                                                <ListItemIcon
-                                                    sx={{ minWidth: "36px" }}
-                                                >
-                                                    {feature.icon}
-                                                </ListItemIcon>
-                                                <ListItemText
-                                                    primary={feature.text}
-                                                    primaryTypographyProps={{
-                                                        variant: "body2",
-                                                        fontWeight: 500,
-                                                        color: "#1f2937",
-                                                    }}
-                                                />
-                                            </ListItem>
+                                            <Stack key={feature.text} direction="row" spacing={0.8} alignItems="center">
+                                                {feature.icon}
+                                                <Typography sx={{
+                                                    color: "#444",
+                                                    fontWeight: 500,
+                                                    fontSize: "0.86rem",
+                                                }}>
+                                                    {feature.text}
+                                                </Typography>
+                                            </Stack>
                                         ))}
-                                    </List>
-                                </Paper>
+                                    </Stack>
+                                </Box>
 
-                                <Paper
-                                    elevation={0}
-                                    sx={{
-                                        p: 2.2,
-                                        mb: 2,
-                                        borderRadius: "16px",
-                                        border: "1px solid #f5ece2",
-                                        background:
-                                            "linear-gradient(180deg, #fffaf4 0%, #ffffff 100%)",
-                                    }}
-                                >
-                                    <Typography
-                                        variant="subtitle1"
-                                        fontWeight={600}
-                                        sx={{ mb: 0.8, color: "#111827" }}
-                                    >
-                                        Class Details
+                                <Box sx={{
+                                    p: 2.5,
+                                    borderRadius: "16px",
+                                    background: "#fafafa",
+                                    border: "1px solid rgba(0,0,0,0.06)",
+                                }}>
+                                    <Typography sx={{
+                                        fontFamily: '"Space Grotesk"',
+                                        fontWeight: 700, color: "#111",
+                                        fontSize: "0.95rem",
+                                    }}>
+                                        Class details
                                     </Typography>
-                                    <List sx={{ py: 0 }}>
-                                        <ListItem sx={{ px: 0, py: 0.5 }}>
-                                            <ListItemIcon sx={{ minWidth: 36 }}>
-                                                <CalendarMonthIcon color="warning" />
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary="Duration"
-                                                secondary={course.details.duration}
-                                            />
-                                        </ListItem>
-                                        <ListItem sx={{ px: 0, py: 0.5 }}>
-                                            <ListItemIcon sx={{ minWidth: 36 }}>
-                                                <ScheduleIcon color="warning" />
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary="Class Length"
-                                                secondary={
-                                                    course.details.classLength
-                                                }
-                                            />
-                                        </ListItem>
-                                        <ListItem sx={{ px: 0, py: 0.5 }}>
-                                            <ListItemIcon sx={{ minWidth: 36 }}>
-                                                <LaptopChromebookIcon color="warning" />
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary="Mode"
-                                                secondary={course.details.mode}
-                                            />
-                                        </ListItem>
-                                    </List>
-                                </Paper>
+                                    <Stack spacing={1.2} sx={{ mt: 1.5 }}>
+                                        {metaCards.map((card) => (
+                                            <Stack key={card.label} direction="row" spacing={1} alignItems="center">
+                                                {card.icon}
+                                                <Box>
+                                                    <Typography sx={{
+                                                        fontSize: "0.76rem", fontWeight: 600,
+                                                        color: "#999", textTransform: "uppercase",
+                                                        letterSpacing: "0.04em",
+                                                    }}>
+                                                        {card.label}
+                                                    </Typography>
+                                                    <Typography sx={{
+                                                        fontWeight: 600, color: "#111",
+                                                        fontSize: "0.9rem",
+                                                    }}>
+                                                        {card.value}
+                                                    </Typography>
+                                                </Box>
+                                            </Stack>
+                                        ))}
+                                    </Stack>
 
+                                    <Button
+                                        onClick={scrollToPricingPlans}
+                                        fullWidth
+                                        sx={{
+                                            mt: 2, py: 1.2,
+                                            borderRadius: "12px",
+                                            color: "#fff",
+                                            fontWeight: 700,
+                                            background: "#111",
+                                            "&:hover": { background: "#222" },
+                                        }}
+                                    >
+                                        Enroll from {"\u20B9579"}
+                                    </Button>
+                                </Box>
                             </Box>
                         </Grid>
                     </Grid>
-                </Paper>
+                </Box>
+
                 <HowItWorks />
 
-                <Paper
-                    sx={{
-                        mt: 4,
-                        p: { xs: 2.5, md: 4 },
-                        borderRadius: "24px",
-                        overflow: "hidden",
-                        border: "1px solid #e8eef8",
-                        background:
-                            "linear-gradient(135deg, #f8fbff 0%, #ffffff 60%, #fff8f8 100%)",
-                        boxShadow: "0 14px 36px rgba(15, 23, 42, 0.08)",
-                    }}
-                >
+                {/* Audience section */}
+                <Box sx={{
+                    mt: 4,
+                    p: { xs: 3, md: 4 },
+                    borderRadius: "20px",
+                    border: "1px solid rgba(0,0,0,0.06)",
+                    background: "#fff",
+                }}>
                     <Grid container spacing={{ xs: 3, md: 4 }} alignItems="center">
                         <Grid size={{ xs: 12, md: 4 }}>
-                            <Typography
-                                variant="overline"
-                                sx={{
-                                    color: "#d32f2f",
-                                    fontWeight: 600,
-                                    letterSpacing: "0.14em",
-                                }}
-                            >
-                                Best Suited For
+                            <Typography sx={{
+                                fontSize: "0.72rem", fontWeight: 600,
+                                letterSpacing: "0.12em", textTransform: "uppercase",
+                                color: "#999",
+                            }}>
+                                Best suited for
                             </Typography>
-                            <Typography
-                                variant="h4"
-                                sx={{
-                                    mt: 0.6,
-                                    fontWeight: 700,
-                                    color: "#111827",
-                                    lineHeight: 1.2,
-                                    fontSize: { xs: "1.8rem", md: "2.2rem" },
-                                }}
-                            >
-                                Who is this{" "}
-                                <Box component="span" sx={{ color: "#d32f2f" }}>
-                                    Course
-                                </Box>{" "}
-                                For?
-                            </Typography>
-                            <Typography
-                                variant="body1"
-                                sx={{
-                                    mt: 1.5,
-                                    color: "#4b5563",
-                                    maxWidth: 360,
-                                    lineHeight: 1.8,
-                                }}
-                            >
-                                This program is designed for different learner
-                                profiles. Cards auto-highlight one by one so you
-                                can quickly check where you fit best.
+                            <Typography variant="h3" sx={{
+                                mt: 1,
+                                fontSize: { xs: "1.9rem", md: "2.3rem" },
+                                color: "#111",
+                            }}>
+                                Who this course is built for.
                             </Typography>
                         </Grid>
 
                         <Grid size={{ xs: 12, md: 8 }}>
-                            <Box sx={{ display: "grid", gap: 1.4 }}>
+                            <Stack spacing={1.2}>
                                 {audienceCards.map((card, index) => {
                                     const isActive = index === activeAudience;
                                     return (
-                                        <Paper
-                                            key={card.title}
-                                            elevation={0}
-                                            sx={{
-                                                p: 2,
-                                                borderRadius: "16px",
-                                                border: `1px solid ${
-                                                    isActive
-                                                        ? `${card.accent}55`
-                                                        : "#e8edf5"
-                                                }`,
-                                                background: isActive
-                                                    ? `linear-gradient(120deg, ${card.accent}16 0%, #ffffff 70%)`
-                                                    : "#ffffff",
-                                                display: "flex",
-                                                alignItems: "center",
-                                                gap: 1.8,
-                                                transition:
-                                                    "all 0.45s ease, transform 0.45s ease",
-                                                transform: isActive
-                                                    ? "translateX(-8px) scale(1.01)"
-                                                    : "translateX(0) scale(1)",
-                                                boxShadow: isActive
-                                                    ? `0 12px 26px ${card.accent}22`
-                                                    : "0 4px 12px rgba(15, 23, 42, 0.05)",
-                                                opacity: isActive ? 1 : 0.82,
-                                            }}
-                                        >
-                                            <Box
-                                                sx={{
-                                                    width: 46,
-                                                    height: 46,
-                                                    borderRadius: "12px",
-                                                    display: "flex",
-                                                    alignItems: "center",
-                                                    justifyContent: "center",
-                                                    color: isActive
-                                                        ? card.accent
-                                                        : "#6b7280",
-                                                    backgroundColor: isActive
-                                                        ? `${card.accent}1f`
-                                                        : "#f3f4f6",
-                                                    flexShrink: 0,
-                                                }}
-                                            >
+                                        <Box key={card.title} sx={{
+                                            p: 2,
+                                            borderRadius: "16px",
+                                            display: "flex",
+                                            flexDirection: { xs: "column", sm: "row" },
+                                            gap: 1.5,
+                                            alignItems: { xs: "flex-start", sm: "center" },
+                                            border: isActive
+                                                ? `1px solid ${card.color}25`
+                                                : "1px solid rgba(0,0,0,0.04)",
+                                            background: isActive ? "#fafafa" : "#fff",
+                                            transform: isActive ? "translateX(-4px)" : "translateX(0)",
+                                            transition: "all 0.35s ease",
+                                        }}>
+                                            <Box sx={{
+                                                width: 44, height: 44,
+                                                borderRadius: "12px",
+                                                display: "grid", placeItems: "center",
+                                                color: isActive ? card.color : "#999",
+                                                backgroundColor: isActive ? card.bg : "#f5f5f5",
+                                                transition: "all 0.3s ease",
+                                            }}>
                                                 {card.icon}
                                             </Box>
                                             <Box>
-                                                <Typography
-                                                    sx={{
-                                                        fontWeight: 600,
-                                                        color: "#111827",
-                                                        fontSize: {
-                                                            xs: "1rem",
-                                                            md: "1.08rem",
-                                                        },
-                                                    }}
-                                                >
+                                                <Typography sx={{
+                                                    fontFamily: '"Space Grotesk"',
+                                                    fontWeight: 700, color: "#111",
+                                                    fontSize: "0.95rem",
+                                                }}>
                                                     {card.title}
                                                 </Typography>
-                                                <Typography
-                                                    variant="body2"
-                                                    sx={{
-                                                        color: "#4b5563",
-                                                        lineHeight: 1.7,
-                                                    }}
-                                                >
+                                                <Typography sx={{
+                                                    mt: 0.3, color: "#666",
+                                                    lineHeight: 1.6, fontSize: "0.86rem",
+                                                }}>
                                                     {card.description}
                                                 </Typography>
                                             </Box>
-                                        </Paper>
+                                        </Box>
                                     );
                                 })}
-                            </Box>
+                            </Stack>
                         </Grid>
                     </Grid>
-                </Paper>
+                </Box>
             </Container>
+
             <MeetMentorSection />
             <PricingPlansSection courseTitle={course.title} />
             <StatsBanner />
@@ -690,5 +648,3 @@ const CourseDetailPage = () => {
 };
 
 export default CourseDetailPage;
-
-

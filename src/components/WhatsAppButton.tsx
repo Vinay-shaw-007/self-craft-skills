@@ -1,17 +1,15 @@
-// src/components/WhatsAppButton.tsx
 import { Fab, Typography } from "@mui/material";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { useLocation } from "react-router-dom";
 
 const WhatsAppButton = () => {
-    const whatsappGreen = "#25D366";
     const location = useLocation();
     const isCourseDetailPage = /^\/courses\/[^/]+/.test(location.pathname);
 
     return (
         <Fab
             variant="extended"
-            component="a" // Makes the button act as a link
+            component="a"
             href="https://wa.me/message/4NYE3ABSMTN5K1"
             target="_blank"
             rel="noopener noreferrer"
@@ -19,19 +17,25 @@ const WhatsAppButton = () => {
                 position: "fixed",
                 bottom: { xs: isCourseDetailPage ? 96 : 16, md: 16 },
                 left: 16,
-                backgroundColor: whatsappGreen,
+                backgroundColor: "#111",
                 color: "white",
                 textTransform: "none",
-                fontWeight: "bold",
+                fontWeight: 600,
                 zIndex: 1100,
+                borderRadius: "14px",
+                border: "1px solid rgba(255,255,255,0.08)",
+                boxShadow: "0 8px 24px rgba(0,0,0,0.2)",
                 "&:hover": {
-                    backgroundColor: "#1EAE54", // A slightly darker green for hover
+                    backgroundColor: "#222",
+                    transform: "translateY(-2px)",
+                    boxShadow: "0 12px 32px rgba(0,0,0,0.25)",
                 },
+                transition: "all 0.2s ease",
             }}
         >
-            <WhatsAppIcon />
+            <WhatsAppIcon sx={{ color: "#25D366" }} />
             <Typography
-                sx={{ ml: 1, display: { xs: "none", md: "inline-flex" } }}
+                sx={{ ml: 1, display: { xs: "none", md: "inline-flex" }, fontSize: "0.86rem" }}
             >
                 Chat on WhatsApp
             </Typography>

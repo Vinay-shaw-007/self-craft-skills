@@ -13,6 +13,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import BackToTopButton from "./components/BackToTopButton";
 import WhatsAppButton from "./components/WhatsAppButton";
+import CustomCursor from "./components/CustomCursor";
 import CourseDetailPage from "./pages/CourseDetailPage";
 import SignUpPage from "./pages/SignUpPage"; // Import SignUpPage
 import LoginPage from "./pages/LoginPage"; // Import LoginPage
@@ -20,7 +21,8 @@ import EnrollmentFormPage from "./pages/EnrollmentFormPage";
 
 function App() {
     return (
-        <Box sx={{ backgroundColor: "#FFFFFF" }}>
+        <Box>
+            <CustomCursor />
             <Header />
             <Routes>
                 <Route path="/" element={<HomePage />} />
@@ -38,9 +40,7 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/enroll/complete" element={<EnrollmentFormPage />} />
             </Routes>
-            <Box id="support">
-                <Footer />
-            </Box>
+            <Footer />
             <BackToTopButton />
             <WhatsAppButton />
         </Box>

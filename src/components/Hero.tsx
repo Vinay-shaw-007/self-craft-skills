@@ -1,217 +1,241 @@
-// src/components/Hero.tsx
-import { Box, Typography, Button, Container } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom"; // 1. Import RouterLink
+import { Box, Button, Chip, Container, Grid, Stack, Typography } from "@mui/material";
+import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
+import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
+import { Link as RouterLink } from "react-router-dom";
 import HomeImage from "../assets/home.svg";
+import { coursesData } from "./coursesData";
+
+const openCourse = coursesData.find((c) => c.status === "Open for Enrollment");
+
+const bentoStats = [
+    { value: "4", unit: "Weeks", sub: "Program duration", color: "#6C5CE7" },
+    { value: "12", unit: "Classes", sub: "Live mentor sessions", color: "#0984E3" },
+    { value: "30", unit: "Seats", sub: "Per cohort batch", color: "#00B894" },
+];
 
 const Hero = () => {
     return (
-        <Box
-            sx={{
-                position: "relative",
-                overflow: "hidden",
-                py: { xs: 8, md: 12 },
-                backgroundColor: "white",
-            }}
-        >
-            {/* Top-left pink circle */}
-            <Box
-                sx={{
-                    position: "absolute",
-                    top: { xs: -30, md: -50 },
-                    left: { xs: -30, md: -50 },
-                    width: { xs: 150, md: 300 },
-                    height: { xs: 150, md: 300 },
-                    background: "linear-gradient(135deg, #FF9A8B, #FF6A88)",
-                    borderRadius: "50%",
-                    opacity: { xs: 0.2, md: 0.2 },
-                    zIndex: 0,
-                }}
-            />
+        <Box sx={{
+            position: "relative",
+            overflow: "hidden",
+            background: "linear-gradient(180deg, #0a0a0a 0%, #111 60%, #1a1a2e 100%)",
+            color: "#fff",
+            pb: { xs: 8, md: 10 },
+            pt: { xs: 6, md: 8 },
+        }} className="noise-overlay">
+            {/* Gradient mesh orbs */}
+            <Box sx={{
+                position: "absolute", top: "5%", left: "15%",
+                width: { xs: 250, md: 500 }, height: { xs: 250, md: 500 },
+                borderRadius: "50%",
+                background: "radial-gradient(circle, rgba(108, 92, 231, 0.25), transparent 70%)",
+                filter: "blur(80px)",
+            }} />
+            <Box sx={{
+                position: "absolute", top: "20%", right: "10%",
+                width: { xs: 200, md: 400 }, height: { xs: 200, md: 400 },
+                borderRadius: "50%",
+                background: "radial-gradient(circle, rgba(9, 132, 227, 0.2), transparent 70%)",
+                filter: "blur(80px)",
+            }} />
+            <Box sx={{
+                position: "absolute", bottom: "0%", left: "40%",
+                width: { xs: 200, md: 350 }, height: { xs: 200, md: 350 },
+                borderRadius: "50%",
+                background: "radial-gradient(circle, rgba(253, 121, 168, 0.15), transparent 70%)",
+                filter: "blur(80px)",
+            }} />
 
-            {/* Bottom-right yellow-orange circle */}
-            <Box
-                sx={{
-                    position: "absolute",
-                    bottom: { xs: -20, md: -60 },
-                    right: { xs: -20, md: -40 },
-                    width: { xs: 100, md: 200 },
-                    height: { xs: 100, md: 200 },
-                    background: "linear-gradient(135deg, #FFD93D, #FF6B6B)",
-                    borderRadius: "50%",
-                    opacity: { xs: 0.1, md: 0.2 },
-                    zIndex: 0,
-                }}
-            />
+            <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
+                <Grid container spacing={{ xs: 4, md: 6 }} alignItems="center">
+                    <Grid size={{ xs: 12, md: 7 }} sx={{ order: { xs: 2, md: 1 } }}>
+                        <Stack spacing={3}>
+                            {/* Pill badge */}
+                            <Chip label="Beginner-Friendly Learning Programs" sx={{
+                                alignSelf: "flex-start",
+                                backgroundColor: "rgba(108, 92, 231, 0.15)",
+                                color: "#a29bfe",
+                                border: "1px solid rgba(108, 92, 231, 0.25)",
+                                fontWeight: 600,
+                                borderRadius: "8px",
+                                fontSize: "0.8rem",
+                            }} />
 
-            <Container maxWidth="lg">
-                <Box
-                    sx={{
-                        position: "relative",
-                        zIndex: 1,
-                        display: "grid",
-                        gridTemplateColumns: { xs: "1fr", md: "1.1fr 0.9fr" },
-                        gap: { xs: 4, md: 6 },
-                        alignItems: "center",
-                    }}
-                >
-                    <Box
-                        sx={{
-                            display: "flex",
-                            justifyContent: { xs: "center", md: "flex-start" },
-                        }}
-                    >
-                        <Box
-                            sx={{
-                                width: { xs: "100%", sm: 420, md: 520 },
-                                maxWidth: "100%",
-                                borderRadius: 6,
-                                overflow: "hidden",
-                                boxShadow: "0 12px 30px rgba(0,0,0,0.12)",
-                            }}
-                        >
-                            <Box
-                                component="img"
-                                src={HomeImage}
-                                alt="Self Craft Skills hero"
-                                sx={{
-                                    width: "100%",
-                                    height: "auto",
-                                    display: "block",
-                                }}
-                            />
-                        </Box>
-                    </Box>
-
-                    <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
-                        <Typography
-                            variant="overline"
-                            sx={{
-                                color: "#d32f2f",
-                                letterSpacing: "0.24em",
-                                fontWeight: 500,
-                            }}
-                        >
-                            Self Craft Skills
-                        </Typography>
-                        <Typography
-                            variant="h2"
-                            component="h1"
-                            sx={{
-                                fontWeight: 700,
-                                fontSize: { xs: "2.4rem", md: "3.4rem" },
-                                color: "#333",
-                                mt: 1,
-                            }}
-                        >
-                            Learn & Share Knowledge{" "}
-                            <span style={{ color: "#D32F2F" }}>
-                                Across Different Fields.
-                            </span>
-                        </Typography>
-                        <Box
-                            sx={{
-                                mt: 2,
-                                px: { xs: 2, md: 2.4 },
-                                py: { xs: 1.8, md: 2.1 },
-                                borderRadius: 4,
-                                background:
-                                    "linear-gradient(135deg, rgba(255, 245, 245, 0.98) 0%, rgba(255, 233, 233, 0.96) 100%)",
-                                border: "1px solid rgba(211, 47, 47, 0.16)",
-                                boxShadow:
-                                    "0 18px 40px rgba(211, 47, 47, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.85)",
-                                maxWidth: 560,
-                                mx: { xs: "auto", md: 0 },
-                                position: "relative",
-                                overflow: "hidden",
-                            }}
-                        >
-                            <Box
-                                sx={{
-                                    position: "absolute",
-                                    top: -24,
-                                    right: -24,
-                                    width: 110,
-                                    height: 110,
-                                    borderRadius: "50%",
-                                    background:
-                                        "radial-gradient(circle, rgba(255, 138, 128, 0.32) 0%, rgba(255, 138, 128, 0) 72%)",
-                                }}
-                            />
-                            <Typography
-                                sx={{
+                            {/* Headline */}
+                            <Typography variant="h1" sx={{
+                                fontSize: { xs: "2.8rem", sm: "3.5rem", md: "4.2rem", lg: "4.8rem" },
+                                maxWidth: 700,
+                            }}>
+                                Build future-ready{" "}
+                                <Box component="span" sx={{
                                     position: "relative",
-                                    display: "inline-flex",
-                                    alignItems: "center",
-                                    px: 1.3,
-                                    py: 0.55,
-                                    borderRadius: "999px",
-                                    backgroundColor: "rgba(183, 28, 28, 0.08)",
-                                    color: "#9f1717",
+                                    display: "inline",
+                                    background: "linear-gradient(135deg, #6C5CE7 0%, #a29bfe 40%, #0984E3 100%)",
+                                    backgroundSize: "200% 200%",
+                                    animation: "gradientShift 4s ease infinite",
+                                    WebkitBackgroundClip: "text",
+                                    WebkitTextFillColor: "transparent",
+                                }}>
+                                    skills
+                                </Box>
+                                {" "}with a live cohort experience.
+                            </Typography>
+
+                            {/* Subtitle */}
+                            <Typography sx={{
+                                maxWidth: 540,
+                                fontSize: { xs: "1rem", md: "1.12rem" },
+                                lineHeight: 1.7,
+                                color: "rgba(255,255,255,0.55)",
+                            }}>
+                                Self Craft Skills combines structured teaching,
+                                guided practice, and mentor support so learners can
+                                move from curiosity to confident execution.
+                            </Typography>
+
+                            {/* Tags */}
+                            <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                                {["Live mentor-led cohorts", "Beginner-friendly structure", "Practical assignments"].map((t) => (
+                                    <Box key={t} sx={{
+                                        px: 1.5, py: 0.6,
+                                        borderRadius: "8px",
+                                        border: "1px solid rgba(255,255,255,0.1)",
+                                        background: "rgba(255,255,255,0.04)",
+                                        fontSize: "0.82rem",
+                                        color: "rgba(255,255,255,0.65)",
+                                    }}>
+                                        {t}
+                                    </Box>
+                                ))}
+                            </Stack>
+
+                            {/* CTAs */}
+                            <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5}>
+                                <Button component={RouterLink} to="/courses" sx={{
+                                    px: 3.5, py: 1.5,
+                                    borderRadius: "14px",
+                                    color: "#111",
                                     fontWeight: 700,
-                                    fontSize: { xs: "0.78rem", md: "0.84rem" },
-                                    textTransform: "uppercase",
-                                    letterSpacing: "0.12em",
-                                }}
-                            >
-                                FRESH BATCH STARTING SOON!
-                            </Typography>
-                            <Typography
-                                sx={{
-                                    position: "relative",
-                                    mt: 1.15,
-                                    color: "#2a1414",
-                                    fontWeight: 800,
-                                    fontSize: { xs: "1.1rem", md: "1.28rem" },
-                                    lineHeight: 1.25,
-                                }}
-                            >
-                                Reserve Your Spot Today
-                            </Typography>
+                                    fontSize: "0.95rem",
+                                    background: "#fff",
+                                    "&:hover": { background: "#f0f0f0", transform: "translateY(-1px)" },
+                                    transition: "all 0.2s ease",
+                                    boxShadow: "0 8px 32px rgba(255,255,255,0.1)",
+                                }}>
+                                    Explore programs
+                                    <ArrowOutwardRoundedIcon sx={{ ml: 0.5, fontSize: 18 }} />
+                                </Button>
+                                <Button component={RouterLink}
+                                    to={openCourse ? `/courses/${openCourse.id}` : "/courses"}
+                                    startIcon={<PlayArrowRoundedIcon />}
+                                    sx={{
+                                        px: 3, py: 1.5,
+                                        borderRadius: "14px",
+                                        color: "#fff",
+                                        fontSize: "0.95rem",
+                                        border: "1px solid rgba(255,255,255,0.15)",
+                                        background: "rgba(255,255,255,0.05)",
+                                        "&:hover": { background: "rgba(255,255,255,0.1)" },
+                                    }}>
+                                    See flagship course
+                                </Button>
+                            </Stack>
+
+                            {/* Bento stats */}
+                            <Grid container spacing={1.5} sx={{ pt: 1 }}>
+                                {bentoStats.map((s) => (
+                                    <Grid key={s.sub} size={{ xs: 4 }}>
+                                        <Box sx={{
+                                            p: { xs: 1.5, md: 2 },
+                                            borderRadius: "16px",
+                                            border: "1px solid rgba(255,255,255,0.08)",
+                                            background: "rgba(255,255,255,0.03)",
+                                            backdropFilter: "blur(10px)",
+                                            transition: "all 0.2s ease",
+                                            "&:hover": {
+                                                background: "rgba(255,255,255,0.06)",
+                                                borderColor: `${s.color}40`,
+                                            },
+                                        }}>
+                                            <Stack direction="row" alignItems="baseline" spacing={0.5}>
+                                                <Typography sx={{
+                                                    fontFamily: '"Space Grotesk"',
+                                                    fontWeight: 700,
+                                                    fontSize: { xs: "1.6rem", md: "2rem" },
+                                                    color: s.color,
+                                                    lineHeight: 1,
+                                                }}>
+                                                    {s.value}
+                                                </Typography>
+                                                <Typography sx={{
+                                                    fontSize: { xs: "0.72rem", md: "0.82rem" },
+                                                    fontWeight: 600,
+                                                    color: "rgba(255,255,255,0.5)",
+                                                    textTransform: "uppercase",
+                                                    letterSpacing: "0.05em",
+                                                }}>
+                                                    {s.unit}
+                                                </Typography>
+                                            </Stack>
+                                            <Typography sx={{
+                                                mt: 0.5,
+                                                fontSize: { xs: "0.7rem", md: "0.78rem" },
+                                                color: "rgba(255,255,255,0.35)",
+                                            }}>
+                                                {s.sub}
+                                            </Typography>
+                                        </Box>
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        </Stack>
+                    </Grid>
+
+                    {/* Hero image */}
+                    <Grid size={{ xs: 12, md: 5 }} sx={{ order: { xs: 1, md: 2 } }}>
+                        <Box sx={{
+                            position: "relative",
+                            display: "flex",
+                            justifyContent: "center",
+                        }}>
+                            {/* Glow behind image */}
+                            <Box sx={{
+                                position: "absolute",
+                                inset: "10%",
+                                borderRadius: "30px",
+                                background: "linear-gradient(135deg, rgba(108, 92, 231, 0.3), rgba(9, 132, 227, 0.2))",
+                                filter: "blur(50px)",
+                            }} />
+                            <Box sx={{
+                                position: "relative",
+                                width: "100%",
+                                maxWidth: { xs: 380, md: 460 },
+                                borderRadius: "24px",
+                                overflow: "hidden",
+                                border: "1px solid rgba(255,255,255,0.08)",
+                                background: "rgba(255,255,255,0.03)",
+                                p: 1,
+                            }}>
+                                <Box component="img" src={HomeImage}
+                                    alt="Students learning on Self Craft Skills"
+                                    sx={{
+                                        width: "100%", display: "block",
+                                        borderRadius: "20px",
+                                    }}
+                                />
+                            </Box>
                         </Box>
-                        <Typography
-                            variant="h6"
-                            component="p"
-                            sx={{
-                                mt: 2,
-                                mb: 4,
-                                color: "text.secondary",
-                                maxWidth: 560,
-                                mx: { xs: "auto", md: 0 },
-                            }}
-                        >
-                            Our mission is to empower you with practical,
-                            growth-driven skills that shape your future and help
-                            you become future-ready.
-                        </Typography>
-                        <Button
-                            component={RouterLink}
-                            to="/courses"
-                            variant="contained"
-                            sx={{
-                                borderRadius: "50px",
-                                px: { xs: 4, md: 5 },
-                                py: 1.5,
-                                fontWeight: "bold",
-                                fontSize: "1rem",
-                                letterSpacing: "0.5px",
-                                background:
-                                    "linear-gradient(45deg, #D32F2F 30%, #E57373 90%)",
-                                color: "white",
-                                boxShadow: "0 4px 15px rgba(211, 47, 47, 0.4)",
-                                transition:
-                                    "transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out",
-                                "&:hover": {
-                                    transform: "translateY(-3px)",
-                                    boxShadow:
-                                        "0 6px 20px rgba(211, 47, 47, 0.5)",
-                                },
-                            }}
-                        >
-                            Explore Courses
-                        </Button>
-                    </Box>
-                </Box>
+                    </Grid>
+                </Grid>
             </Container>
+
+            {/* Bottom fade to white */}
+            <Box sx={{
+                position: "absolute",
+                bottom: 0, left: 0, right: 0,
+                height: 120,
+                background: "linear-gradient(to bottom, transparent, #fafafa)",
+            }} />
         </Box>
     );
 };

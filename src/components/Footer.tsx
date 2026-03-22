@@ -1,240 +1,173 @@
-// src/components/Footer.tsx
 import {
-    Box,
-    Container,
-    Typography,
-    Link,
-    Grid,
-    Stack,
-    Divider,
+    Box, Button, Container, Divider, Grid, Link, Stack, Typography,
 } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom"; // 1. This import is crucial
-import Logo from "../assets/logo.png";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import { LinkedIn } from "@mui/icons-material";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
+import { Link as RouterLink } from "react-router-dom";
+import Logo from "../assets/logo.png";
+
+const socialLinks = [
+    { href: "https://www.facebook.com/share/1Ccous7Nsr/", icon: <FacebookIcon sx={{ fontSize: 18 }} />, label: "Facebook" },
+    { href: "https://www.instagram.com/selfcraftskills?igsh=MTRmMTJqanU0NXp0YQ==", icon: <InstagramIcon sx={{ fontSize: 18 }} />, label: "Instagram" },
+    { href: "https://wa.me/message/4NYE3ABSMTN5K1", icon: <WhatsAppIcon sx={{ fontSize: 18 }} />, label: "WhatsApp" },
+    { href: "https://linkedin.com/company/selfcraftskills", icon: <LinkedInIcon sx={{ fontSize: 18 }} />, label: "LinkedIn" },
+    { href: "https://www.youtube.com/@SelfCraftSkills/", icon: <YouTubeIcon sx={{ fontSize: 18 }} />, label: "YouTube" },
+];
+
+const linkSx = {
+    color: "rgba(255,255,255,0.45)",
+    fontSize: "0.86rem",
+    transition: "color 0.2s",
+    "&:hover": { color: "#fff" },
+};
 
 const Footer = () => {
     return (
-        <Box
-            sx={{
-                background: "linear-gradient(45deg, #1f2937 30%, #111827 90%)",
-                color: "white",
-                py: { xs: 6, md: 8 },
-            }}
-        >
-            <Container>
-                <Grid container spacing={4}>
-                    {/* Column 1: Brand Info */}
-                    <Grid size={{ xs: 12, md: 4 }}>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                mb: 2,
-                            }}
-                        >
-                            <img
-                                src={Logo}
-                                alt="Self-Craft Skills Logo"
-                                style={{ height: "50px" }}
-                            />
-                            <Typography
-                                variant="h6"
-                                fontWeight="bold"
-                                sx={{ ml: 2 }}
-                            >
-                                Self Craft Skills
+        <Box sx={{
+            position: "relative", overflow: "hidden",
+            background: "#0a0a0a", color: "#fff",
+            pt: { xs: 8, md: 10 }, pb: { xs: 4, md: 5 },
+        }} className="noise-overlay">
+
+            <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
+                {/* Support CTA card */}
+                <Box id="support" sx={{
+                    p: { xs: 3, md: 5 }, mb: { xs: 6, md: 8 },
+                    borderRadius: "24px",
+                    border: "1px solid rgba(255,255,255,0.06)",
+                    background: "rgba(255,255,255,0.03)",
+                }}>
+                    <Grid container spacing={3} alignItems="center">
+                        <Grid size={{ xs: 12, md: 8 }}>
+                            <Typography sx={{
+                                fontSize: "0.72rem", fontWeight: 600,
+                                letterSpacing: "0.12em", textTransform: "uppercase",
+                                color: "rgba(255,255,255,0.3)",
+                            }}>learner support</Typography>
+                            <Typography variant="h3" sx={{
+                                mt: 1, fontSize: { xs: "1.8rem", md: "2.4rem" },
+                            }}>
+                                Need help choosing the right course or plan?
                             </Typography>
-                        </Box>
-                        <Typography variant="body2" sx={{ color: "#bdbdbd" }}>
-                            Learn skills that craft your life. Our mission is to
-                            empower you with practical, growth-driven skills
-                            that shape your future.
+                            <Typography sx={{
+                                mt: 1.5, color: "rgba(255,255,255,0.4)",
+                                maxWidth: 600, lineHeight: 1.7,
+                            }}>
+                                Reach out for guidance on the live cohort, payment
+                                process, timing, or course fit. We keep the
+                                conversation practical and learner-first.
+                            </Typography>
+                        </Grid>
+                        <Grid size={{ xs: 12, md: 4 }}>
+                            <Stack spacing={1.2} sx={{ alignItems: { xs: "stretch", md: "flex-end" } }}>
+                                <Button href="mailto:selfcraftskills@gmail.com"
+                                    endIcon={<ArrowOutwardRoundedIcon sx={{ fontSize: 16 }} />}
+                                    sx={{
+                                        px: 3, py: 1.2, borderRadius: "12px",
+                                        color: "#111", fontWeight: 600,
+                                        background: "#fff",
+                                        "&:hover": { background: "#f0f0f0" },
+                                    }}>
+                                    Email support
+                                </Button>
+                                <Button href="https://wa.me/message/4NYE3ABSMTN5K1"
+                                    target="_blank" rel="noopener noreferrer"
+                                    sx={{
+                                        px: 3, py: 1.1, borderRadius: "12px",
+                                        color: "rgba(255,255,255,0.6)",
+                                        border: "1px solid rgba(255,255,255,0.08)",
+                                        "&:hover": { background: "rgba(255,255,255,0.04)", color: "#fff" },
+                                    }}>
+                                    Message on WhatsApp
+                                </Button>
+                            </Stack>
+                        </Grid>
+                    </Grid>
+                </Box>
+
+                {/* Footer links grid */}
+                <Grid container spacing={4}>
+                    <Grid size={{ xs: 12, md: 5 }}>
+                        <Stack direction="row" spacing={1.2} alignItems="center">
+                            <Box component="img" src={Logo} alt="Logo" sx={{ width: 40, height: 40 }} />
+                            <Typography sx={{
+                                fontFamily: '"Space Grotesk"', fontWeight: 700, fontSize: "1.05rem",
+                            }}>Self Craft Skills</Typography>
+                        </Stack>
+                        <Typography sx={{
+                            mt: 1.5, color: "rgba(255,255,255,0.35)",
+                            maxWidth: 360, lineHeight: 1.7, fontSize: "0.88rem",
+                        }}>
+                            Learn skills that craft your life. Our mission is to empower you with practical, growth-driven skills that shape your future.
                         </Typography>
                     </Grid>
 
-                    {/* Column 2: Quick Links */}
                     <Grid size={{ xs: 6, md: 2 }}>
-                        <Typography
-                            variant="subtitle1"
-                            fontWeight="bold"
-                            gutterBottom
-                        >
-                            Explore
-                        </Typography>
+                        <Typography sx={{ fontWeight: 600, fontSize: "0.86rem", mb: 1.5, color: "rgba(255,255,255,0.7)" }}>Explore</Typography>
                         <Stack spacing={1}>
-                            {/* 2. Each link must use component={RouterLink} and the 'to' prop */}
-                            <Link
-                                component={RouterLink}
-                                to="/#hero"
-                                color="inherit"
-                                underline="hover"
-                                variant="body2"
-                                sx={{ color: "#bdbdbd" }}
-                            >
-                                Home
-                            </Link>
-                            <Link
-                                component={RouterLink}
-                                to="/#about"
-                                color="inherit"
-                                underline="hover"
-                                variant="body2"
-                                sx={{ color: "#bdbdbd" }}
-                            >
-                                About
-                            </Link>
-                            <Link
-                                component={RouterLink}
-                                to="/courses"
-                                color="inherit"
-                                underline="hover"
-                                variant="body2"
-                                sx={{ color: "#bdbdbd" }}
-                            >
-                                Courses
-                            </Link>
+                            <Link component={RouterLink} to="/" underline="hover" sx={linkSx}>Home</Link>
+                            <Link component={RouterLink} to="/courses" underline="hover" sx={linkSx}>Programs</Link>
+                            <Link component={RouterLink} to="/faq" underline="hover" sx={linkSx}>FAQs</Link>
                         </Stack>
                     </Grid>
 
-                    {/* Column 3: More Links */}
-                    <Grid size={{ xs: 6, md: 3 }}>
-                        <Typography
-                            variant="subtitle1"
-                            fontWeight="bold"
-                            gutterBottom
-                        >
-                            Information
-                        </Typography>
+                    <Grid size={{ xs: 6, md: 2 }}>
+                        <Typography sx={{ fontWeight: 600, fontSize: "0.86rem", mb: 1.5, color: "rgba(255,255,255,0.7)" }}>Policies</Typography>
                         <Stack spacing={1}>
-                            <Link
-                                component={RouterLink}
-                                to="/courses/ai-unlocked#enrollment-process"
-                                color="inherit"
-                                underline="hover"
-                                variant="body2"
-                                sx={{ color: "#bdbdbd" }}
-                            >
-                                Enrollment Process
-                            </Link>
-                            <Link
-                                component={RouterLink}
-                                to="/faq"
-                                color="inherit"
-                                underline="hover"
-                                variant="body2"
-                                sx={{ color: "#bdbdbd" }}
-                            >
-                                FAQs
-                            </Link>
-                            <Link
-                                href="/refund-policy.html"
-                                color="inherit"
-                                underline="hover"
-                                variant="body2"
-                                sx={{ color: "#bdbdbd" }}
-                            >
-                                Refund Policy
-                            </Link>
-                            <Link
-                                href="/terms-and-conditions.html"
-                                color="inherit"
-                                underline="hover"
-                                variant="body2"
-                                sx={{ color: "#bdbdbd" }}
-                            >
-                                Terms & Conditions
-                            </Link>
-                            <Link
-                                href="/privacy-policy.html"
-                                color="inherit"
-                                underline="hover"
-                                variant="body2"
-                                sx={{ color: "#bdbdbd" }}
-                            >
-                                Privacy Policy
-                            </Link>
+                            <Link component={RouterLink} to="/privacy-policy" underline="hover" sx={linkSx}>Privacy Policy</Link>
+                            <Link component={RouterLink} to="/terms-and-conditions" underline="hover" sx={linkSx}>Terms & Conditions</Link>
+                            <Link component={RouterLink} to="/refund-policy" underline="hover" sx={linkSx}>Refund Policy</Link>
                         </Stack>
                     </Grid>
 
-                    {/* Column 4: Contact */}
                     <Grid size={{ xs: 12, md: 3 }}>
-                        <Typography
-                            variant="subtitle1"
-                            fontWeight="bold"
-                            gutterBottom
-                        >
-                            Contact Us
-                        </Typography>
-                        <Link
-                            href="mailto:selfcraftskills@gmail.com"
-                            color="inherit"
-                            underline="hover"
-                            variant="body2"
-                            sx={{ color: "#bdbdbd" }}
-                        >
-                            selfcraftskills@gmail.com
-                        </Link>
+                        <Typography sx={{ fontWeight: 600, fontSize: "0.86rem", mb: 1.5, color: "rgba(255,255,255,0.7)" }}>Contact</Typography>
+                        <Stack spacing={1}>
+                            <Link href="mailto:selfcraftskills@gmail.com" underline="hover" sx={linkSx}>
+                                selfcraftskills@gmail.com
+                            </Link>
+                            <Typography sx={{ color: "rgba(255,255,255,0.3)", fontSize: "0.82rem" }}>
+                                Live support available through email and WhatsApp.
+                            </Typography>
+                        </Stack>
                     </Grid>
                 </Grid>
 
-                <Divider
-                    sx={{ my: 4, borderColor: "rgba(255, 255, 255, 0.1)" }}
-                />
+                <Divider sx={{ my: 4, borderColor: "rgba(255,255,255,0.06)" }} />
 
-                {/* Bottom Bar: Copyright and Social Icons */}
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: { xs: "column-reverse", sm: "row" },
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        gap: 2,
-                    }}
-                >
-                    <Typography variant="body2" sx={{ color: "#bdbdbd" }}>
-                        {"\u00A9"} {new Date().getFullYear()} Self-Craft Skills. All
-                        Rights Reserved.
+                <Box sx={{
+                    display: "flex",
+                    flexDirection: { xs: "column", md: "row" },
+                    alignItems: { xs: "flex-start", md: "center" },
+                    justifyContent: "space-between", gap: 2,
+                }}>
+                    <Typography sx={{ color: "rgba(255,255,255,0.25)", fontSize: "0.82rem" }}>
+                        {"\u00A9"} {new Date().getFullYear()} Self Craft Skills. All rights reserved.
                     </Typography>
-                    <Stack direction="row" spacing={2}>
-                        <Link
-                            href="https://www.facebook.com/share/1Ccous7Nsr/"
-                            color="inherit"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            sx={{ "&:hover": { color: "primary.main" } }}
-                        >
-                            <FacebookIcon />
-                        </Link>
-                        <Link
-                            href="https://www.instagram.com/selfcraftskills?igsh=MTRmMTJqanU0NXp0YQ=="
-                            color="inherit"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            sx={{ "&:hover": { color: "primary.main" } }}
-                        >
-                            <InstagramIcon />
-                        </Link>
-                        <Link
-                            href="https://wa.me/message/4NYE3ABSMTN5K1"
-                            color="inherit"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            sx={{ "&:hover": { color: "primary.main" } }}
-                        >
-                            <WhatsAppIcon />
-                        </Link>
-                        <Link
-                            href="https://linkedin.com/company/selfcraftskills"
-                            color="inherit"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            sx={{ "&:hover": { color: "primary.main" } }}
-                        >
-                            <LinkedIn />
-                        </Link>
+                    <Stack direction="row" spacing={0.8}>
+                        {socialLinks.map((item) => (
+                            <Link key={item.label} href={item.href}
+                                target="_blank" rel="noopener noreferrer" aria-label={item.label}
+                                sx={{
+                                    width: 36, height: 36,
+                                    borderRadius: "10px",
+                                    display: "grid", placeItems: "center",
+                                    color: "rgba(255,255,255,0.35)",
+                                    border: "1px solid rgba(255,255,255,0.06)",
+                                    transition: "all 0.2s ease",
+                                    "&:hover": {
+                                        color: "#fff",
+                                        background: "rgba(255,255,255,0.06)",
+                                        transform: "translateY(-2px)",
+                                    },
+                                }}>
+                                {item.icon}
+                            </Link>
+                        ))}
                     </Stack>
                 </Box>
             </Container>
@@ -243,4 +176,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
