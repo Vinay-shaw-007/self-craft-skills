@@ -10,7 +10,6 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
 import WorkspacePremiumRoundedIcon from "@mui/icons-material/WorkspacePremiumRounded";
 import FadeInOnScroll from "./FadeInOnScroll";
-import { startEnrollmentPayment } from "../utils/enrollmentPayment";
 
 interface PricingPlansSectionProps {
     courseTitle: string;
@@ -25,7 +24,7 @@ interface PricingPlan {
     name: string;
     subtitle: string;
     amountDisplay: string;
-    amountPaise: number;
+    paymentLink: string;
     accent: "standard" | "premium";
     icon: React.ReactNode;
     features: PlanFeature[];
@@ -37,7 +36,7 @@ const pricingPlans: PricingPlan[] = [
         name: "Standard Learning Plan",
         subtitle: "Strong foundation, essential access",
         amountDisplay: "\u20B9579/-",
-        amountPaise: 57900,
+        paymentLink: "https://rzp.io/rzp/stnplan",
         accent: "standard",
         icon: <SchoolRoundedIcon sx={{ fontSize: 22 }} />,
         features: [
@@ -53,7 +52,7 @@ const pricingPlans: PricingPlan[] = [
         name: "Premium Learning Plan",
         subtitle: "Complete access, faster execution",
         amountDisplay: "\u20B9699/-",
-        amountPaise: 69900,
+        paymentLink: "https://rzp.io/rzp/prmplan",
         accent: "premium",
         icon: <WorkspacePremiumRoundedIcon sx={{ fontSize: 22 }} />,
         bestValue: true,
@@ -225,12 +224,10 @@ const PricingPlansSection = ({ courseTitle }: PricingPlansSectionProps) => {
 
                                         <Button
                                             fullWidth
-                                            onClick={() => {
-                                                void startEnrollmentPayment({
-                                                    amountPaise: plan.amountPaise,
-                                                    planName: plan.name,
-                                                });
-                                            }}
+                                            component="a"
+                                            href={plan.paymentLink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             sx={{
                                                 mt: 1, py: 1.3,
                                                 borderRadius: "12px",
