@@ -1,125 +1,100 @@
-import { useEffect, useMemo, useRef } from "react";
-import { Box, Button, Container, Paper, Typography } from "@mui/material";
+import { useEffect, useRef } from "react";
+import { Button, Container, Paper, Stack, Typography } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
-import {
-    enrollmentMeta,
-    getStoredEnrollmentPaymentId,
-    storeEnrollmentPaymentId,
-} from "../utils/enrollmentPayment";
+import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 
-const GOOGLE_FORM_VIEW_URL =
-    "https://docs.google.com/forms/d/e/1FAIpQLScFHglJRuPu5QZOo6jkxxB7yX3L9NGnxJbhmZap2uD6EsA9Wg/viewform";
-const PAYMENT_ID_ENTRY_KEY = "entry.1663560164";
-const WHATSAPP_NUMBER = "917890041604";
+const COURSE_NAME = "AI Unlocked: Zero to Hero";
+
+const GROUP_LINKS: Record<string, string> = {
+    standard: "https://chat.whatsapp.com/DbGfQfQRW7a4HhDeWX4wmh?mode=gi_t",
+    premium: "https://chat.whatsapp.com/DtGBut6puSu5EGXtBa4Vf1?mode=gi_t",
+};
+
+const PLAN_LABELS: Record<string, string> = {
+    standard: "Standard Learning Plan",
+    premium: "Premium Learning Plan",
+};
 
 const EnrollmentFormPage = () => {
     const [searchParams] = useSearchParams();
-    const paymentIdFromQuery = searchParams.get("payment_id")?.trim() ?? "";
-    const paymentId = paymentIdFromQuery || getStoredEnrollmentPaymentId();
-    const iframeLoadsRef = useRef(0);
-    const hasOpenedWhatsApp = useRef(false);
+    const plan = searchParams.get("plan")?.toLowerCase() ?? "";
+    const groupLink = GROUP_LINKS[plan] || GROUP_LINKS.standard;
+    const planLabel = PLAN_LABELS[plan] || "";
+    const hasOpened = useRef(false);
 
     useEffect(() => {
-        if (paymentIdFromQuery) {
-            storeEnrollmentPaymentId(paymentIdFromQuery);
+        if (!hasOpened.current) {
+            hasOpened.current = true;
+            window.open(groupLink, "_blank", "noopener,noreferrer");
         }
-    }, [paymentIdFromQuery]);
-
-    const whatsappUrl = useMemo(() => {
-        const message = [
-            "Hi Self Craft Skills 👋",
-            `I've successfully enrolled in ${enrollmentMeta.courseName}`,
-            `Payment ID: ${paymentId || "N/A"}`,
-            "Please guide me for next steps.",
-        ].join("\n");
-
-        return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-    }, [paymentId]);
-
-    const formUrl = useMemo(() => {
-        const url = new URL(GOOGLE_FORM_VIEW_URL);
-        url.searchParams.set("embedded", "true");
-        url.searchParams.set("usp", "pp_url");
-
-        if (paymentId) {
-            url.searchParams.set(PAYMENT_ID_ENTRY_KEY, paymentId);
-        }
-
-        return url.toString();
-    }, [paymentId]);
-
-    const handleIframeLoad = () => {
-        iframeLoadsRef.current += 1;
-        if (iframeLoadsRef.current >= 2 && !hasOpenedWhatsApp.current) {
-            hasOpenedWhatsApp.current = true;
-            window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-        }
-    };
-
-    if (!paymentId) {
-        return (
-            <Container maxWidth="sm" sx={{ py: 8 }}>
-                <Paper sx={{ p: 3 }}>
-                    <Typography variant="h6" fontWeight={700}>
-                        Payment ID missing
-                    </Typography>
-                    <Typography sx={{ mt: 1.5, color: "text.secondary" }}>
-                        Please complete payment again from the Enroll Now button.
-                    </Typography>
-                </Paper>
-            </Container>
-        );
-    }
+    }, [groupLink]);
 
     return (
-        <Container maxWidth="md" sx={{ py: 6 }}>
-            <Paper sx={{ p: { xs: 2, md: 3 }, borderRadius: "16px" }}>
-                <Typography variant="h5" fontWeight={700}>
-                    Complete Enrollment Form
-                </Typography>
-                <Typography sx={{ mt: 1, color: "text.secondary" }}>
-                    Payment ID is already attached. Submit the form to continue.
-                </Typography>
-                <Typography sx={{ mt: 0.5, color: "text.secondary" }}>
-                    Payment ID: {paymentId}
+        <Container maxWidth="sm" sx={{ py: { xs: 8, md: 12 } }}>
+            <Paper sx={{
+                p: { xs: 3, md: 4 },
+                borderRadius: "20px",
+                textAlign: "center",
+                border: "1px solid rgba(0,184,148,0.2)",
+            }}>
+                <CheckCircleRoundedIcon sx={{ fontSize: 56, color: "#00B894", mb: 2 }} />
+
+                <Typography variant="h5" sx={{
+                    fontFamily: '"Space Grotesk"',
+                    fontWeight: 700,
+                    color: "#111",
+                    mb: 1,
+                }}>
+                    Enrollment Successful!
                 </Typography>
 
-                <Box
-                    sx={{
-                        mt: 2.5,
-                        border: "1px solid #e5e7eb",
-                        borderRadius: "12px",
-                        overflow: "hidden",
-                    }}
-                >
-                    <iframe
-                        title="Enrollment Form"
-                        src={formUrl}
-                        width="100%"
-                        height="1935"
-                        frameBorder="0"
-                        marginHeight={0}
-                        marginWidth={0}
-                        onLoad={handleIframeLoad}
+                <Typography sx={{ color: "#666", lineHeight: 1.7, mb: 1 }}>
+                    Thank you for enrolling in <strong>{COURSE_NAME}</strong>
+                    {planLabel && <> — <strong>{planLabel}</strong></>}.
+                </Typography>
+
+                <Typography sx={{ color: "#999", fontSize: "0.88rem", lineHeight: 1.7, mb: 3 }}>
+                    Your WhatsApp group should open automatically.
+                    If it didn't, use the button below to join.
+                </Typography>
+
+                <Stack spacing={1.5}>
+                    <Button
+                        component="a"
+                        href={groupLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        fullWidth
+                        sx={{
+                            py: 1.3,
+                            borderRadius: "12px",
+                            fontWeight: 700,
+                            fontSize: "0.95rem",
+                            color: "#fff",
+                            background: "#25D366",
+                            "&:hover": { background: "#1fb855" },
+                        }}
                     >
-                        Loading...
-                    </iframe>
-                </Box>
+                        Join WhatsApp Group
+                    </Button>
 
-                <Typography sx={{ mt: 1.5, color: "text.secondary", fontSize: "0.9rem" }}>
-                    If WhatsApp does not open automatically after submit, use the button
-                    below.
-                </Typography>
-                <Button
-                    component="a"
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    variant="contained"
-                    sx={{ mt: 1.2 }}
-                >
-                    Open WhatsApp
-                </Button>
+                    <Button
+                        component="a"
+                        href="/courses/ai-unlocked"
+                        fullWidth
+                        sx={{
+                            py: 1.3,
+                            borderRadius: "12px",
+                            fontWeight: 600,
+                            fontSize: "0.9rem",
+                            color: "#666",
+                            border: "1px solid rgba(0,0,0,0.1)",
+                            "&:hover": { background: "#f5f5f5" },
+                        }}
+                    >
+                        Back to Course
+                    </Button>
+                </Stack>
             </Paper>
         </Container>
     );
