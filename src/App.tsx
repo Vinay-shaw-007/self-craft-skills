@@ -18,6 +18,7 @@ import CourseDetailPage from "./pages/CourseDetailPage";
 import SignUpPage from "./pages/SignUpPage"; // Import SignUpPage
 import LoginPage from "./pages/LoginPage"; // Import LoginPage
 import EnrollmentFormPage from "./pages/EnrollmentFormPage";
+import FreeResourcesPage from "./pages/FreeResourcesPage";
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                     element={<CourseDetailPage />}
                 />{" "}
                 {/* New Route */}
+                <Route path="/free-resources" element={<FreeResourcesPage />} />
                 <Route path="/faq" element={<FaqPage />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
                 <Route path="/terms-and-conditions" element={<TermsPage />} />
