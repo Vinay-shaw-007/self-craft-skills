@@ -13,6 +13,7 @@ import { coursesData } from "./coursesData";
 const navItems = [
     { label: "Home", href: "/" },
     { label: "Programs", href: "/courses" },
+    { label: "Free Resources", href: "/free-resources" },
     { label: "FAQs", href: "/faq" },
 ];
 
@@ -136,14 +137,62 @@ const Header = () => {
                                 Enroll now
                                 <ArrowOutwardRoundedIcon sx={{ ml: 0.5, fontSize: 16 }} />
                             </Button>
-                            <IconButton onClick={() => setDrawerOpen(true)} sx={{
+                            <Box sx={{
                                 display: { xs: "flex", md: "none" },
-                                border: "1px solid rgba(0,0,0,0.08)",
-                                borderRadius: "10px",
-                                width: 40, height: 40,
+                                flexDirection: "column",
+                                alignItems: "center",
+                                position: "relative",
                             }}>
-                                <MenuRoundedIcon />
-                            </IconButton>
+                                <IconButton onClick={() => setDrawerOpen(true)} sx={{
+                                    border: "1px solid rgba(0,0,0,0.08)",
+                                    borderRadius: "10px",
+                                    width: 40, height: 40,
+                                    zIndex: 1,
+                                }}>
+                                    <MenuRoundedIcon />
+                                </IconButton>
+                                {/* Hanging "FREE" tag */}
+                                <Box
+                                    component={RouterLink}
+                                    to="/free-resources"
+                                    sx={{
+                                        position: "absolute",
+                                        top: 38,
+                                        textDecoration: "none",
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignItems: "center",
+                                        animation: "swing 3s ease-in-out infinite",
+                                        transformOrigin: "top center",
+                                        "@keyframes swing": {
+                                            "0%, 100%": { transform: "rotate(3deg)" },
+                                            "50%": { transform: "rotate(-3deg)" },
+                                        },
+                                    }}
+                                >
+                                    {/* String */}
+                                    <Box sx={{
+                                        width: "1px",
+                                        height: 14,
+                                        background: "linear-gradient(to bottom, rgba(0,0,0,0.15), #6C5CE7)",
+                                    }} />
+                                    {/* Tag */}
+                                    <Box sx={{
+                                        px: 0.8,
+                                        py: 0.3,
+                                        borderRadius: "5px",
+                                        background: "linear-gradient(135deg, #6C5CE7, #0984E3)",
+                                        color: "#fff",
+                                        fontSize: "0.55rem",
+                                        fontWeight: 800,
+                                        letterSpacing: "0.08em",
+                                        lineHeight: 1,
+                                        boxShadow: "0 2px 8px rgba(108, 92, 231, 0.3)",
+                                    }}>
+                                        FREE
+                                    </Box>
+                                </Box>
+                            </Box>
                         </Stack>
                     </Toolbar>
                 </Container>
