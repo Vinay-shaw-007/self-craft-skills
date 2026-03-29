@@ -6,46 +6,33 @@ import ErrorOutlineRoundedIcon from "@mui/icons-material/ErrorOutlineRounded";
 
 const COURSE_NAME = "AI Unlocked: Zero to Hero";
 
-// Razorpay payment link ID → plan mapping
-const PLAN_BY_LINK_ID: Record<string, string> = {
-    pl_SWwhKi4vkgGCTC: "standard",
-    pl_SWwviniCb1Nxna: "premium",
-};
-
-const GROUP_LINKS: Record<string, string> = {
-    standard: "https://chat.whatsapp.com/DbGfQfQRW7a4HhDeWX4wmh?mode=gi_t",
-    premium: "https://chat.whatsapp.com/DtGBut6puSu5EGXtBa4Vf1?mode=gi_t",
-};
-
-const PLAN_LABELS: Record<string, string> = {
-    standard: "Standard Learning Plan",
-    premium: "Premium Learning Plan",
+// Obscure reference codes — not guessable from one to the other
+const PLAN_MAP: Record<string, { label: string; group: string }> = {
+    "s7k2xq": {
+        label: "Standard Learning Plan",
+        group: "https://chat.whatsapp.com/DbGfQfQRW7a4HhDeWX4wmh?mode=gi_t",
+    },
+    "p9m4vr": {
+        label: "Premium Learning Plan",
+        group: "https://chat.whatsapp.com/DtGBut6puSu5EGXtBa4Vf1?mode=gi_t",
+    },
 };
 
 const EnrollmentFormPage = () => {
     const [searchParams] = useSearchParams();
     const hasOpened = useRef(false);
 
-    // Razorpay appends these params after successful payment
-    const paymentId = searchParams.get("razorpay_payment_id") ?? "";
-    const paymentLinkId = searchParams.get("razorpay_payment_link_id") ?? "";
-    const linkStatus = searchParams.get("razorpay_payment_link_status") ?? "";
-
-    // Determine plan from Razorpay's payment link ID
-    const plan = PLAN_BY_LINK_ID[paymentLinkId] ?? "";
-    const isValidPayment = paymentId && plan && linkStatus === "paid";
-
-    const groupLink = isValidPayment ? GROUP_LINKS[plan] : "";
-    const planLabel = PLAN_LABELS[plan] || "";
+    const ref = searchParams.get("ref") ?? "";
+    const planData = PLAN_MAP[ref];
 
     useEffect(() => {
-        if (isValidPayment && groupLink && !hasOpened.current) {
+        if (planData && !hasOpened.current) {
             hasOpened.current = true;
-            window.open(groupLink, "_blank", "noopener,noreferrer");
+            window.open(planData.group, "_blank", "noopener,noreferrer");
         }
-    }, [isValidPayment, groupLink]);
+    }, [planData]);
 
-    if (!isValidPayment) {
+    if (!planData) {
         return (
             <Container maxWidth="sm" sx={{ py: { xs: 8, md: 12 } }}>
                 <Paper sx={{
@@ -112,7 +99,7 @@ const EnrollmentFormPage = () => {
 
                 <Typography sx={{ color: "#666", lineHeight: 1.7, mb: 1 }}>
                     Thank you for enrolling in <strong>{COURSE_NAME}</strong>
-                    {planLabel && <> — <strong>{planLabel}</strong></>}.
+                     — <strong>{planData.label}</strong>.
                 </Typography>
 
                 <Typography sx={{ color: "#999", fontSize: "0.88rem", lineHeight: 1.7, mb: 3 }}>
@@ -123,7 +110,7 @@ const EnrollmentFormPage = () => {
                 <Stack spacing={1.5}>
                     <Button
                         component="a"
-                        href={groupLink}
+                        href={planData.group}
                         target="_blank"
                         rel="noopener noreferrer"
                         fullWidth
