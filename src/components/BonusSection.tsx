@@ -23,7 +23,9 @@ interface PlanFeature {
 interface PricingPlan {
     name: string;
     subtitle: string;
-    amountDisplay: string;
+    originalPrice: string;
+    discountedPrice: string;
+    discountPercent: string;
     paymentLink: string;
     accent: "standard" | "premium";
     icon: React.ReactNode;
@@ -35,7 +37,9 @@ const pricingPlans: PricingPlan[] = [
     {
         name: "Standard Learning Plan",
         subtitle: "Strong foundation, essential access",
-        amountDisplay: "\u20B9579/-",
+        originalPrice: "\u20B9999",
+        discountedPrice: "\u20B9579/-",
+        discountPercent: "42% OFF",
         paymentLink: "https://rzp.io/rzp/stnplan",
         accent: "standard",
         icon: <SchoolRoundedIcon sx={{ fontSize: 22 }} />,
@@ -51,7 +55,9 @@ const pricingPlans: PricingPlan[] = [
     {
         name: "Premium Learning Plan",
         subtitle: "Complete access, faster execution",
-        amountDisplay: "\u20B9699/-",
+        originalPrice: "\u20B91,349",
+        discountedPrice: "\u20B9699/-",
+        discountPercent: "48% OFF",
         paymentLink: "https://rzp.io/rzp/prmplan",
         accent: "premium",
         icon: <WorkspacePremiumRoundedIcon sx={{ fontSize: 22 }} />,
@@ -182,15 +188,39 @@ const PricingPlansSection = ({ courseTitle }: PricingPlansSectionProps) => {
                                             </Box>
                                         </Stack>
 
-                                        <Typography sx={{
-                                            mt: 2.5, mb: 0.5,
-                                            fontFamily: '"Space Grotesk"',
-                                            fontWeight: 800,
-                                            fontSize: { xs: "2.2rem", md: "2.6rem" },
-                                            lineHeight: 1,
-                                        }}>
-                                            {plan.amountDisplay}
-                                        </Typography>
+                                        <Box sx={{ mt: 2.5, mb: 0.5 }}>
+                                            <Stack direction="row" spacing={1} alignItems="center">
+                                                <Typography sx={{
+                                                    fontFamily: '"Space Grotesk"',
+                                                    fontWeight: 600,
+                                                    fontSize: { xs: "1.1rem", md: "1.3rem" },
+                                                    textDecoration: "line-through",
+                                                    color: isPremium ? "rgba(255,255,255,0.35)" : "#999",
+                                                }}>
+                                                    {plan.originalPrice}
+                                                </Typography>
+                                                <Box sx={{
+                                                    px: 1, py: 0.3,
+                                                    borderRadius: "6px",
+                                                    background: isPremium ? "#00B894" : "#00B894",
+                                                    color: "#fff",
+                                                    fontWeight: 700,
+                                                    fontSize: "0.72rem",
+                                                    letterSpacing: "0.03em",
+                                                }}>
+                                                    {plan.discountPercent}
+                                                </Box>
+                                            </Stack>
+                                            <Typography sx={{
+                                                fontFamily: '"Space Grotesk"',
+                                                fontWeight: 800,
+                                                fontSize: { xs: "2.2rem", md: "2.6rem" },
+                                                lineHeight: 1,
+                                                mt: 0.5,
+                                            }}>
+                                                {plan.discountedPrice}
+                                            </Typography>
+                                        </Box>
 
                                         <Stack spacing={0.8} sx={{ my: 2.5, flexGrow: 1 }}>
                                             {plan.features.map((feature) => (
