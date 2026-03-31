@@ -6,7 +6,6 @@ import ErrorOutlineRoundedIcon from "@mui/icons-material/ErrorOutlineRounded";
 
 const COURSE_NAME = "AI Unlocked: Zero to Hero";
 
-// Obscure reference codes — not guessable from one to the other
 const PLAN_MAP: Record<string, { label: string; group: string }> = {
     "s7k2xq": {
         label: "Standard Learning Plan",
@@ -20,15 +19,16 @@ const PLAN_MAP: Record<string, { label: string; group: string }> = {
 
 const EnrollmentFormPage = () => {
     const [searchParams] = useSearchParams();
-    const hasOpened = useRef(false);
+    const hasRedirected = useRef(false);
 
     const ref = searchParams.get("ref") ?? "";
     const planData = PLAN_MAP[ref];
 
     useEffect(() => {
-        if (planData && !hasOpened.current) {
-            hasOpened.current = true;
-            window.open(planData.group, "_blank", "noopener,noreferrer");
+        if (planData && !hasRedirected.current) {
+            hasRedirected.current = true;
+            // Navigate directly instead of window.open — browsers don't block navigation
+            window.location.href = planData.group;
         }
     }, [planData]);
 
@@ -103,8 +103,8 @@ const EnrollmentFormPage = () => {
                 </Typography>
 
                 <Typography sx={{ color: "#999", fontSize: "0.88rem", lineHeight: 1.7, mb: 3 }}>
-                    Your WhatsApp group should open automatically.
-                    If it didn't, use the button below to join.
+                    Redirecting you to WhatsApp group...
+                    If it didn't open, use the button below.
                 </Typography>
 
                 <Stack spacing={1.5}>

@@ -61,8 +61,9 @@ const StickyEnrollBar = ({ course }: StickyEnrollBarProps) => {
                 <Typography component="span" sx={{
                     fontSize: { xs: "0.74rem", md: "0.86rem" },
                     fontWeight: 500, color: "#666", lineHeight: 1,
+                    textDecoration: "line-through",
                 }}>
-                    Starting From
+                    {"\u20B9999"}
                 </Typography>{" "}
                 <Typography component="span" sx={{
                     fontFamily: '"Space Grotesk"',
@@ -70,6 +71,12 @@ const StickyEnrollBar = ({ course }: StickyEnrollBarProps) => {
                     fontWeight: 700, color: "#111", lineHeight: 1,
                 }}>
                     {"\u20B9579/-"}
+                </Typography>{" "}
+                <Typography component="span" sx={{
+                    fontSize: { xs: "0.68rem", md: "0.76rem" },
+                    fontWeight: 700, color: "#00B894", lineHeight: 1,
+                }}>
+                    42% OFF
                 </Typography>
             </Box>
 
