@@ -6,6 +6,7 @@ import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
 import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 import FadeInOnScroll from "./FadeInOnScroll";
 import PromptBuilderLogo from "../assets/Prompt-Builder.svg";
+import AIImagePromptBuilderLogo from "../assets/ai-image-prompt-builder.svg";
 import AIEbookCover from "../assets/AI-ebook.png";
 
 const FreeResources = () => {
@@ -87,88 +88,171 @@ const FreeResources = () => {
                     </Typography>
                 </FadeInOnScroll>
 
-                {/* Prompt Builder Card */}
+                {/* Tools Grid */}
                 <FadeInOnScroll>
                     <Box sx={{
-                        maxWidth: 360,
+                        display: "grid",
+                        gridTemplateColumns: { xs: "1fr", md: "repeat(2, 1fr)" },
+                        gap: 3,
                         mb: { xs: 8, md: 10 },
-                        borderRadius: "20px",
-                        overflow: "hidden",
-                        border: "1px solid rgba(108, 92, 231, 0.2)",
-                        background: "#fff",
-                        transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                        "&:hover": {
-                            transform: "translateY(-6px)",
-                            boxShadow: "0 20px 48px rgba(108, 92, 231, 0.12)",
-                        },
+                        maxWidth: 760,
                     }}>
-                        {/* Logo area */}
+                        {/* Prompt Builder Card */}
                         <Box sx={{
+                            borderRadius: "20px",
+                            overflow: "hidden",
+                            border: "1px solid rgba(108, 92, 231, 0.2)",
+                            background: "#fff",
                             display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            py: { xs: 3, md: 4 },
-                            background: "linear-gradient(135deg, rgba(108, 92, 231, 0.06), rgba(9, 132, 227, 0.06))",
+                            flexDirection: "column",
+                            transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                            "&:hover": {
+                                transform: "translateY(-6px)",
+                                boxShadow: "0 20px 48px rgba(108, 92, 231, 0.12)",
+                            },
                         }}>
-                            <Box
-                                component="img"
-                                src={PromptBuilderLogo}
-                                alt="Prompt Builder"
-                                sx={{
-                                    width: { xs: 100, md: 120 },
-                                    height: { xs: 100, md: 120 },
-                                    borderRadius: "24px",
-                                }}
-                            />
+                            <Box sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                py: { xs: 3, md: 4 },
+                                background: "linear-gradient(135deg, rgba(108, 92, 231, 0.06), rgba(9, 132, 227, 0.06))",
+                            }}>
+                                <Box
+                                    component="img"
+                                    src={PromptBuilderLogo}
+                                    alt="Prompt Builder"
+                                    sx={{
+                                        width: { xs: 100, md: 120 },
+                                        height: { xs: 100, md: 120 },
+                                        borderRadius: "24px",
+                                    }}
+                                />
+                            </Box>
+                            <Box sx={{ p: 2.5, flexGrow: 1, display: "flex", flexDirection: "column" }}>
+                                <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1.5 }}>
+                                    <AutoAwesomeRoundedIcon sx={{ color: "#6C5CE7", fontSize: 18 }} />
+                                    <Typography sx={{
+                                        fontFamily: '"Space Grotesk"',
+                                        fontWeight: 700,
+                                        fontSize: "1.15rem",
+                                        color: "#111",
+                                    }}>
+                                        Prompt Builder
+                                    </Typography>
+                                </Stack>
+                                <Typography sx={{
+                                    color: "#666", lineHeight: 1.7,
+                                    fontSize: "0.88rem", mb: 1,
+                                }}>
+                                    Turn ideas into high-performing AI prompts in seconds. Just describe what you need, and Prompt Builder creates optimized prompts—or refines your existing ones—for ChatGPT, Claude, or any AI tool.
+                                </Typography>
+                                <Typography sx={{
+                                    color: "#999", lineHeight: 1.7,
+                                    fontSize: "0.82rem", mb: 2,
+                                }}>
+                                    No prompt engineering experience needed. Powered by a custom GPT built by Self Craft Skills.
+                                </Typography>
+                                <Button
+                                    component="a"
+                                    href="https://chatgpt.com/g/g-69c157457308819196af4084dcc29297-prompt-builder"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    fullWidth
+                                    endIcon={<ArrowOutwardRoundedIcon sx={{ fontSize: 16 }} />}
+                                    sx={{
+                                        mt: "auto",
+                                        py: 1.2,
+                                        borderRadius: "12px",
+                                        fontWeight: 600,
+                                        fontSize: "0.9rem",
+                                        color: "#fff",
+                                        background: "#111",
+                                        "&:hover": { background: "#222" },
+                                    }}
+                                >
+                                    Try Prompt Builder — It's Free
+                                </Button>
+                            </Box>
                         </Box>
 
-                        {/* Content */}
-                        <Box sx={{ p: 2.5 }}>
-                            <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1.5 }}>
-                                <AutoAwesomeRoundedIcon sx={{ color: "#6C5CE7", fontSize: 18 }} />
+                        {/* AI Image Prompt Builder Card */}
+                        <Box sx={{
+                            borderRadius: "20px",
+                            overflow: "hidden",
+                            border: "1px solid rgba(9, 132, 227, 0.2)",
+                            background: "#fff",
+                            display: "flex",
+                            flexDirection: "column",
+                            transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                            "&:hover": {
+                                transform: "translateY(-6px)",
+                                boxShadow: "0 20px 48px rgba(9, 132, 227, 0.12)",
+                            },
+                        }}>
+                            <Box sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                py: { xs: 3, md: 4 },
+                                background: "linear-gradient(135deg, rgba(9, 132, 227, 0.06), rgba(108, 92, 231, 0.06))",
+                            }}>
+                                <Box
+                                    component="img"
+                                    src={AIImagePromptBuilderLogo}
+                                    alt="AI Image Prompt Builder"
+                                    sx={{
+                                        width: { xs: 100, md: 120 },
+                                        height: { xs: 100, md: 120 },
+                                        borderRadius: "24px",
+                                    }}
+                                />
+                            </Box>
+                            <Box sx={{ p: 2.5, flexGrow: 1, display: "flex", flexDirection: "column" }}>
+                                <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1.5 }}>
+                                    <AutoAwesomeRoundedIcon sx={{ color: "#0984E3", fontSize: 18 }} />
+                                    <Typography sx={{
+                                        fontFamily: '"Space Grotesk"',
+                                        fontWeight: 700,
+                                        fontSize: "1.15rem",
+                                        color: "#111",
+                                    }}>
+                                        AI Image Prompt Builder
+                                    </Typography>
+                                </Stack>
                                 <Typography sx={{
-                                    fontFamily: '"Space Grotesk"',
-                                    fontWeight: 700,
-                                    fontSize: "1.15rem",
-                                    color: "#111",
+                                    color: "#666", lineHeight: 1.7,
+                                    fontSize: "0.88rem", mb: 1,
                                 }}>
-                                    Prompt Builder
+                                    Create personalised AI image prompts just for you. Describe your vision, and get detailed, optimized prompts ready for DALL·E, Midjourney, or any AI image generator.
                                 </Typography>
-                            </Stack>
-
-                            <Typography sx={{
-                                color: "#666", lineHeight: 1.7,
-                                fontSize: "0.88rem", mb: 1,
-                            }}>
-                                Turn ideas into high-performing AI prompts in seconds. Just describe what you need, and Prompt Builder creates optimized prompts—or refines your existing ones—for ChatGPT, Claude, or any AI tool.
-                            </Typography>
-
-                            <Typography sx={{
-                                color: "#999", lineHeight: 1.7,
-                                fontSize: "0.82rem", mb: 2,
-                            }}>
-                                No prompt engineering experience needed. Powered by a custom GPT built by Self Craft Skills.
-                            </Typography>
-
-                            <Button
-                                component="a"
-                                href="https://chatgpt.com/g/g-69c157457308819196af4084dcc29297-prompt-builder"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                fullWidth
-                                endIcon={<ArrowOutwardRoundedIcon sx={{ fontSize: 16 }} />}
-                                sx={{
-                                    py: 1.2,
-                                    borderRadius: "12px",
-                                    fontWeight: 600,
-                                    fontSize: "0.9rem",
-                                    color: "#fff",
-                                    background: "#111",
-                                    "&:hover": { background: "#222" },
-                                }}
-                            >
-                                Try Prompt Builder — It's Free
-                            </Button>
+                                <Typography sx={{
+                                    color: "#999", lineHeight: 1.7,
+                                    fontSize: "0.82rem", mb: 2,
+                                }}>
+                                    No design skills needed. Powered by a custom GPT built by Self Craft Skills.
+                                </Typography>
+                                <Button
+                                    component="a"
+                                    href="https://chatgpt.com/g/g-69cdcc3a22488191a7c61718c3397b77-ai-image-prompt-builder"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    fullWidth
+                                    endIcon={<ArrowOutwardRoundedIcon sx={{ fontSize: 16 }} />}
+                                    sx={{
+                                        mt: "auto",
+                                        py: 1.2,
+                                        borderRadius: "12px",
+                                        fontWeight: 600,
+                                        fontSize: "0.9rem",
+                                        color: "#fff",
+                                        background: "#111",
+                                        "&:hover": { background: "#222" },
+                                    }}
+                                >
+                                    Try Image Prompt Builder — It's Free
+                                </Button>
+                            </Box>
                         </Box>
                     </Box>
                 </FadeInOnScroll>
