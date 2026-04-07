@@ -7,6 +7,7 @@ import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 import FadeInOnScroll from "./FadeInOnScroll";
 import PromptBuilderLogo from "../assets/Prompt-Builder.svg";
 import AIImagePromptBuilderLogo from "../assets/ai-image-prompt-builder.svg";
+import ObjectTalkLogo from "../assets/object-talk-master-builder.png";
 import AIEbookCover from "../assets/AI-ebook.png";
 
 const FreeResources = () => {
@@ -92,10 +93,9 @@ const FreeResources = () => {
                 <FadeInOnScroll>
                     <Box sx={{
                         display: "grid",
-                        gridTemplateColumns: { xs: "1fr", md: "repeat(2, 1fr)" },
+                        gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)", md: "repeat(3, 1fr)" },
                         gap: 3,
                         mb: { xs: 8, md: 10 },
-                        maxWidth: 760,
                     }}>
                         {/* Prompt Builder Card */}
                         <Box sx={{
@@ -251,6 +251,85 @@ const FreeResources = () => {
                                     }}
                                 >
                                     Try Image Prompt Builder — It's Free
+                                </Button>
+                            </Box>
+                        </Box>
+
+                        {/* Object Talk Master Builder Card */}
+                        <Box sx={{
+                            borderRadius: "20px",
+                            overflow: "hidden",
+                            border: "1px solid rgba(0, 184, 148, 0.2)",
+                            background: "#fff",
+                            display: "flex",
+                            flexDirection: "column",
+                            transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                            "&:hover": {
+                                transform: "translateY(-6px)",
+                                boxShadow: "0 20px 48px rgba(0, 184, 148, 0.12)",
+                            },
+                        }}>
+                            <Box sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                py: { xs: 3, md: 4 },
+                                background: "linear-gradient(135deg, rgba(0, 184, 148, 0.06), rgba(9, 132, 227, 0.06))",
+                            }}>
+                                <Box
+                                    component="img"
+                                    src={ObjectTalkLogo}
+                                    alt="Object Talk Master Builder"
+                                    sx={{
+                                        width: { xs: 100, md: 120 },
+                                        height: { xs: 100, md: 120 },
+                                        borderRadius: "24px",
+                                    }}
+                                />
+                            </Box>
+                            <Box sx={{ p: 2.5, flexGrow: 1, display: "flex", flexDirection: "column" }}>
+                                <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1.5 }}>
+                                    <AutoAwesomeRoundedIcon sx={{ color: "#00B894", fontSize: 18 }} />
+                                    <Typography sx={{
+                                        fontFamily: '"Space Grotesk"',
+                                        fontWeight: 700,
+                                        fontSize: "1.15rem",
+                                        color: "#111",
+                                    }}>
+                                        Object Talk Master Builder
+                                    </Typography>
+                                </Stack>
+                                <Typography sx={{
+                                    color: "#666", lineHeight: 1.7,
+                                    fontSize: "0.88rem", mb: 1,
+                                }}>
+                                    Bring any object to life with AI. Pick anything around you and get a fun, creative conversation as if that object could talk — great for creativity, storytelling, and learning.
+                                </Typography>
+                                <Typography sx={{
+                                    color: "#999", lineHeight: 1.7,
+                                    fontSize: "0.82rem", mb: 2,
+                                }}>
+                                    Just pick an object and start talking. Powered by a custom GPT built by Self Craft Skills.
+                                </Typography>
+                                <Button
+                                    component="a"
+                                    href="https://chatgpt.com/g/g-69d3f13719288191b4460abdc37e59ff-object-talk-master-builder"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    fullWidth
+                                    endIcon={<ArrowOutwardRoundedIcon sx={{ fontSize: 16 }} />}
+                                    sx={{
+                                        mt: "auto",
+                                        py: 1.2,
+                                        borderRadius: "12px",
+                                        fontWeight: 600,
+                                        fontSize: "0.9rem",
+                                        color: "#fff",
+                                        background: "#111",
+                                        "&:hover": { background: "#222" },
+                                    }}
+                                >
+                                    Try Object Talk — It's Free
                                 </Button>
                             </Box>
                         </Box>
