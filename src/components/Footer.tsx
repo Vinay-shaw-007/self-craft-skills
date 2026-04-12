@@ -111,6 +111,7 @@ const Footer = () => {
                         <Stack spacing={1}>
                             <Link component={RouterLink} to="/" underline="hover" sx={linkSx}>Home</Link>
                             <Link component={RouterLink} to="/courses" underline="hover" sx={linkSx}>Programs</Link>
+                            <Link component={RouterLink} to="/free-resources" underline="hover" sx={linkSx}>Free Resources</Link>
                             <Link component={RouterLink} to="/faq" underline="hover" sx={linkSx}>FAQs</Link>
                         </Stack>
                     </Grid>

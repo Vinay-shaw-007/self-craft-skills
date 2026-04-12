@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import {
     Box, Button, Container, Stack, Typography,
 } from "@mui/material";
@@ -5,12 +6,32 @@ import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
 import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
 import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 import FadeInOnScroll from "./FadeInOnScroll";
-import PromptBuilderLogo from "../assets/Prompt-Builder.svg";
-import AIImagePromptBuilderLogo from "../assets/ai-image-prompt-builder.svg";
+import PromptBuilderLogo from "../assets/Prompt-Builder.png";
+import AIImagePromptBuilderLogo from "../assets/ai-image-prompt-builder.png";
 import ObjectTalkLogo from "../assets/object-talk-master-builder.png";
+import TimeDisciplineCoachLogo from "../assets/time-discipline-coach.png";
 import AIEbookCover from "../assets/AI-ebook.png";
 
 const FreeResources = () => {
+    const scrollRef = useRef<HTMLDivElement>(null);
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [totalCards, setTotalCards] = useState(0);
+
+    useEffect(() => {
+        const el = scrollRef.current;
+        if (!el) return;
+        setTotalCards(el.children.length);
+
+        const handleScroll = () => {
+            const cardWidth = el.scrollWidth / el.children.length;
+            const index = Math.round(el.scrollLeft / cardWidth);
+            setActiveIndex(index);
+        };
+
+        el.addEventListener("scroll", handleScroll, { passive: true });
+        return () => el.removeEventListener("scroll", handleScroll);
+    }, []);
+
     return (
         <Box sx={{ py: { xs: 10, md: 14 } }}>
             <Container maxWidth="lg">
@@ -76,26 +97,83 @@ const FreeResources = () => {
                     </Box>
                 </FadeInOnScroll>
 
+                {/* Category quick links */}
+                <FadeInOnScroll>
+                    <Stack
+                        direction="row"
+                        spacing={1.2}
+                        justifyContent="center"
+                        sx={{ mb: { xs: 4, md: 5 } }}
+                    >
+                        {[
+                            { label: "Tools", href: "#tools" },
+                            { label: "E-Books", href: "#ebooks" },
+                        ].map((item) => (
+                            <Box
+                                key={item.href}
+                                component="a"
+                                href={item.href}
+                                sx={{
+                                    px: 2.2,
+                                    py: 0.8,
+                                    borderRadius: "999px",
+                                    border: "1px solid rgba(0,0,0,0.1)",
+                                    background: "#fff",
+                                    color: "#111",
+                                    fontWeight: 600,
+                                    fontSize: "0.85rem",
+                                    textDecoration: "none",
+                                    transition: "all 0.2s ease",
+                                    "&:hover": {
+                                        background: "#111",
+                                        color: "#fff",
+                                        borderColor: "#111",
+                                    },
+                                }}
+                            >
+                                {item.label}
+                            </Box>
+                        ))}
+                    </Stack>
+                </FadeInOnScroll>
+
                 {/* Tools Category */}
                 <FadeInOnScroll>
-                    <Typography sx={{
-                        fontFamily: '"Space Grotesk"',
-                        fontWeight: 700,
-                        fontSize: { xs: "1.3rem", md: "1.5rem" },
-                        color: "#111",
-                        mb: 3,
-                    }}>
+                    <Typography
+                        id="tools"
+                        sx={{
+                            fontFamily: '"Space Grotesk"',
+                            fontWeight: 700,
+                            fontSize: { xs: "1.3rem", md: "1.5rem" },
+                            color: "#111",
+                            mb: 3,
+                            scrollMarginTop: "100px",
+                        }}
+                    >
                         Tools
                     </Typography>
                 </FadeInOnScroll>
 
                 {/* Tools Grid */}
                 <FadeInOnScroll>
-                    <Box sx={{
-                        display: "grid",
-                        gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)", md: "repeat(3, 1fr)" },
-                        gap: 3,
-                        mb: { xs: 8, md: 10 },
+                    <Box ref={scrollRef} sx={{
+                        display: { xs: "flex", sm: "grid" },
+                        gridTemplateColumns: { sm: "repeat(2, 1fr)", md: "repeat(3, 1fr)" },
+                        gap: { xs: 2, sm: 3, md: 3.5 },
+                        mb: { xs: 2, sm: 8, md: 10 },
+                        // Mobile: horizontal scroll carousel
+                        overflowX: { xs: "auto", sm: "visible" },
+                        scrollSnapType: { xs: "x mandatory", sm: "none" },
+                        WebkitOverflowScrolling: "touch",
+                        pb: { xs: 1, sm: 0 },
+                        scrollbarWidth: "none",
+                        "&::-webkit-scrollbar": { display: "none" },
+                        "& > *": {
+                            width: { xs: 260, sm: "auto" },
+                            minWidth: { xs: 260, sm: "auto" },
+                            flexShrink: { xs: 0, sm: 1 },
+                            scrollSnapAlign: { xs: "start", sm: "none" },
+                        },
                     }}>
                         {/* Prompt Builder Card */}
                         <Box sx={{
@@ -333,18 +411,131 @@ const FreeResources = () => {
                                 </Button>
                             </Box>
                         </Box>
+
+                        {/* Time Discipline Coach Card */}
+                        <Box sx={{
+                            borderRadius: "20px",
+                            overflow: "hidden",
+                            border: "1px solid rgba(255, 107, 107, 0.2)",
+                            background: "#fff",
+                            display: "flex",
+                            flexDirection: "column",
+                            transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                            "&:hover": {
+                                transform: "translateY(-6px)",
+                                boxShadow: "0 20px 48px rgba(255, 107, 107, 0.12)",
+                            },
+                        }}>
+                            <Box sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                py: { xs: 3, md: 4 },
+                                background: "linear-gradient(135deg, rgba(255, 107, 107, 0.06), rgba(253, 203, 110, 0.06))",
+                            }}>
+                                <Box
+                                    component="img"
+                                    src={TimeDisciplineCoachLogo}
+                                    alt="Time Discipline Coach"
+                                    sx={{
+                                        width: { xs: 100, md: 120 },
+                                        height: { xs: 100, md: 120 },
+                                        borderRadius: "24px",
+                                    }}
+                                />
+                            </Box>
+                            <Box sx={{ p: 2.5, flexGrow: 1, display: "flex", flexDirection: "column" }}>
+                                <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1.5 }}>
+                                    <AutoAwesomeRoundedIcon sx={{ color: "#FF6B6B", fontSize: 18 }} />
+                                    <Typography sx={{
+                                        fontFamily: '"Space Grotesk"',
+                                        fontWeight: 700,
+                                        fontSize: "1.15rem",
+                                        color: "#111",
+                                    }}>
+                                        Time Discipline Coach
+                                    </Typography>
+                                </Stack>
+                                <Typography sx={{
+                                    color: "#666", lineHeight: 1.7,
+                                    fontSize: "0.88rem", mb: 1,
+                                }}>
+                                    Your personal AI coach to master time management and build lasting discipline. Get tailored routines, focus strategies, and actionable plans to stop procrastinating and take control of your day.
+                                </Typography>
+                                <Typography sx={{
+                                    color: "#999", lineHeight: 1.7,
+                                    fontSize: "0.82rem", mb: 2,
+                                }}>
+                                    Built for students, professionals, and creators. Powered by a custom GPT built by Self Craft Skills.
+                                </Typography>
+                                <Button
+                                    component="a"
+                                    href="https://chatgpt.com/g/g-69d880ca14608191b411154bd596158f-time-discipline-coach"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    fullWidth
+                                    endIcon={<ArrowOutwardRoundedIcon sx={{ fontSize: 16 }} />}
+                                    sx={{
+                                        mt: "auto",
+                                        py: 1.2,
+                                        borderRadius: "12px",
+                                        fontWeight: 600,
+                                        fontSize: "0.9rem",
+                                        color: "#fff",
+                                        background: "#111",
+                                        "&:hover": { background: "#222" },
+                                    }}
+                                >
+                                    Try Time Discipline Coach — It's Free
+                                </Button>
+                            </Box>
+                        </Box>
                     </Box>
+
+                    {/* Mobile scroll dots */}
+                    {totalCards > 1 && (
+                        <Stack
+                            direction="row"
+                            spacing={0.9}
+                            justifyContent="center"
+                            alignItems="center"
+                            sx={{
+                                display: { xs: "flex", sm: "none" },
+                                mb: { xs: 8 },
+                            }}
+                        >
+                            {Array.from({ length: totalCards }).map((_, i) => {
+                                const isActive = i === activeIndex;
+                                return (
+                                    <Box
+                                        key={i}
+                                        sx={{
+                                            width: isActive ? 22 : 7,
+                                            height: 7,
+                                            borderRadius: 99,
+                                            background: isActive ? "#6C5CE7" : "rgba(0,0,0,0.18)",
+                                            transition: "all 0.3s ease",
+                                        }}
+                                    />
+                                );
+                            })}
+                        </Stack>
+                    )}
                 </FadeInOnScroll>
 
                 {/* E-Books Category */}
                 <FadeInOnScroll>
-                    <Typography sx={{
-                        fontFamily: '"Space Grotesk"',
-                        fontWeight: 700,
-                        fontSize: { xs: "1.3rem", md: "1.5rem" },
-                        color: "#111",
-                        mb: 3,
-                    }}>
+                    <Typography
+                        id="ebooks"
+                        sx={{
+                            fontFamily: '"Space Grotesk"',
+                            fontWeight: 700,
+                            fontSize: { xs: "1.3rem", md: "1.5rem" },
+                            color: "#111",
+                            mb: 3,
+                            scrollMarginTop: "100px",
+                        }}
+                    >
                         E-Books
                     </Typography>
                 </FadeInOnScroll>
