@@ -1,10 +1,16 @@
 import { Fab, Typography } from "@mui/material";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { useLocation } from "react-router-dom";
+import { useSubscription } from "../hooks/useSubscription";
 
 const WhatsAppButton = () => {
     const location = useLocation();
+    const { isSubscribed } = useSubscription();
     const isCourseDetailPage = /^\/courses\/[^/]+/.test(location.pathname);
+    const isHome = location.pathname === "/";
+    // These routes show a bottom sticky bar (only for non-members) — lift the
+    // button above it on mobile so it doesn't cover the "Become a member" bar.
+    const raised = !isSubscribed && (isCourseDetailPage || isHome);
 
     return (
         <Fab
@@ -15,7 +21,7 @@ const WhatsAppButton = () => {
             rel="noopener noreferrer"
             sx={{
                 position: "fixed",
-                bottom: { xs: isCourseDetailPage ? 96 : 16, md: 16 },
+                bottom: { xs: raised ? (isCourseDetailPage ? 96 : 92) : 16, md: 16 },
                 left: 16,
                 backgroundColor: "#111",
                 color: "white",

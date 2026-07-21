@@ -1,11 +1,16 @@
 import { Fab, Zoom, useScrollTrigger } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useLocation } from "react-router-dom";
+import { useSubscription } from "../hooks/useSubscription";
 import { colors } from "../theme/colors";
 
 const BackToTopButton = () => {
     const location = useLocation();
+    const { isSubscribed } = useSubscription();
     const isCourseDetailPage = /^\/courses\/[^/]+/.test(location.pathname);
+    const isHome = location.pathname === "/";
+    // Lift above the bottom sticky bar (shown to non-members on home / course pages).
+    const raised = !isSubscribed && (isCourseDetailPage || isHome);
     const trigger = useScrollTrigger({
         disableHysteresis: true,
         threshold: 100,
@@ -26,7 +31,7 @@ const BackToTopButton = () => {
                 onClick={scrollToTop}
                 sx={{
                     position: "fixed",
-                    bottom: { xs: isCourseDetailPage ? 96 : 16, md: 16 },
+                    bottom: { xs: raised ? (isCourseDetailPage ? 96 : 92) : 16, md: 16 },
                     right: 16,
                     zIndex: 1100,
                     backgroundColor: colors.indigo,
