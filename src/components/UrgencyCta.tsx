@@ -42,8 +42,8 @@ const UrgencyCta = () => {
                         </Typography>
                     </Box>
 
-                    <Stack spacing={1.5} sx={{ flexShrink: 0 }}>
-                        <Stack direction="row" spacing={1.2} justifyContent="center">
+                    <Stack spacing={1.5} sx={{ flexShrink: 0, width: { xs: "100%", md: "auto" } }}>
+                        <Stack direction="row" spacing={1.2} justifyContent="center" flexWrap="wrap" useFlexGap>
                             {included.map((item) => (
                                 <Stack key={item.label} direction="row" spacing={0.7} alignItems="center" sx={{
                                     px: 1.6, py: 0.8,
