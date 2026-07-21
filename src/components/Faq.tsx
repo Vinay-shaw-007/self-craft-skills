@@ -6,35 +6,36 @@ import {
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 import FadeInOnScroll from "./FadeInOnScroll";
+import { colors } from "../theme/colors";
 
 const faqData = [
     {
-        category: "About the academy",
+        category: "About the membership",
         emoji: "01",
         questions: [
-            { q: "What is Self-Craft Skills?", a: "Self Craft Skills is a knowledge-sharing platform where you can learn about various fields. We aim to make learning simple, practical, and useful for learners." },
-            { q: "Why should I choose Self-Craft Skills?", a: "We focus on application-based learning with live guidance and mentorship. Instead of just theory, you'll gain knowledge you can actually use in studies, work, and everyday life." },
-            { q: "What is the vision of Self-Craft Skills?", a: "Our goal is to become a leading platform for modern and practical learning through our courses." },
+            { q: "What is Self Craft Skills?", a: "Self Craft Skills is an online learning membership. One simple monthly subscription unlocks every course on the platform, so you can learn practical, real-world skills at your own pace." },
+            { q: "How does the subscription work?", a: "You pay one low monthly price and get unlimited access to every course. It's billed monthly and you can cancel anytime — there's no lock-in and no per-course payments." },
+            { q: "What do I get with my membership?", a: "Unlimited access to all courses, new courses added regularly, downloadable resources and templates, a certificate of completion for each course, and access to our learner community." },
         ],
     },
     {
         category: "Courses and learning",
         emoji: "02",
         questions: [
-            { q: "Who can join the courses?", a: "Our programs are designed for both students and working professionals who want to improve productivity, communication, and career readiness." },
-            { q: "What courses do you currently offer?", a: "We currently offer AI Unlocked: Zero to Hero, a 4-week beginner-friendly course on ChatGPT and AI productivity. Upcoming programs include Content Creation and Communication Skills." },
-            { q: "How are classes conducted?", a: "Sessions are held live online and include interactive exercises, practical demonstrations, and group discussions. Learners also stay connected through our WhatsApp community." },
+            { q: "Who is this for?", a: "Students, working professionals, creators, and lifelong learners who want to build practical AI, content, and communication skills — whether you're starting from zero or levelling up." },
+            { q: "What courses do you currently offer?", a: "We currently offer AI Unlocked: Zero to Hero, a beginner-friendly course on ChatGPT and AI productivity, with Content Creation and Communication Skills courses on the way. Everything is included in your membership." },
+            { q: "How are courses delivered?", a: "Courses are 100% recorded video lessons you can watch on demand, anytime, from any device — organised into clear modules so you always know what to learn next." },
             { q: "Do I need prior experience to join?", a: "No. Our courses are beginner-friendly and structured step by step. All you need is interest and willingness to learn." },
-            { q: "Will I get class recordings?", a: "Yes. Session recordings will be available for revision or if you miss a class." },
+            { q: "Can I learn at my own pace?", a: "Yes. Every lesson is recorded and available on demand, so you can watch, pause, and rewatch whenever it suits you — and pick up right where you left off." },
         ],
     },
     {
-        category: "Registration and refund",
+        category: "Billing and refunds",
         emoji: "03",
         questions: [
-            { q: "How do I register for a course?", a: 'You can register directly through our website via the "Enroll Now" button or via the WhatsApp registration link. Payments are processed securely.' },
-            { q: "Is there a refund policy?", a: "Yes. A full refund is available before the course batch starts. Once classes begin, fees are non-refundable." },
-            { q: "How can I claim my refund?", a: "Email selfcraftskills@gmail.com before the batch start date with your payment details. Refunds are processed back to the original payment method within 3 to 5 business days." },
+            { q: "How do I become a member?", a: "Create an account, choose the membership on our pricing page, and pay securely through Razorpay. Access is unlocked automatically the moment your payment succeeds." },
+            { q: "Can I cancel anytime?", a: "Yes. You can cancel from your Account page at any time. Cancelling stops all future charges, and you keep access until the end of the period you've already paid for." },
+            { q: "What is your refund policy?", a: "If you're not satisfied, you can request a refund of your most recent monthly payment within 7 days by emailing selfcraftskills@gmail.com. Refunds are processed to your original payment method within 3 to 5 business days." },
         ],
     },
 ];
@@ -59,14 +60,9 @@ const Faq = () => {
                         }} />
                         <Typography variant="h2" sx={{
                             fontSize: { xs: "2rem", md: "2.8rem" },
-                            color: "#111",
                         }}>
-                            Common questions from{" "}
-                            <Box component="span" sx={{
-                                background: "linear-gradient(135deg, #6C5CE7, #0984E3)",
-                                WebkitBackgroundClip: "text",
-                                WebkitTextFillColor: "transparent",
-                            }}>new learners</Box>.
+                            <Box component="span" sx={{ color: colors.ink }}>Common questions,</Box>{" "}
+                            <Box component="span" sx={{ color: colors.indigo }}>answered.</Box>
                         </Typography>
                     </Box>
                 </FadeInOnScroll>
@@ -87,7 +83,7 @@ const Faq = () => {
                                         <Box sx={{
                                             width: 36, height: 36,
                                             borderRadius: "10px",
-                                            background: "#111",
+                                            background: colors.indigo,
                                             color: "#fff",
                                             display: "grid", placeItems: "center",
                                             fontSize: "0.78rem",
@@ -119,14 +115,14 @@ const Faq = () => {
                                                     mb: 1,
                                                     borderRadius: "12px !important",
                                                     overflow: "hidden",
-                                                    border: isOpen ? "1px solid rgba(108, 92, 231, 0.15)" : "1px solid rgba(0,0,0,0.04)",
-                                                    background: isOpen ? "#faf9ff" : "#fafafa",
+                                                    border: isOpen ? `1px solid rgba(${colors.indigoRgb}, 0.25)` : "1px solid rgba(0,0,0,0.04)",
+                                                    background: isOpen ? colors.lavenderSoft : "#fafafa",
                                                     "&:before": { display: "none" },
                                                     transition: "all 0.2s ease",
                                                 }}>
                                                 <AccordionSummary
                                                     expandIcon={isOpen
-                                                        ? <RemoveRoundedIcon sx={{ fontSize: 18, color: "#6C5CE7" }} />
+                                                        ? <RemoveRoundedIcon sx={{ fontSize: 18, color: colors.indigo }} />
                                                         : <AddRoundedIcon sx={{ fontSize: 18, color: "#999" }} />
                                                     }
                                                     sx={{ minHeight: 48, px: 2, "& .MuiAccordionSummary-content": { my: 1 } }}>

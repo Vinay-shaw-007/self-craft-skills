@@ -35,15 +35,15 @@ const PrivacyPolicyPage = () => {
                     color="text.secondary"
                     sx={{ mb: 4 }}
                 >
-                    Effective Date: February 26, 2026
+                    Effective Date: July 20, 2026
                 </Typography>
 
                 <Typography paragraph color="text.secondary">
                     At Self Craft Skills, we respect your privacy and are
                     committed to protecting your personal information. This
                     Privacy Policy explains how we collect, use, and safeguard
-                    your data when you interact with our website or enroll in
-                    our courses.
+                    your data when you interact with our website or subscribe to
+                    our membership.
                 </Typography>
 
                 <Typography
@@ -54,8 +54,8 @@ const PrivacyPolicyPage = () => {
                     1. Information We Collect
                 </Typography>
                 <Typography paragraph color="text.secondary">
-                    When you register, enroll, or contact us, we may collect the
-                    following information:
+                    When you create an account, subscribe, or contact us, we may
+                    collect the following information:
                 </Typography>
                 <List>
                     {[
@@ -88,8 +88,8 @@ const PrivacyPolicyPage = () => {
                 </Typography>
                 <List>
                     {[
-                        "Course registration and enrollment",
-                        "Sending class updates, reminders, and learning resources",
+                        "Creating and managing your membership account",
+                        "Sending course updates, reminders, and learning resources",
                         "Providing customer support and responding to queries",
                         "Sharing important announcements related to Self Craft Skills",
                     ].map((item) => (

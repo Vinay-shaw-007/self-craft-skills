@@ -1,13 +1,17 @@
 import { Box, Typography, Button } from "@mui/material";
 import type { Course } from "./coursesData";
 import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
+import { useSubscription } from "../hooks/useSubscription";
+import { MONTHLY_PRICE_DISPLAY } from "../config/pricing";
 
 interface StickyEnrollBarProps {
     course: Course | undefined;
 }
 
 const StickyEnrollBar = ({ course }: StickyEnrollBarProps) => {
-    if (!course || course.status !== "Open for Enrollment") {
+    const { isSubscribed } = useSubscription();
+
+    if (!course || course.status !== "Open for Enrollment" || isSubscribed) {
         return null;
     }
 
@@ -59,24 +63,17 @@ const StickyEnrollBar = ({ course }: StickyEnrollBarProps) => {
                 zIndex: 1,
             }}>
                 <Typography component="span" sx={{
-                    fontSize: { xs: "0.74rem", md: "0.86rem" },
-                    fontWeight: 500, color: "#666", lineHeight: 1,
-                    textDecoration: "line-through",
-                }}>
-                    {"\u20B9999"}
-                </Typography>{" "}
-                <Typography component="span" sx={{
                     fontFamily: '"Space Grotesk"',
                     fontSize: { xs: "0.9rem", md: "1.01rem" },
                     fontWeight: 700, color: "#111", lineHeight: 1,
                 }}>
-                    {"\u20B9579/-"}
+                    {MONTHLY_PRICE_DISPLAY}/mo
                 </Typography>{" "}
                 <Typography component="span" sx={{
                     fontSize: { xs: "0.68rem", md: "0.76rem" },
-                    fontWeight: 700, color: "#00B894", lineHeight: 1,
+                    fontWeight: 700, color: "#4F46E5", lineHeight: 1,
                 }}>
-                    42% OFF
+                    ALL COURSES
                 </Typography>
             </Box>
 
@@ -117,7 +114,7 @@ const StickyEnrollBar = ({ course }: StickyEnrollBarProps) => {
                             mt: 0.15,
                             fontSize: { sm: "0.76rem", md: "0.82rem" },
                         }}>
-                            Start your journey by choosing your learning plan.
+                            One membership unlocks this course and every other.
                         </Typography>
                     </Box>
                 </Box>
@@ -141,7 +138,7 @@ const StickyEnrollBar = ({ course }: StickyEnrollBarProps) => {
                         transition: "all 0.2s ease",
                     }}
                 >
-                    Enroll Now
+                    Subscribe Now
                 </Button>
             </Box>
         </Box>

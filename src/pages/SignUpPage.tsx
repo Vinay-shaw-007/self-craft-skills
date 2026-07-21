@@ -1,117 +1,148 @@
 // src/pages/SignUpPage.tsx
+import { useState } from "react";
 import {
-  Box,
-  Typography,
-  TextField,
-  Button,
-  Divider,
-  Stack,
-  Link as MuiLink,
-  IconButton,
+    Alert,
+    Box,
+    Button,
+    CircularProgress,
+    Link as MuiLink,
+    TextField,
+    Typography,
 } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import AuthLayout from "../components/AuthLayout";
+import { useAuth } from "../hooks/useAuth";
+import { colors } from "../theme/colors";
 
-import GoogleLogo from "../assets/google-logo.svg";
-import LinkedInLogo from "../assets/linkedin-logo.svg";
-import GitHubLogo from "../assets/github-logo.svg";
+const fieldSx = {
+    "& .MuiOutlinedInput-root": {
+        borderRadius: "14px",
+        background: "#fff",
+    },
+};
 
 const SignUpPage = () => {
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    alert("Sign Up Submitted!");
-  };
+    const { signUp, isConfigured } = useAuth();
+    const navigate = useNavigate();
+    const [fullName, setFullName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState<string | null>(null);
+    const [notConfigured, setNotConfigured] = useState(false);
+    const [confirmationSent, setConfirmationSent] = useState(false);
+    const [busy, setBusy] = useState(false);
 
-  return (
-    <AuthLayout
-      title="Start Your Journey 🚀"
-      subtitle="Create your account to enroll in courses, track your progress, and join our community."
-      backgroundImage="url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200')"
-      gradient="linear-gradient(135deg, rgba(255, 154, 158, 0.85) 0%, rgba(250, 208, 196, 0.85) 100%)"
-    >
-      <Typography variant="h4" fontWeight="bold" gutterBottom>
-        Sign Up
-      </Typography>
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
+        setError(null);
 
-      <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 }}>
-        <TextField fullWidth margin="normal" label="Full Name" required />
-        <TextField fullWidth margin="normal" label="Email Address" type="email" required />
-        <TextField fullWidth margin="normal" label="Password" type="password" required />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          sx={{
-            mt: 3,
-            py: 1.5,
-            fontSize: "16px",
-            fontWeight: "bold",
-            borderRadius: "12px",
-            background: "linear-gradient(90deg, #36d1dc, #5b86e5)",
-          }}
+        if (!isConfigured) {
+            setNotConfigured(true);
+            return;
+        }
+
+        // Light validation: WhatsApp needs a country code + number.
+        const cleanedPhone = phone.replace(/\s+/g, "");
+        if (!/^\+?\d{10,15}$/.test(cleanedPhone)) {
+            setError("Please enter a valid WhatsApp number with country code, e.g. +91XXXXXXXXXX.");
+            return;
+        }
+
+        setBusy(true);
+        const result = await signUp(email, password, fullName, cleanedPhone);
+        setBusy(false);
+
+        if (result.error) {
+            setError(result.error);
+            return;
+        }
+        if (result.needsEmailConfirmation) {
+            setConfirmationSent(true);
+            return;
+        }
+        navigate("/pricing");
+    };
+
+    return (
+        <AuthLayout
+            title="Create your account"
+            subtitle="One membership unlocks every course. Start here."
         >
-          Sign Up
-        </Button>
-      </Box>
+            {confirmationSent ? (
+                <Alert severity="success" sx={{ borderRadius: "14px" }}>
+                    Almost there — we've sent a confirmation link to{" "}
+                    <strong>{email}</strong>. Click it, then log in.
+                </Alert>
+            ) : (
+                <Box component="form" onSubmit={handleSubmit}>
+                    <TextField
+                        fullWidth margin="normal" label="Full name" required
+                        value={fullName} onChange={(e) => setFullName(e.target.value)} sx={fieldSx}
+                    />
+                    <TextField
+                        fullWidth margin="normal" label="Email address" type="email" required
+                        value={email} onChange={(e) => setEmail(e.target.value)} sx={fieldSx}
+                    />
+                    <TextField
+                        fullWidth margin="normal" label="WhatsApp number" type="tel" required
+                        placeholder="+91XXXXXXXXXX"
+                        value={phone} onChange={(e) => setPhone(e.target.value)}
+                        helperText="Include your country code — we'll send updates here"
+                        sx={fieldSx}
+                    />
+                    <TextField
+                        fullWidth margin="normal" label="Password" type="password" required
+                        value={password} onChange={(e) => setPassword(e.target.value)}
+                        helperText="At least 6 characters" sx={fieldSx}
+                    />
 
-      <Divider sx={{ my: 3 }}>OR</Divider>
+                    <Button
+                        type="submit"
+                        fullWidth
+                        disabled={busy}
+                        sx={{
+                            mt: 3,
+                            py: 1.4,
+                            fontSize: "0.98rem",
+                            fontWeight: 700,
+                            borderRadius: "999px",
+                            color: "#fff",
+                            background: colors.indigo,
+                            "&:hover": { background: colors.indigoDark },
+                            "&.Mui-disabled": { background: colors.lavenderSoft },
+                        }}
+                    >
+                        {busy ? <CircularProgress size={22} sx={{ color: colors.indigo }} /> : "Create account"}
+                    </Button>
 
-      <Stack direction="row" spacing={2} justifyContent="center">
-        <IconButton
-          onClick={() => console.log("Google sign up")}
-          sx={{
-            border: "1px solid #ddd",
-            borderRadius: "50%",
-            p: 1.5,
-            "&:hover": {
-              backgroundColor: "#f5f5f5",
-              borderColor: "#ccc",
-            },
-          }}
-        >
-          <img src={GoogleLogo} alt="Google" style={{ height: 24, width: 24 }} />
-        </IconButton>
-        
-        <IconButton
-          onClick={() => console.log("LinkedIn sign up")}
-          sx={{
-            border: "1px solid #ddd",
-            borderRadius: "50%",
-            p: 1.5,
-            "&:hover": {
-              backgroundColor: "#f5f5f5",
-              borderColor: "#ccc",
-            },
-          }}
-        >
-          <img src={LinkedInLogo} alt="LinkedIn" style={{ height: 24, width: 24 }} />
-        </IconButton>
-        
-        <IconButton
-          onClick={() => console.log("GitHub sign up")}
-          sx={{
-            border: "1px solid #ddd",
-            borderRadius: "50%",
-            p: 1.5,
-            backgroundColor: "#000",
-            "&:hover": {
-              backgroundColor: "#333",
-              borderColor: "#000",
-            },
-          }}
-        >
-          <img src={GitHubLogo} alt="GitHub" style={{ height: 24, width: 24, filter: "invert(1)" }} />
-        </IconButton>
-      </Stack>
+                    {error && (
+                        <Alert severity="error" sx={{ mt: 2.5, borderRadius: "14px" }}>
+                            {error}
+                        </Alert>
+                    )}
+                    {notConfigured && (
+                        <Alert severity="info" sx={{ mt: 2.5, borderRadius: "14px" }}>
+                            Member accounts are launching soon — sign up will be
+                            enabled once memberships go live.
+                        </Alert>
+                    )}
+                </Box>
+            )}
 
-      <Typography variant="body2" sx={{ mt: 3 }}>
-        Already have an account?{" "}
-        <MuiLink component={RouterLink} to="/login" underline="hover" fontWeight="bold">
-          Log In
-        </MuiLink>
-      </Typography>
-    </AuthLayout>
-  );
+            <Typography sx={{ mt: 3, textAlign: "center", fontSize: "0.9rem", color: colors.slate }}>
+                Already have an account?{" "}
+                <MuiLink
+                    component={RouterLink}
+                    to="/login"
+                    underline="hover"
+                    sx={{ fontWeight: 700, color: colors.indigo }}
+                >
+                    Log in
+                </MuiLink>
+            </Typography>
+        </AuthLayout>
+    );
 };
 
 export default SignUpPage;

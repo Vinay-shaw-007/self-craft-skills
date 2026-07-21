@@ -1,0 +1,18 @@
+# Netlify configuration
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+  [build.environment]
+    # These two are public by design (Supabase anon key is protected by Row
+    # Level Security) and Vite embeds them into the frontend bundle. Tell
+    # Netlify's secret scanner they're expected there, so the build doesn't
+    # fail thinking a secret leaked.
+    SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_URL,VITE_SUPABASE_ANON_KEY"
+
+[functions]
+  directory = "netlify/functions"
+
+# Each function declares its own /api/<name> route via `export const config`
+# (Netlify Functions v2), so no redirect rule is needed here — and the SPA
+# catch-all in public/_redirects can't shadow the API paths.

@@ -33,24 +33,24 @@ export interface Course {
 const aiCourseDetails: CourseDetails = {
     summary:
         "A 4-week immersive course on mastering AI tools and ChatGPT for professional and personal growth.",
-    duration: "4 Weeks (2-3 classes per week)",
+    duration: "12 lessons · self-paced",
     classLength: "60-90 mins each",
-    mode: "Online (Zoom)",
+    mode: "100% Recorded — watch anytime",
     goal: "Build strong AI knowledge, practical hands-on skills, and awareness of today's AI world.",
     whoIsThisFor:
         "Students, working professionals, content creators, and entrepreneurs looking to boost their productivity and future-proof their skills.",
     bonuses: ["Certificate of Completion", "Exclusive Prompt Book"],
     keyFeatures: [
-        "Weekly Live Classes",
+        "12 On-Demand Video Lessons",
         "Beginner-Friendly",
-        "LIVE Q&A session",
+        "Live Q&A sessions for members",
         "No prior experience required",
         "Certificate of completion",
-        "Bonus: worth Rs.4999 (Free)",
+        "Downloadable resources & templates",
     ],
     syllabus: [
         {
-            week: "WEEK 1 - AI Foundations + Smart Prompting",
+            week: "MODULE 1 - AI Foundations + Smart Prompting",
             takeaway:
                 "Remove fear, build real understanding, and master prompting.",
             topics: [
@@ -60,7 +60,7 @@ const aiCourseDetails: CourseDetails = {
             ],
         },
         {
-            week: "WEEK 2 - AI for Study, Creativity & Multimodal Tools",
+            week: "MODULE 2 - AI for Study, Creativity & Multimodal Tools",
             takeaway:
                 "Make AI deeply useful and introduce creative and multimodal AI.",
             topics: [
@@ -70,7 +70,7 @@ const aiCourseDetails: CourseDetails = {
             ],
         },
         {
-            week: "WEEK 3 - Building with AI (Creator -> Builder Mode)",
+            week: "MODULE 3 - Building with AI (Creator -> Builder Mode)",
             takeaway: "Students shift from users to creators.",
             topics: [
                 "Class 7 - Logic, Problem Solving & AI Thinking",
@@ -79,7 +79,7 @@ const aiCourseDetails: CourseDetails = {
             ],
         },
         {
-            week: "WEEK 4 - AI Career, Business & Future Systems",
+            week: "MODULE 4 - AI Career, Business & Future Systems",
             takeaway:
                 "Real-world clarity, earning pathways, and future readiness.",
             topics: [

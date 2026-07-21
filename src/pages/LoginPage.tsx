@@ -1,116 +1,126 @@
 // src/pages/LoginPage.tsx
+import { useState } from "react";
 import {
-  Box,
-  Typography,
-  TextField,
-  Button,
-  Divider,
-  Stack,
-  Link as MuiLink,
-  IconButton,
+    Alert,
+    Box,
+    Button,
+    CircularProgress,
+    Link as MuiLink,
+    TextField,
+    Typography,
 } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import AuthLayout from "../components/AuthLayout";
+import { useAuth } from "../hooks/useAuth";
+import { colors } from "../theme/colors";
 
-import GoogleLogo from "../assets/google-logo.svg";
-import LinkedInLogo from "../assets/linkedin-logo.svg";
-import GitHubLogo from "../assets/github-logo.svg";
+const fieldSx = {
+    "& .MuiOutlinedInput-root": {
+        borderRadius: "14px",
+        background: "#fff",
+    },
+};
 
 const LoginPage = () => {
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    alert("Login Submitted!");
-  };
+    const { signIn, isConfigured } = useAuth();
+    const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState<string | null>(null);
+    const [notConfigured, setNotConfigured] = useState(false);
+    const [busy, setBusy] = useState(false);
 
-  return (
-    <AuthLayout
-      title="Welcome Back 👋"
-      subtitle="Log in to access your courses and continue your learning journey."
-      backgroundImage="url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200')"
-      gradient="linear-gradient(135deg, rgba(102, 126, 234, 0.85) 0%, rgba(118, 75, 162, 0.85) 100%)"
-    >
-      <Typography variant="h4" fontWeight="bold" gutterBottom>
-        Log In
-      </Typography>
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
+        setError(null);
 
-      <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 }}>
-        <TextField fullWidth margin="normal" label="Email Address" type="email" required />
-        <TextField fullWidth margin="normal" label="Password" type="password" required />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          sx={{
-            mt: 3,
-            py: 1.5,
-            fontSize: "16px",
-            fontWeight: "bold",
-            borderRadius: "12px",
-            background: "linear-gradient(90deg, #ff416c, #ff4b2b)",
-          }}
+        if (!isConfigured) {
+            setNotConfigured(true);
+            return;
+        }
+
+        setBusy(true);
+        const result = await signIn(email, password);
+        setBusy(false);
+
+        if (result.error) {
+            setError(result.error);
+            return;
+        }
+        navigate("/dashboard");
+    };
+
+    return (
+        <AuthLayout
+            title="Welcome back"
+            subtitle="Log in to continue watching your courses."
         >
-          Log In
-        </Button>
-      </Box>
+            <Box component="form" onSubmit={handleSubmit}>
+                <TextField
+                    fullWidth margin="normal" label="Email address" type="email" required
+                    value={email} onChange={(e) => setEmail(e.target.value)} sx={fieldSx}
+                />
+                <TextField
+                    fullWidth margin="normal" label="Password" type="password" required
+                    value={password} onChange={(e) => setPassword(e.target.value)} sx={fieldSx}
+                />
 
-      <Divider sx={{ my: 3 }}>OR</Divider>
+                <Box sx={{ textAlign: "right", mt: 0.5 }}>
+                    <MuiLink
+                        component={RouterLink}
+                        to="/forgot-password"
+                        underline="hover"
+                        sx={{ fontSize: "0.84rem", fontWeight: 600, color: colors.indigo }}
+                    >
+                        Forgot password?
+                    </MuiLink>
+                </Box>
 
-      <Stack direction="row" spacing={2} justifyContent="center">
-        <IconButton
-          onClick={() => console.log("Google login")}
-          sx={{
-            border: "1px solid #ddd",
-            borderRadius: "50%",
-            p: 1.5,
-            "&:hover": {
-              backgroundColor: "#f5f5f5",
-              borderColor: "#ccc",
-            },
-          }}
-        >
-          <img src={GoogleLogo} alt="Google" style={{ height: 24, width: 24 }} />
-        </IconButton>
-        
-        <IconButton
-          onClick={() => console.log("LinkedIn login")}
-          sx={{
-            border: "1px solid #ddd",
-            borderRadius: "50%",
-            p: 1.5,
-            "&:hover": {
-              backgroundColor: "#f5f5f5",
-              borderColor: "#ccc",
-            },
-          }}
-        >
-          <img src={LinkedInLogo} alt="LinkedIn" style={{ height: 24, width: 24 }} />
-        </IconButton>
-        
-        <IconButton
-          onClick={() => console.log("GitHub login")}
-          sx={{
-            border: "1px solid #ddd",
-            borderRadius: "50%",
-            p: 1.5,
-            backgroundColor: "#000",
-            "&:hover": {
-              backgroundColor: "#333",
-              borderColor: "#000",
-            },
-          }}
-        >
-          <img src={GitHubLogo} alt="GitHub" style={{ height: 24, width: 24, filter: "invert(1)" }} />
-        </IconButton>
-      </Stack>
+                <Button
+                    type="submit"
+                    fullWidth
+                    disabled={busy}
+                    sx={{
+                        mt: 3,
+                        py: 1.4,
+                        fontSize: "0.98rem",
+                        fontWeight: 700,
+                        borderRadius: "999px",
+                        color: "#fff",
+                        background: colors.indigo,
+                        "&:hover": { background: colors.indigoDark },
+                        "&.Mui-disabled": { background: colors.lavenderSoft },
+                    }}
+                >
+                    {busy ? <CircularProgress size={22} sx={{ color: colors.indigo }} /> : "Log in"}
+                </Button>
 
-      <Typography variant="body2" sx={{ mt: 3 }}>
-        Don't have an account?{" "}
-        <MuiLink component={RouterLink} to="/signup" underline="hover" fontWeight="bold">
-          Sign Up
-        </MuiLink>
-      </Typography>
-    </AuthLayout>
-  );
+                {error && (
+                    <Alert severity="error" sx={{ mt: 2.5, borderRadius: "14px" }}>
+                        {error}
+                    </Alert>
+                )}
+                {notConfigured && (
+                    <Alert severity="info" sx={{ mt: 2.5, borderRadius: "14px" }}>
+                        Member accounts are launching soon — login will be enabled
+                        once memberships go live.
+                    </Alert>
+                )}
+            </Box>
+
+            <Typography sx={{ mt: 3, textAlign: "center", fontSize: "0.9rem", color: colors.slate }}>
+                New to Self Craft Skills?{" "}
+                <MuiLink
+                    component={RouterLink}
+                    to="/signup"
+                    underline="hover"
+                    sx={{ fontWeight: 700, color: colors.indigo }}
+                >
+                    Create an account
+                </MuiLink>
+            </Typography>
+        </AuthLayout>
+    );
 };
 
 export default LoginPage;
