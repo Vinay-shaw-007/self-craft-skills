@@ -33,24 +33,24 @@ const TermsPage = () => {
                     color="text.secondary"
                     sx={{ mb: 4 }}
                 >
-                    Effective Date: February 26, 2026
+                    Effective Date: July 20, 2026
                 </Typography>
 
                 <Typography paragraph color="text.secondary">
                     Welcome to Self Craft Skills. By accessing our website,
-                    enrolling in our courses, or making a payment, you agree to
-                    be bound by the following Terms & Conditions. Please read
+                    subscribing to our membership, or making a payment, you agree
+                    to be bound by the following Terms & Conditions. Please read
                     them carefully.
                 </Typography>
 
                 <Typography variant="h5" fontWeight="bold" sx={{ mt: 4, mb: 2 }}>
-                    1. Course Enrollment
+                    1. Membership
                 </Typography>
                 <List>
                     {[
-                        "Enrollment is confirmed only after successful payment and submission of the registration details.",
-                        "Course access details, class links, and updates will be shared via email and/or WhatsApp after confirmation.",
-                        "Each course enrollment is personal and non-transferable.",
+                        "A membership gives you access to all courses on the platform while your subscription is active.",
+                        "Access is activated automatically after a successful payment — no manual confirmation is required.",
+                        "Your membership account is personal and non-transferable.",
                     ].map((item) => (
                         <ListItem key={item} disablePadding sx={bulletSx}>
                             <ListItemIcon>
@@ -69,7 +69,7 @@ const TermsPage = () => {
                 </Typography>
                 <List>
                     {[
-                        "Courses are delivered online through platforms such as Zoom, WhatsApp, email, or other digital tools.",
+                        "Courses are delivered online as recorded video lessons streamed on our website, available on demand to active members.",
                         "Learners are responsible for having a stable internet connection and suitable devices.",
                         "Any recordings or digital materials provided are strictly for personal learning use only and must not be shared, copied, or distributed.",
                     ].map((item) => (
@@ -131,9 +131,11 @@ const TermsPage = () => {
                 </Typography>
                 <List>
                     {[
+                        "Membership is a recurring monthly subscription, billed automatically each month via Razorpay until you cancel.",
                         "All payments are processed securely via Razorpay or other approved payment methods displayed on the website.",
+                        "You can cancel anytime from your Account page; cancellation stops future charges and access continues until the end of the paid period.",
                         "Refunds and cancellations are governed by our Refund Policy, available on the website.",
-                        "By enrolling, you acknowledge that you have read and agreed to the Refund Policy.",
+                        "By subscribing, you acknowledge that you have read and agreed to the Refund Policy.",
                     ].map((item) => (
                         <ListItem key={item} disablePadding sx={bulletSx}>
                             <ListItemIcon>

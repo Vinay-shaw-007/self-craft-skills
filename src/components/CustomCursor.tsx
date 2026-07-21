@@ -71,7 +71,7 @@ const CustomCursor = () => {
                     oldest.life = 1;
                     oldest.maxLife = 0.6 + Math.random() * 0.5;
                     oldest.size = 2 + Math.random() * 3.5;
-                    oldest.hue = 255 + Math.random() * 30;
+                    oldest.hue = 240 + Math.random() * 20;
                     particles.push(oldest);
                 } else {
                     particles.push({
@@ -82,7 +82,7 @@ const CustomCursor = () => {
                         life: 1,
                         maxLife: 0.6 + Math.random() * 0.5,
                         size: 2 + Math.random() * 3.5,
-                        hue: 255 + Math.random() * 30,
+                        hue: 240 + Math.random() * 20,
                     });
                 }
             }
@@ -110,9 +110,9 @@ const CustomCursor = () => {
                     mouseX, mouseY, 0,
                     mouseX, mouseY, 28 + speed * 0.3
                 );
-                glowGradient.addColorStop(0, "rgba(108, 92, 231, 0.15)");
-                glowGradient.addColorStop(0.4, "rgba(108, 92, 231, 0.06)");
-                glowGradient.addColorStop(1, "rgba(108, 92, 231, 0)");
+                glowGradient.addColorStop(0, "rgba(79, 70, 229, 0.15)");
+                glowGradient.addColorStop(0.4, "rgba(79, 70, 229, 0.06)");
+                glowGradient.addColorStop(1, "rgba(79, 70, 229, 0)");
                 ctx.fillStyle = glowGradient;
                 ctx.beginPath();
                 ctx.arc(mouseX, mouseY, 28 + speed * 0.3, 0, Math.PI * 2);

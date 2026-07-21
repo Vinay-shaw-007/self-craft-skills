@@ -1,4 +1,12 @@
 User-agent: *
 Allow: /
 
+# Private / logged-in app areas — no SEO value, keep out of the index
+Disallow: /dashboard
+Disallow: /learn
+Disallow: /account
+Disallow: /login
+Disallow: /signup
+Disallow: /subscribe
+
 Sitemap: https://selfcraftskills.com/sitemap.xml

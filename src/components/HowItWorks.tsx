@@ -8,36 +8,36 @@ import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 
 const processCards = [
     {
-        title: "Secure Course Payment",
+        title: "Secure Subscription Payment",
         description:
-            "Pay confidently using our trusted Razorpay payment gateway.",
+            "Subscribe securely using our trusted Razorpay payment gateway.",
         points: [
             "Fast, secure checkout",
             "UPI, Cards, Net Banking supported",
-            "Instant payment confirmation",
+            "Cancel anytime, no lock-in",
         ],
         icon: <SecurityIcon sx={{ fontSize: 22 }} />,
-        color: "#6C5CE7",
-        bg: "#f3f1ff",
+        color: "#4F46E5",
+        bg: "#EDEBFC",
     },
     {
-        title: "Quick Registration",
-        description: "Complete a short registration form after payment.",
+        title: "Instant Access",
+        description: "Unlock every course the moment you subscribe.",
         points: [
-            "Google Form opens automatically",
-            "Share basic enrollment details",
-            "Takes less than a minute",
+            "No forms, no waiting",
+            "Watch lessons on demand",
+            "Available on any device",
         ],
         icon: <DescriptionOutlinedIcon sx={{ fontSize: 22 }} />,
-        color: "#0984E3",
-        bg: "#e8f4fd",
+        color: "#3B32B0",
+        bg: "#EDEBFC",
     },
     {
-        title: "WhatsApp Learning Onboarding",
-        description: "Get instantly onboarded through WhatsApp.",
+        title: "Community & Support",
+        description: "Stay connected through our learner WhatsApp community.",
         points: [
             "Instant welcome message",
-            "Class links, schedules and resources",
+            "Updates and discussions",
             "Doubt support throughout the course",
         ],
         icon: <WhatsAppIcon sx={{ fontSize: 22 }} />,
@@ -90,8 +90,8 @@ const HowItWorks = () => {
                     mt: 1, color: "#666",
                     maxWidth: 600, fontSize: "0.92rem", lineHeight: 1.7,
                 }}>
-                    A simple, secure journey - from payment to live learning and
-                    support.
+                    A simple, secure journey - from subscribing to watching and
+                    getting support.
                 </Typography>
             </FadeInOnScroll>
 

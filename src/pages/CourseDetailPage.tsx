@@ -35,14 +35,18 @@ import useScrollToHash from "../hooks/useScrollToHash";
 import { coursesData } from "../components/coursesData";
 import HowItWorks from "../components/HowItWorks";
 import MeetMentorSection from "../components/MeetMentorSection";
-import PricingPlansSection from "../components/BonusSection";
+import CourseAccessGate from "../components/CourseAccessGate";
 import StatsBanner from "../components/StatsBanner";
 import StickyEnrollBar from "../components/StickyEnrollBar";
+import { useSubscription } from "../hooks/useSubscription";
+import Seo from "../components/Seo";
+import { colors } from "../theme/colors";
 
 const CourseDetailPage = () => {
     useScrollToHash();
     const { courseId } = useParams<{ courseId: string }>();
     const course = coursesData.find((c) => c.id === courseId);
+    const { isSubscribed } = useSubscription();
     const [expandedPanel, setExpandedPanel] = useState<string | false>(false);
     const [activeAudience, setActiveAudience] = useState(0);
 
@@ -53,22 +57,22 @@ const CourseDetailPage = () => {
         };
 
     const fallbackKeyFeatures = [
-        "Weekly Live Classes",
+        "On-Demand Video Lessons",
         "Beginner-Friendly",
-        "LIVE Q&A session",
+        "Live Q&A sessions for members",
         "No prior experience required",
         "Certificate of completion",
-        "Bonus: worth Rs.4999 (Free)",
+        "Downloadable resources & templates",
     ];
 
     const getFeatureIcon = (featureText: string) => {
-        if (featureText.includes("Live")) return <LiveTvIcon sx={{ color: "#0984E3", fontSize: 18 }} />;
-        if (featureText.includes("Beginner")) return <StairsIcon sx={{ color: "#00B894", fontSize: 18 }} />;
-        if (featureText.includes("Q&A")) return <QuestionAnswerIcon sx={{ color: "#6C5CE7", fontSize: 18 }} />;
-        if (featureText.includes("prior experience")) return <SchoolIcon sx={{ color: "#00B894", fontSize: 18 }} />;
-        if (featureText.toLowerCase().includes("certificate")) return <WorkspacePremiumIcon sx={{ color: "#E17055", fontSize: 18 }} />;
-        if (featureText.toLowerCase().includes("bonus")) return <CardGiftcardIcon sx={{ color: "#FD79A8", fontSize: 18 }} />;
-        return <CheckRoundedIcon sx={{ color: "#00B894", fontSize: 18 }} />;
+        if (featureText.includes("Live")) return <LiveTvIcon sx={{ color: colors.indigo, fontSize: 18 }} />;
+        if (featureText.includes("Beginner")) return <StairsIcon sx={{ color: colors.indigo, fontSize: 18 }} />;
+        if (featureText.includes("Q&A")) return <QuestionAnswerIcon sx={{ color: colors.indigo, fontSize: 18 }} />;
+        if (featureText.includes("prior experience")) return <SchoolIcon sx={{ color: colors.indigo, fontSize: 18 }} />;
+        if (featureText.toLowerCase().includes("certificate")) return <WorkspacePremiumIcon sx={{ color: colors.indigo, fontSize: 18 }} />;
+        if (featureText.toLowerCase().includes("bonus")) return <CardGiftcardIcon sx={{ color: colors.indigo, fontSize: 18 }} />;
+        return <CheckRoundedIcon sx={{ color: colors.indigo, fontSize: 18 }} />;
     };
 
     const audienceCards = [
@@ -77,32 +81,32 @@ const CourseDetailPage = () => {
             description:
                 "Build practical AI skills early and stand out in academics, internships, and placements.",
             icon: <SchoolOutlinedIcon />,
-            color: "#6C5CE7",
-            bg: "#f3f1ff",
+            color: colors.indigo,
+            bg: colors.lavenderSoft,
         },
         {
             title: "Working Professionals",
             description:
                 "Use AI tools to improve speed, productivity, and decision-making in day-to-day work.",
             icon: <WorkOutlineIcon />,
-            color: "#00B894",
-            bg: "#e6f9f3",
+            color: colors.indigo,
+            bg: colors.lavenderSoft,
         },
         {
             title: "Lifelong Learners",
             description:
                 "Learn with a structured path and mentor guidance even if you are starting from zero.",
             icon: <PsychologyAltOutlinedIcon />,
-            color: "#FD79A8",
-            bg: "#fce4ec",
+            color: colors.indigo,
+            bg: colors.lavenderSoft,
         },
         {
             title: "Creators and Freelancers",
             description:
                 "Create smarter workflows, better content, and stronger personal branding with AI.",
             icon: <AutoAwesomeOutlinedIcon />,
-            color: "#0984E3",
-            bg: "#e8f4fd",
+            color: colors.indigo,
+            bg: colors.lavenderSoft,
         },
     ];
 
@@ -128,7 +132,7 @@ const CourseDetailPage = () => {
         return (
             <Box sx={{ py: 8 }}>
                 <Container>
-                    <Typography variant="h2" color="#111">{course.title}</Typography>
+                    <Typography variant="h2" color={colors.ink}>{course.title}</Typography>
                     <Typography sx={{ mt: 2, color: "#666", lineHeight: 1.8 }}>
                         {course.details.summary}
                     </Typography>
@@ -148,18 +152,18 @@ const CourseDetailPage = () => {
     const metaCards = [
         {
             label: "Duration",
-            value: course.details.duration ?? "4 weeks",
-            icon: <CalendarMonthIcon sx={{ color: "#6C5CE7" }} />,
+            value: course.details.duration ?? "12 lessons",
+            icon: <CalendarMonthIcon sx={{ color: colors.indigo }} />,
         },
         {
             label: "Class length",
             value: course.details.classLength ?? "60-90 mins",
-            icon: <ScheduleIcon sx={{ color: "#00B894" }} />,
+            icon: <ScheduleIcon sx={{ color: colors.indigo }} />,
         },
         {
             label: "Mode",
             value: course.details.mode ?? "Online",
-            icon: <LaptopChromebookIcon sx={{ color: "#FD79A8" }} />,
+            icon: <LaptopChromebookIcon sx={{ color: colors.indigo }} />,
         },
     ];
 
@@ -176,37 +180,42 @@ const CourseDetailPage = () => {
 
     return (
         <Box sx={{ pb: { xs: 18, md: 12 } }}>
+            <Seo
+                title={`${course.title} | Self Craft Skills`}
+                description={course.details.summary}
+                canonicalPath={`/courses/${course.id}`}
+            />
             {/* Hero section - dark */}
             <Box sx={{
                 position: "relative",
                 overflow: "hidden",
                 pt: { xs: 4, md: 5 },
                 pb: { xs: 6, md: 8 },
-                background: "linear-gradient(180deg, #0a0a0a 0%, #111 60%, #1a1a2e 100%)",
+                background: `linear-gradient(160deg, ${colors.indigoDeeper} 0%, ${colors.indigoDeep} 60%, ${colors.indigo} 130%)`,
                 color: "#fff",
-            }} className="noise-overlay">
+            }}>
                 {/* Glow orbs */}
                 <Box sx={{
                     position: "absolute", top: -200, right: -100,
                     width: 500, height: 500, borderRadius: "50%",
-                    background: "radial-gradient(circle, rgba(108, 92, 231, 0.12), transparent 70%)",
+                    background: `radial-gradient(circle, rgba(${colors.lavenderRgb}, 0.18), transparent 70%)`,
                     filter: "blur(80px)",
                 }} />
                 <Box sx={{
                     position: "absolute", bottom: -150, left: -100,
                     width: 400, height: 400, borderRadius: "50%",
-                    background: "radial-gradient(circle, rgba(9, 132, 227, 0.08), transparent 70%)",
+                    background: `radial-gradient(circle, rgba(${colors.indigoRgb}, 0.3), transparent 70%)`,
                     filter: "blur(80px)",
                 }} />
 
                 <Container sx={{ position: "relative", zIndex: 1 }}>
                     <Grid container spacing={{ xs: 4, md: 5 }} alignItems="center">
                         <Grid size={{ xs: 12, md: 7 }}>
-                            <Chip label="Live Course" size="small" sx={{
-                                borderRadius: "8px",
-                                color: "#00B894",
-                                backgroundColor: "rgba(0, 184, 148, 0.1)",
-                                border: "1px solid rgba(0, 184, 148, 0.2)",
+                            <Chip label="On-Demand Course" size="small" sx={{
+                                borderRadius: "999px",
+                                color: colors.lavender,
+                                backgroundColor: `rgba(${colors.lavenderRgb}, 0.12)`,
+                                border: `1px solid rgba(${colors.lavenderRgb}, 0.25)`,
                                 fontWeight: 600,
                             }} />
                             <Typography variant="h1" sx={{
@@ -248,27 +257,26 @@ const CourseDetailPage = () => {
                                     endIcon={<ArrowOutwardRoundedIcon sx={{ fontSize: 16 }} />}
                                     sx={{
                                         width: { xs: "100%", sm: "auto" },
-                                        borderRadius: "12px",
+                                        borderRadius: "999px",
                                         px: 3.2, py: 1.3,
-                                        color: "#111", fontWeight: 700,
+                                        color: colors.indigoDeep, fontWeight: 700,
                                         background: "#fff",
                                         "&:hover": { background: "#f0f0f0" },
-                                        boxShadow: "0 8px 32px rgba(255,255,255,0.1)",
                                     }}
                                 >
-                                    View pricing plans
+                                    {isSubscribed ? "Watch now" : "View pricing plans"}
                                 </Button>
                                 <Button
                                     href="#curriculum"
                                     startIcon={<ArrowDownwardRoundedIcon />}
                                     sx={{
                                         width: { xs: "100%", sm: "auto" },
-                                        borderRadius: "12px",
+                                        borderRadius: "999px",
                                         px: 3, py: 1.2,
-                                        color: "rgba(255,255,255,0.6)",
-                                        border: "1px solid rgba(255,255,255,0.1)",
+                                        color: "rgba(255,255,255,0.7)",
+                                        border: "1px solid rgba(255,255,255,0.18)",
                                         "&:hover": {
-                                            background: "rgba(255,255,255,0.04)",
+                                            background: "rgba(255,255,255,0.08)",
                                             color: "#fff",
                                         },
                                     }}
@@ -277,14 +285,17 @@ const CourseDetailPage = () => {
                                 </Button>
                             </Stack>
 
-                            <Grid container spacing={1.4} sx={{ mt: 2.5 }}>
+                            <Grid container spacing={1.4} sx={{ mt: 2.5 }} alignItems="stretch">
                                 {metaCards.map((card) => (
-                                    <Grid key={card.label} size={{ xs: 12, sm: 4 }}>
+                                    <Grid key={card.label} size={{ xs: 12, sm: 4 }} sx={{ display: "flex" }}>
                                         <Box sx={{
                                             p: 2,
+                                            width: "100%",
                                             borderRadius: "14px",
-                                            border: "1px solid rgba(255,255,255,0.06)",
-                                            background: "rgba(255,255,255,0.04)",
+                                            border: `1px solid rgba(${colors.lavenderRgb}, 0.12)`,
+                                            background: "rgba(255,255,255,0.05)",
+                                            display: "flex",
+                                            alignItems: "center",
                                         }}>
                                             <Stack direction="row" spacing={1} alignItems="center">
                                                 {card.icon}
@@ -292,7 +303,7 @@ const CourseDetailPage = () => {
                                                     <Typography sx={{
                                                         fontSize: "0.72rem", fontWeight: 600,
                                                         letterSpacing: "0.06em", textTransform: "uppercase",
-                                                        color: "rgba(255,255,255,0.35)",
+                                                        color: "rgba(255,255,255,0.4)",
                                                     }}>
                                                         {card.label}
                                                     </Typography>
@@ -339,7 +350,7 @@ const CourseDetailPage = () => {
                 <Box sx={{
                     position: "absolute", bottom: 0, left: 0, right: 0,
                     height: 120,
-                    background: "linear-gradient(to bottom, transparent, #fafafa)",
+                    background: "linear-gradient(to bottom, transparent, #F7F7FB)",
                     pointerEvents: "none",
                 }} />
             </Box>
@@ -368,9 +379,9 @@ const CourseDetailPage = () => {
                             <Typography variant="h3" sx={{
                                 mt: 1,
                                 fontSize: { xs: "1.9rem", md: "2.5rem" },
-                                color: "#111",
+                                color: colors.ink,
                             }}>
-                                What learners cover week by week.
+                                What you'll learn, module by module.
                             </Typography>
 
                             <Box sx={{ mt: 2.5 }}>
@@ -389,16 +400,16 @@ const CourseDetailPage = () => {
                                                 borderRadius: "12px !important",
                                                 overflow: "hidden",
                                                 border: isOpen
-                                                    ? "1px solid rgba(108, 92, 231, 0.15)"
+                                                    ? `1px solid rgba(${colors.indigoRgb}, 0.25)`
                                                     : "1px solid rgba(0,0,0,0.04)",
-                                                background: isOpen ? "#faf9ff" : "#fafafa",
+                                                background: isOpen ? colors.lavenderSoft : "#fafafa",
                                                 "&:before": { display: "none" },
                                                 transition: "all 0.2s ease",
                                             }}
                                         >
                                             <AccordionSummary
                                                 expandIcon={isOpen
-                                                    ? <RemoveRoundedIcon sx={{ fontSize: 18, color: "#6C5CE7" }} />
+                                                    ? <RemoveRoundedIcon sx={{ fontSize: 18, color: colors.indigo }} />
                                                     : <AddRoundedIcon sx={{ fontSize: 18, color: "#999" }} />
                                                 }
                                                 sx={{
@@ -409,7 +420,7 @@ const CourseDetailPage = () => {
                                                 <Box>
                                                     <Typography sx={{
                                                         fontWeight: 700,
-                                                        color: isOpen ? "#111" : "#333",
+                                                        color: isOpen ? colors.indigo : "#333",
                                                         fontSize: { xs: "0.92rem", md: "1rem" },
                                                     }}>
                                                         {week.week}
@@ -427,7 +438,7 @@ const CourseDetailPage = () => {
                                                 <Stack spacing={0.5}>
                                                     {week.topics.map((topic) => (
                                                         <Stack key={topic} direction="row" spacing={0.8} alignItems="flex-start">
-                                                            <CheckRoundedIcon sx={{ color: "#00B894", fontSize: 16, mt: "3px" }} />
+                                                            <CheckRoundedIcon sx={{ color: colors.indigo, fontSize: 16, mt: "3px" }} />
                                                             <Typography sx={{
                                                                 color: "#444",
                                                                 fontSize: "0.88rem",
@@ -448,10 +459,10 @@ const CourseDetailPage = () => {
                                 <Grid size={{ xs: 12, sm: 6 }}>
                                     <Box sx={{
                                         p: 2, borderRadius: "12px",
-                                        background: "#f3f1ff",
-                                        border: "1px solid rgba(108, 92, 231, 0.1)",
+                                        background: colors.lavenderSoft,
+                                        border: `1px solid rgba(${colors.indigoRgb}, 0.12)`,
                                     }}>
-                                        <Typography sx={{ fontWeight: 700, color: "#111", fontSize: "0.92rem" }}>
+                                        <Typography sx={{ fontWeight: 700, color: colors.ink, fontSize: "0.92rem" }}>
                                             {course.details.finalCapstoneHeading ?? "Final Capstone Project"}
                                         </Typography>
                                     </Box>
@@ -459,10 +470,10 @@ const CourseDetailPage = () => {
                                 <Grid size={{ xs: 12, sm: 6 }}>
                                     <Box sx={{
                                         p: 2, borderRadius: "12px",
-                                        background: "#e8f4fd",
-                                        border: "1px solid rgba(9, 132, 227, 0.1)",
+                                        background: colors.lavenderSoft,
+                                        border: `1px solid rgba(${colors.indigoRgb}, 0.12)`,
                                     }}>
-                                        <Typography sx={{ fontWeight: 700, color: "#111", fontSize: "0.92rem" }}>
+                                        <Typography sx={{ fontWeight: 700, color: colors.ink, fontSize: "0.92rem" }}>
                                             {course.details.certificateHeading ?? "Certificate"}
                                         </Typography>
                                     </Box>
@@ -481,7 +492,7 @@ const CourseDetailPage = () => {
                                 }}>
                                     <Typography sx={{
                                         fontFamily: '"Space Grotesk"',
-                                        fontWeight: 700, color: "#111",
+                                        fontWeight: 700, color: colors.ink,
                                         fontSize: "0.95rem",
                                     }}>
                                         What you get
@@ -510,7 +521,7 @@ const CourseDetailPage = () => {
                                 }}>
                                     <Typography sx={{
                                         fontFamily: '"Space Grotesk"',
-                                        fontWeight: 700, color: "#111",
+                                        fontWeight: 700, color: colors.ink,
                                         fontSize: "0.95rem",
                                     }}>
                                         Class details
@@ -528,7 +539,7 @@ const CourseDetailPage = () => {
                                                         {card.label}
                                                     </Typography>
                                                     <Typography sx={{
-                                                        fontWeight: 600, color: "#111",
+                                                        fontWeight: 600, color: colors.ink,
                                                         fontSize: "0.9rem",
                                                     }}>
                                                         {card.value}
@@ -543,14 +554,14 @@ const CourseDetailPage = () => {
                                         fullWidth
                                         sx={{
                                             mt: 2, py: 1.2,
-                                            borderRadius: "12px",
+                                            borderRadius: "999px",
                                             color: "#fff",
                                             fontWeight: 700,
-                                            background: "#111",
-                                            "&:hover": { background: "#222" },
+                                            background: colors.indigo,
+                                            "&:hover": { background: colors.indigoDark },
                                         }}
                                     >
-                                        Enroll from {"\u20B9579"}
+                                        {isSubscribed ? "Watch now" : "Subscribe to watch"}
                                     </Button>
                                 </Box>
                             </Box>
@@ -558,10 +569,10 @@ const CourseDetailPage = () => {
                     </Grid>
                 </Box>
 
-                <HowItWorks />
+                {!isSubscribed && <HowItWorks />}
 
-                {/* Audience section */}
-                <Box sx={{
+                {/* Audience section — sales content, hidden once subscribed */}
+                {!isSubscribed && <Box sx={{
                     mt: 4,
                     p: { xs: 3, md: 4 },
                     borderRadius: "20px",
@@ -580,7 +591,7 @@ const CourseDetailPage = () => {
                             <Typography variant="h3" sx={{
                                 mt: 1,
                                 fontSize: { xs: "1.9rem", md: "2.3rem" },
-                                color: "#111",
+                                color: colors.ink,
                             }}>
                                 Who this course is built for.
                             </Typography>
@@ -618,7 +629,7 @@ const CourseDetailPage = () => {
                                             <Box>
                                                 <Typography sx={{
                                                     fontFamily: '"Space Grotesk"',
-                                                    fontWeight: 700, color: "#111",
+                                                    fontWeight: 700, color: colors.ink,
                                                     fontSize: "0.95rem",
                                                 }}>
                                                     {card.title}
@@ -636,12 +647,12 @@ const CourseDetailPage = () => {
                             </Stack>
                         </Grid>
                     </Grid>
-                </Box>
+                </Box>}
             </Container>
 
-            <MeetMentorSection />
-            <PricingPlansSection courseTitle={course.title} />
-            <StatsBanner />
+            {!isSubscribed && <MeetMentorSection />}
+            <CourseAccessGate courseId={course.id} courseTitle={course.title} />
+            {!isSubscribed && <StatsBanner />}
             <StickyEnrollBar course={course} />
         </Box>
     );

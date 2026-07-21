@@ -9,6 +9,7 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 import { Link as RouterLink } from "react-router-dom";
 import Logo from "../assets/logo.png";
+import { colors } from "../theme/colors";
 
 const socialLinks = [
     { href: "https://www.facebook.com/share/1Ccous7Nsr/", icon: <FacebookIcon sx={{ fontSize: 18 }} />, label: "Facebook" },
@@ -29,7 +30,7 @@ const Footer = () => {
     return (
         <Box sx={{
             position: "relative", overflow: "hidden",
-            background: "#0a0a0a", color: "#fff",
+            background: colors.indigoDeeper, color: "#fff",
             pt: { xs: 8, md: 10 }, pb: { xs: 4, md: 5 },
         }} className="noise-overlay">
 
@@ -57,9 +58,9 @@ const Footer = () => {
                                 mt: 1.5, color: "rgba(255,255,255,0.4)",
                                 maxWidth: 600, lineHeight: 1.7,
                             }}>
-                                Reach out for guidance on the live cohort, payment
-                                process, timing, or course fit. We keep the
-                                conversation practical and learner-first.
+                                Reach out about your membership, billing, or which
+                                course to start with. We keep the conversation
+                                practical and learner-first.
                             </Typography>
                         </Grid>
                         <Grid size={{ xs: 12, md: 4 }}>
@@ -67,10 +68,10 @@ const Footer = () => {
                                 <Button href="mailto:selfcraftskills@gmail.com"
                                     endIcon={<ArrowOutwardRoundedIcon sx={{ fontSize: 16 }} />}
                                     sx={{
-                                        px: 3, py: 1.2, borderRadius: "12px",
-                                        color: "#111", fontWeight: 600,
-                                        background: "#fff",
-                                        "&:hover": { background: "#f0f0f0" },
+                                        px: 3, py: 1.2, borderRadius: "999px",
+                                        color: "#fff", fontWeight: 700,
+                                        background: colors.indigo,
+                                        "&:hover": { background: colors.indigoDark },
                                     }}>
                                     Email support
                                 </Button>
@@ -111,6 +112,7 @@ const Footer = () => {
                         <Stack spacing={1}>
                             <Link component={RouterLink} to="/" underline="hover" sx={linkSx}>Home</Link>
                             <Link component={RouterLink} to="/courses" underline="hover" sx={linkSx}>Programs</Link>
+                            <Link component={RouterLink} to="/pricing" underline="hover" sx={linkSx}>Pricing</Link>
                             <Link component={RouterLink} to="/free-resources" underline="hover" sx={linkSx}>Free Resources</Link>
                             <Link component={RouterLink} to="/faq" underline="hover" sx={linkSx}>FAQs</Link>
                         </Stack>
