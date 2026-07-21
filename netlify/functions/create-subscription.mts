@@ -4,7 +4,12 @@
 // with the returned subscription_id; the webhook flips the status to
 // 'active' once the first charge succeeds.
 import { getUserFromRequest, json, supabaseAdmin } from "../lib/supabase.mts";
-import { createSubscription } from "../lib/razorpay.mts";
+import { createSubscription, getSubscription } from "../lib/razorpay.mts";
+
+// Razorpay subscription states in which the pending subscription is still
+// payable at checkout. Anything else (expired, cancelled, …) means we must
+// create a fresh one instead of reusing the stale id.
+const REUSABLE_RZP_STATES = new Set(["created", "authenticated"]);
 
 // Declaring the path here (Netlify Functions v2) makes the function respond
 // directly at /api/create-subscription — no netlify.toml redirect needed,
@@ -38,13 +43,23 @@ export default async (req: Request): Promise<Response> => {
     }
 
     try {
-        // Reuse a pending (created/authenticated) subscription if checkout was
-        // abandoned earlier, instead of piling up new ones.
+        // Reuse a pending subscription from an abandoned checkout, but only if
+        // Razorpay still considers it payable. Razorpay auto-expires unpaid
+        // subscriptions, so a stale id would fail checkout with "id does not
+        // exist" — in that case we fall through and create a fresh one.
         if (existing?.razorpay_subscription_id) {
-            return json({
-                subscriptionId: existing.razorpay_subscription_id,
-                razorpayKeyId: process.env.RAZORPAY_KEY_ID,
-            });
+            const live = await getSubscription(existing.razorpay_subscription_id);
+            if (live && REUSABLE_RZP_STATES.has(live.status)) {
+                return json({
+                    subscriptionId: existing.razorpay_subscription_id,
+                    razorpayKeyId: process.env.RAZORPAY_KEY_ID,
+                });
+            }
+            // Stale/expired — mark the old row so it won't be reused again.
+            await db
+                .from("subscriptions")
+                .update({ status: "expired" })
+                .eq("razorpay_subscription_id", existing.razorpay_subscription_id);
         }
 
         const subscription = await createSubscription(user.id);

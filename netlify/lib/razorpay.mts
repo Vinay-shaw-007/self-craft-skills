@@ -52,6 +52,19 @@ export const createSubscription = async (userId: string): Promise<RazorpaySubscr
 };
 
 /**
+ * Fetches a subscription's current state from Razorpay. Returns null if it
+ * no longer exists (e.g. expired) — used to decide whether a pending
+ * subscription is still safe to reuse at checkout.
+ */
+export const getSubscription = async (subscriptionId: string): Promise<RazorpaySubscription | null> => {
+    const res = await fetch(`${RAZORPAY_BASE}/subscriptions/${subscriptionId}`, {
+        headers: { authorization: authHeader() },
+    });
+    if (!res.ok) return null;
+    return (await res.json()) as RazorpaySubscription;
+};
+
+/**
  * Cancels a subscription at the end of the current billing cycle, so the
  * member keeps access for the period they already paid for.
  */
