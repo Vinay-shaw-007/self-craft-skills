@@ -9,6 +9,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { coursesData } from "../components/coursesData";
 import { getCourseContent, getCourseStats, getAllLessons } from "../data/courseContent";
 import { useProgress } from "../hooks/useProgress";
+import CompleteProfilePrompt from "../components/CompleteProfilePrompt";
 import { colors } from "../theme/colors";
 
 type Filter = "all" | "in_progress" | "completed";
@@ -46,6 +47,8 @@ const DashboardPage = () => {
     return (
         <Box sx={{ py: { xs: 4, md: 5 }, minHeight: "70vh" }}>
             <Container maxWidth="lg">
+                <CompleteProfilePrompt />
+
                 <Typography variant="h2" sx={{ fontSize: { xs: "2rem", md: "2.6rem" }, color: colors.ink, mb: 3 }}>
                     Courses
                 </Typography>

@@ -4,6 +4,7 @@ import { Box, Button, Chip, Container, Divider, Stack, Typography } from "@mui/m
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useSubscription } from "../hooks/useSubscription";
 import { useAuth } from "../hooks/useAuth";
+import EditProfileCard from "../components/EditProfileCard";
 import { MONTHLY_PRICE_DISPLAY } from "../config/pricing";
 import { colors } from "../theme/colors";
 
@@ -81,6 +82,8 @@ const AccountPage = () => {
                         </Button>
                     </Box>
                 )}
+
+                {isConfigured && user && <EditProfileCard />}
 
                 {isConfigured && !user ? (
                     <Box sx={{
