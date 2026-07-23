@@ -7,6 +7,7 @@ import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 import { useSubscription } from "../hooks/useSubscription";
 import { MONTHLY_PRICE_DISPLAY, PLAN_NAME } from "../config/pricing";
 import Seo from "../components/Seo";
+import CompleteProfilePrompt from "../components/CompleteProfilePrompt";
 import { colors } from "../theme/colors";
 
 const included = [
@@ -48,6 +49,10 @@ const PricingPage = () => {
                 canonicalPath="/pricing"
             />
             <Container maxWidth="sm">
+                {/* Catches Google sign-ups (who skip the signup form) here, since
+                    non-members land on pricing rather than the dashboard. */}
+                <CompleteProfilePrompt />
+
                 <Box sx={{ textAlign: "center", mb: 5 }}>
                     <Typography sx={{
                         fontSize: "0.72rem", fontWeight: 700,
