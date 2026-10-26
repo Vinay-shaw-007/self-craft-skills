@@ -8,8 +8,8 @@ const FaqPage = () => {
     return (
         <main>
             <Seo
-                title="FAQ — Membership, Courses & Billing | Self Craft Skills"
-                description="Answers about the Self Craft Skills membership: how the subscription works, how courses are delivered, cancelling anytime, and our refund policy."
+                title="FAQ — Membership, Courses & YGM Services | Self Craft Skills"
+                description="Answers about the Self Craft Skills membership and YGM services: how the subscription works, course delivery, cancelling, refunds, and hiring us to run your channel."
                 canonicalPath="/faq"
             />
             <Faq />

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import {
     Accordion, AccordionDetails, AccordionSummary,
-    Box, Chip, Container, Grid, Stack, Typography,
+    Box, Chip, Container, Grid, Link, Stack, Typography,
 } from "@mui/material";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
+import { Link as RouterLink } from "react-router-dom";
 import FadeInOnScroll from "./FadeInOnScroll";
 import { colors } from "../theme/colors";
+import { oneTimeServices, ygmPlans } from "../data/servicesData";
 
 const faqData = [
     {
@@ -37,6 +39,46 @@ const faqData = [
             { q: "Can I cancel anytime?", a: "Yes. You can cancel from your Account page at any time. Cancelling stops all future charges, and you keep access until the end of the period you've already paid for." },
             { q: "What is your refund policy?", a: "If you're not satisfied, you can request a refund of your most recent monthly payment within 7 days by emailing selfcraftskills@gmail.com. Refunds are processed to your original payment method within 3 to 5 business days." },
         ],
+    },
+];
+
+// Prices come from the services catalogue so this answer can't go stale.
+const planPrices = ygmPlans.map((p) => p.now).join(", ");
+const auditPrice = oneTimeServices.find((s) => s.id === "audit")?.price;
+const consultPrice = oneTimeServices.find((s) => s.id === "consult")?.price;
+
+// The services side of the business answers a different question than the
+// membership does — "can you do it for me?" rather than "what will I learn?"
+// — so it gets its own block below, instead of a fourth category card the
+// three-column grid above has no room for.
+const ygmFaq = [
+    {
+        q: "What is YGM?",
+        a: "YGM \u2014 Your Growth Matters \u2014 is the services side of Self Craft Skills. Where the courses teach you to run your own channel, YGM runs it with you: channel management, content strategy, thumbnails, Shorts and editing, handled as a monthly service.",
+    },
+    {
+        q: "Is YGM only for YouTube?",
+        a: "No. The strategy, content and management work covers Instagram and LinkedIn as well as YouTube. The monthly plans listed on the services page are built specifically around YouTube channels, so wider social media work is quoted once we know the scope.",
+    },
+    {
+        q: "How is this different from the membership?",
+        a: "They are separate. The membership is a monthly subscription that unlocks the courses so you can learn the skills yourself. YGM is freelance work billed per month or per project, where we do it for you. You can hire YGM without being a member, and being a member doesn't include any service work.",
+    },
+    {
+        q: "What does it cost?",
+        a: `Monthly channel management runs at ${planPrices} per month depending on how much strategy and creative support you need. A one-time channel audit is ${auditPrice} and a 60-minute consultation is ${consultPrice}. Individual thumbnails, graphics and edits are available on a published rate card.`,
+    },
+    {
+        q: "Will you need my Google password?",
+        a: "Never. We work through delegated access only \u2014 a Manager or Editor role granted from your Brand Account \u2014 which you can withdraw at any time from YouTube Studio under Settings and Permissions. We don't use shared logins, and we don't touch monetisation, banking or account recovery settings.",
+    },
+    {
+        q: "Do you guarantee subscribers or views?",
+        a: "No, and we won't pretend otherwise. Reach depends on your niche, your content and the platform's algorithm, none of which anyone controls. What we commit to is the work itself, done consistently and on time. We also never buy views, subscribers or engagement \u2014 it breaks platform rules and damages the channel it's meant to help.",
+    },
+    {
+        q: "How do we start, and how do I stop?",
+        a: "Message us on WhatsApp or email with your channel and what you need, and we'll talk through the right plan before anything is billed. Plans are paid monthly in advance on your signup date, and you can cancel with 15 days' written notice before a renewal date.",
     },
 ];
 
@@ -150,6 +192,111 @@ const Faq = () => {
                         </Grid>
                     ))}
                 </Grid>
+
+                {/* Services block — same card language as the categories above,
+                    kept visually part of this page rather than borrowing the
+                    green YGM identity from /services. */}
+                <FadeInOnScroll>
+                    <Box sx={{
+                        mt: 3,
+                        p: { xs: 2.5, md: 3 },
+                        borderRadius: "20px",
+                        border: "1px solid rgba(0,0,0,0.06)",
+                        background: "#fff",
+                    }}>
+                        <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 1 }}>
+                            <Box sx={{
+                                width: 36, height: 36,
+                                borderRadius: "10px",
+                                background: colors.indigo,
+                                color: "#fff",
+                                display: "grid", placeItems: "center",
+                                fontSize: "0.78rem",
+                                fontWeight: 700,
+                                fontFamily: '"Space Grotesk"',
+                            }}>
+                                04
+                            </Box>
+                            <Typography sx={{
+                                fontFamily: '"Space Grotesk"',
+                                fontWeight: 600,
+                                fontSize: "0.95rem",
+                                color: "#111",
+                            }}>
+                                Hiring us — YGM services
+                            </Typography>
+                        </Stack>
+                        <Typography sx={{
+                            mb: 2.5, color: "#666", fontSize: "0.86rem", lineHeight: 1.7,
+                            maxWidth: 680,
+                        }}>
+                            Alongside the courses we take on social media and YouTube growth
+                            as a done-for-you service, under the name YGM — Your Growth
+                            Matters.
+                        </Typography>
+
+                        <Grid container spacing={{ xs: 0, md: 2 }}>
+                            {[ygmFaq.slice(0, 4), ygmFaq.slice(4)].map((column, colIndex) => (
+                                <Grid key={colIndex} size={{ xs: 12, md: 6 }}>
+                                    {column.map((faq, fi) => {
+                                        const panelId = `ygm-${colIndex}-${fi}`;
+                                        const isOpen = expanded === panelId;
+                                        return (
+                                            <Accordion key={panelId}
+                                                expanded={isOpen}
+                                                onChange={handleChange(panelId)}
+                                                disableGutters elevation={0}
+                                                sx={{
+                                                    mb: 1,
+                                                    borderRadius: "12px !important",
+                                                    overflow: "hidden",
+                                                    border: isOpen ? `1px solid rgba(${colors.indigoRgb}, 0.25)` : "1px solid rgba(0,0,0,0.04)",
+                                                    background: isOpen ? colors.lavenderSoft : "#fafafa",
+                                                    "&:before": { display: "none" },
+                                                    transition: "all 0.2s ease",
+                                                }}>
+                                                <AccordionSummary
+                                                    expandIcon={isOpen
+                                                        ? <RemoveRoundedIcon sx={{ fontSize: 18, color: colors.indigo }} />
+                                                        : <AddRoundedIcon sx={{ fontSize: 18, color: "#999" }} />
+                                                    }
+                                                    sx={{ minHeight: 48, px: 2, "& .MuiAccordionSummary-content": { my: 1 } }}>
+                                                    <Typography sx={{
+                                                        fontWeight: 600, fontSize: "0.86rem",
+                                                        color: isOpen ? "#111" : "#444",
+                                                        lineHeight: 1.4,
+                                                    }}>
+                                                        {faq.q}
+                                                    </Typography>
+                                                </AccordionSummary>
+                                                <AccordionDetails sx={{ px: 2, pb: 2 }}>
+                                                    <Typography sx={{
+                                                        color: "#666", lineHeight: 1.7,
+                                                        fontSize: "0.84rem",
+                                                    }}>
+                                                        {faq.a}
+                                                    </Typography>
+                                                </AccordionDetails>
+                                            </Accordion>
+                                        );
+                                    })}
+                                </Grid>
+                            ))}
+                        </Grid>
+
+                        <Typography sx={{ mt: 2, fontSize: "0.84rem", color: "#666", lineHeight: 1.8 }}>
+                            Full service list, plans and rate card on the{" "}
+                            <Link component={RouterLink} to="/services" sx={{ color: colors.indigo, fontWeight: 600 }}>
+                                services page
+                            </Link>
+                            , and the small print in the{" "}
+                            <Link component={RouterLink} to="/ygm-terms" sx={{ color: colors.indigo, fontWeight: 600 }}>
+                                YGM service terms
+                            </Link>
+                            .
+                        </Typography>
+                    </Box>
+                </FadeInOnScroll>
             </Container>
         </Box>
     );
