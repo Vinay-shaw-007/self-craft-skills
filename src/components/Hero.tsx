@@ -7,6 +7,7 @@ import NewReleasesRoundedIcon from "@mui/icons-material/NewReleasesRounded";
 import { Link as RouterLink } from "react-router-dom";
 import HomeImage from "../assets/home.svg";
 import { colors } from "../theme/colors";
+import { ygm } from "../theme/ygmColors";
 import { useSubscription } from "../hooks/useSubscription";
 
 const heroPoints = [
@@ -107,7 +108,49 @@ const Hero = () => {
                             </Button>
                         </Stack>
 
-                        <Stack direction="row" spacing={{ xs: 2, sm: 3 }} flexWrap="wrap" useFlexGap sx={{ mt: 5 }}>
+                        {/* The freelance side of the business is easy to miss on a
+                            course-selling hero, so it gets its own pointer. The green
+                            accent is the YGM brand colour, hinting that /services is a
+                            different offering rather than another membership page. */}
+                        <Box component={RouterLink} to="/services" sx={{
+                            mt: 3.5,
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: 1.2,
+                            px: 2, py: 1.1,
+                            borderRadius: { xs: "16px", sm: "999px" },
+                            textDecoration: "none",
+                            border: "1px solid rgba(255,255,255,0.16)",
+                            background: "rgba(255,255,255,0.06)",
+                            transition: "background 0.2s ease, border-color 0.2s ease",
+                            "&:hover": {
+                                background: "rgba(255,255,255,0.11)",
+                                borderColor: `rgba(${ygm.greenRgb}, 0.55)`,
+                            },
+                            "&:hover .svc-arrow": { transform: "translate(2px, -2px)" },
+                        }}>
+                            <Box sx={{
+                                width: 8, height: 8, borderRadius: "50%", flexShrink: 0,
+                                background: ygm.greenBright,
+                                boxShadow: `0 0 10px ${ygm.greenBright}`,
+                            }} />
+                            <Typography sx={{
+                                fontSize: { xs: "0.8rem", md: "0.86rem" },
+                                fontWeight: 600, lineHeight: 1.5,
+                                color: "rgba(255,255,255,0.78)",
+                            }}>
+                                We also grow creators{"\u2019"} channels{" \u2014 "}
+                                <Box component="span" sx={{ color: ygm.greenBright }}>
+                                    see YGM services
+                                </Box>
+                            </Typography>
+                            <ArrowOutwardRoundedIcon className="svc-arrow" sx={{
+                                fontSize: 15, flexShrink: 0, color: ygm.greenBright,
+                                transition: "transform 0.2s ease",
+                            }} />
+                        </Box>
+
+                        <Stack direction="row" spacing={{ xs: 2, sm: 3 }} flexWrap="wrap" useFlexGap sx={{ mt: 4 }}>
                             {heroPoints.map((p) => (
                                 <Stack key={p.label} direction="row" spacing={1} alignItems="center">
                                     <Box sx={{ color: colors.lavender, display: "flex" }}>{p.icon}</Box>

@@ -8,6 +8,7 @@ import PromiseSection from "../components/PromiseSection";
 import PricingTeaser from "../components/PricingTeaser";
 import CategoriesSection from "../components/CategoriesSection";
 import MeetMentorSection from "../components/MeetMentorSection";
+import ServicesTeaser from "../components/ServicesTeaser";
 import StickyConversionBar from "../components/StickyConversionBar";
 import Seo from "../components/Seo";
 import useScrollToHash from "../hooks/useScrollToHash";
@@ -39,6 +40,8 @@ const HomePage = () => {
             {!isSubscribed && <PricingTeaser />}
             {!isSubscribed && <CategoriesSection />}
             <MeetMentorSection />
+            {/* Shown to members too — a subscriber can still want the done-for-you work. */}
+            <ServicesTeaser />
             <Box id="faq">
                 <Faq />
             </Box>
