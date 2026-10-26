@@ -20,6 +20,8 @@ import LoginPage from "./pages/LoginPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import FreeResourcesPage from "./pages/FreeResourcesPage";
+import ServicesPage from "./pages/ServicesPage";
+import YgmTermsPage from "./pages/YgmTermsPage";
 import PricingPage from "./pages/PricingPage";
 import DashboardPage from "./pages/DashboardPage";
 import CoursePlayerPage from "./pages/CoursePlayerPage";
@@ -38,6 +40,9 @@ function App() {
     const isPlayer = pathname.startsWith("/learn");
     const isDashboard = pathname.startsWith("/dashboard");
     const isAppShell = isPlayer || isDashboard;
+    // The YGM services page carries its own green footer, so the indigo
+    // marketing footer would stack two clashing dark blocks underneath it.
+    const isServices = pathname === "/services";
 
     return (
         <AuthProvider>
@@ -51,6 +56,8 @@ function App() {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/courses" element={<CoursesPage />} />
                     <Route path="/courses/:courseId" element={<CourseDetailPage />} />
+                    <Route path="/services" element={<ServicesPage />} />
+                    <Route path="/ygm-terms" element={<YgmTermsPage />} />
                     <Route path="/free-resources" element={<FreeResourcesPage />} />
                     <Route path="/faq" element={<FaqPage />} />
                     <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
@@ -80,7 +87,7 @@ function App() {
                         }
                     />
                 </Routes>
-                {!isAppShell && <Footer />}
+                {!isAppShell && !isServices && <Footer />}
                 {!isAppShell && <BackToTopButton />}
                 {/* Hide the floating chat on the focused player so it can't cover the lesson list */}
                 {!isPlayer && <WhatsAppButton />}

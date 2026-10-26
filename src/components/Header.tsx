@@ -15,6 +15,7 @@ import { colors } from "../theme/colors";
 const navItems = [
     { label: "Home", href: "/" },
     { label: "Programs", href: "/courses" },
+    { label: "Services", href: "/services" },
     { label: "Pricing", href: "/pricing" },
     { label: "Free Resources", href: "/free-resources" },
     { label: "FAQs", href: "/faq" },

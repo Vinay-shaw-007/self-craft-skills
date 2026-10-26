@@ -1,23 +1,11 @@
 import {
     Box, Button, Container, Divider, Grid, Link, Stack, Typography,
 } from "@mui/material";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import YouTubeIcon from "@mui/icons-material/YouTube";
 import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 import { Link as RouterLink } from "react-router-dom";
 import Logo from "../assets/logo.png";
+import { socialLinks } from "../data/socialLinks";
 import { colors } from "../theme/colors";
-
-const socialLinks = [
-    { href: "https://www.facebook.com/share/1Ccous7Nsr/", icon: <FacebookIcon sx={{ fontSize: 18 }} />, label: "Facebook" },
-    { href: "https://www.instagram.com/selfcraftskills?igsh=MTRmMTJqanU0NXp0YQ==", icon: <InstagramIcon sx={{ fontSize: 18 }} />, label: "Instagram" },
-    { href: "https://wa.me/message/4NYE3ABSMTN5K1", icon: <WhatsAppIcon sx={{ fontSize: 18 }} />, label: "WhatsApp" },
-    { href: "https://linkedin.com/company/selfcraftskills", icon: <LinkedInIcon sx={{ fontSize: 18 }} />, label: "LinkedIn" },
-    { href: "https://www.youtube.com/@SelfCraftSkills/", icon: <YouTubeIcon sx={{ fontSize: 18 }} />, label: "YouTube" },
-];
 
 const linkSx = {
     color: "rgba(255,255,255,0.45)",
@@ -112,6 +100,7 @@ const Footer = () => {
                         <Stack spacing={1}>
                             <Link component={RouterLink} to="/" underline="hover" sx={linkSx}>Home</Link>
                             <Link component={RouterLink} to="/courses" underline="hover" sx={linkSx}>Programs</Link>
+                            <Link component={RouterLink} to="/services" underline="hover" sx={linkSx}>Services</Link>
                             <Link component={RouterLink} to="/pricing" underline="hover" sx={linkSx}>Pricing</Link>
                             <Link component={RouterLink} to="/free-resources" underline="hover" sx={linkSx}>Free Resources</Link>
                             <Link component={RouterLink} to="/faq" underline="hover" sx={linkSx}>FAQs</Link>
@@ -124,6 +113,7 @@ const Footer = () => {
                             <Link component={RouterLink} to="/privacy-policy" underline="hover" sx={linkSx}>Privacy Policy</Link>
                             <Link component={RouterLink} to="/terms-and-conditions" underline="hover" sx={linkSx}>Terms & Conditions</Link>
                             <Link component={RouterLink} to="/refund-policy" underline="hover" sx={linkSx}>Refund Policy</Link>
+                            <Link component={RouterLink} to="/ygm-terms" underline="hover" sx={linkSx}>YGM Service Terms</Link>
                         </Stack>
                     </Grid>
 
