@@ -136,13 +136,24 @@ const SwipeRow = ({
                     "& > *": {
                         // One card per screen on a phone, two on a tablet,
                         // both with the next one peeking so the swipe is obvious.
-                        flex: { xs: "0 0 86%", sm: "0 0 47%", md: "initial" },
+                        flex: { xs: "0 0 90%", sm: "0 0 47%", md: "initial" },
                         scrollSnapAlign: { xs: "center", md: "none" },
                     },
                 }}
             >
-                {cards}
-                {tail && <Box sx={{ display: { xs: "none", md: "block" } }}>{tail}</Box>}
+                {cards.map((card, i) => (
+                    <Box key={i} sx={{ display: "flex", flexDirection: "column" }}>
+                        {card}
+                    </Box>
+                ))}
+                {tail && (
+                    <Box sx={{
+                        display: { xs: "none", md: "flex" },
+                        flexDirection: "column",
+                    }}>
+                        {tail}
+                    </Box>
+                )}
             </Box>
 
             <Stack
