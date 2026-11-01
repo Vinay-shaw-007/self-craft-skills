@@ -4,6 +4,7 @@ import {
 import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 import { Link as RouterLink } from "react-router-dom";
 import Logo from "../assets/logo.png";
+import { CONTACT } from "../data/contact";
 import { socialLinks } from "../data/socialLinks";
 import { colors } from "../theme/colors";
 
@@ -63,7 +64,7 @@ const Footer = () => {
                                     }}>
                                     Email support
                                 </Button>
-                                <Button href="https://wa.me/message/4NYE3ABSMTN5K1"
+                                <Button href={CONTACT.whatsapp}
                                     target="_blank" rel="noopener noreferrer"
                                     sx={{
                                         px: 3, py: 1.1, borderRadius: "12px",

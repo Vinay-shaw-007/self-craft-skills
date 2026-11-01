@@ -25,7 +25,8 @@ import { socialLinks } from "../data/socialLinks";
 // Exact-case filename — the Netlify build runs on a case-sensitive filesystem.
 import YgmLogoSrc from "../assets/YGM.png";
 import {
-    CONTACT, ENTRY_AUDIT_PRICE, ENTRY_PRICE, platforms, serviceCategories, ygmServices,
+    CONTACT, ENTRY_AUDIT_PRICE, ENTRY_PRICE, oneTimeEnquiry, planEnquiry,
+    platforms, serviceCategories, WA_YGM, ygmServices,
     type PlatformId, type YgmServiceId,
 } from "../data/servicesData";
 import { ygm } from "../theme/ygmColors";
@@ -223,7 +224,7 @@ const YgmLogo = ({ size, alt = "" }: { size: number | Record<string, number>; al
 const ContactButtons = ({ onDark }: { onDark?: boolean }) => (
     <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5} sx={{ justifyContent: "center" }}>
         <Button
-            href={CONTACT.whatsapp}
+            href={WA_YGM}
             target="_blank"
             rel="noopener noreferrer"
             startIcon={<WhatsAppIcon sx={{ fontSize: 18 }} />}
@@ -723,7 +724,7 @@ const ServicesPage = () => {
                                         </Typography>
 
                                         <Button
-                                            href={CONTACT.whatsapp}
+                                            href={planEnquiry(cat, plan)}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             fullWidth
@@ -810,7 +811,7 @@ const ServicesPage = () => {
                                         and start growing on your own terms.
                                     </Typography>
                                     <Button
-                                        href={CONTACT.whatsapp}
+                                        href={oneTimeEnquiry(cat)}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         endIcon={<ArrowOutwardRoundedIcon sx={{ fontSize: 16 }} />}
@@ -1034,7 +1035,7 @@ const ServicesPage = () => {
                                 <Link href={`mailto:${CONTACT.email}`} underline="hover" sx={footerLinkSx}>
                                     {CONTACT.email}
                                 </Link>
-                                <Link href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer"
+                                <Link href={WA_YGM} target="_blank" rel="noopener noreferrer"
                                     underline="hover" sx={footerLinkSx}>
                                     Message on WhatsApp
                                 </Link>

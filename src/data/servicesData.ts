@@ -4,11 +4,9 @@
 // services sit above it under the Self Craft Skills parent brand.
 // Prices are the live 2026 rates — update here, not in the page.
 
-/** Enquiries share the main site's channels so nothing lands in a second inbox. */
-export const CONTACT = {
-    whatsapp: "https://wa.me/message/4NYE3ABSMTN5K1",
-    email: "selfcraftskills@gmail.com",
-};
+import { waLink } from "./contact";
+
+export { CONTACT, WA_YGM } from "./contact";
 
 export interface ServiceCategory {
     no: string;
@@ -512,6 +510,20 @@ const linkedin: PlatformCatalogue = {
 
 /** Every catalogue, in the order the toggle shows them. */
 export const platforms: PlatformCatalogue[] = [youtube, instagram, linkedin];
+
+/** "Get started" on a plan card: the message names tier, platform and price. */
+export const planEnquiry = (platform: PlatformCatalogue, plan: YgmPlan) =>
+    waLink(
+        `Hi 👋, I'd like to enquire about the ${plan.name} plan for ${platform.label} `
+        + `(${plan.now} ${plan.period}). Please share the details.`,
+    );
+
+/** The one-time card's CTA: we know the platform, not which of the two products. */
+export const oneTimeEnquiry = (platform: PlatformCatalogue) =>
+    waLink(
+        `Hi 👋, I'd like to book a one-time ${platform.label} service — `
+        + `an audit or a strategy call. Please share the details.`,
+    );
 
 const rupees = (price: string) => Number(price.replace(/\D/g, ""));
 const cheapest = (prices: string[]) =>

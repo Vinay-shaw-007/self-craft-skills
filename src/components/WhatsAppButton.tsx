@@ -2,12 +2,14 @@ import { Fab, Typography } from "@mui/material";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { useLocation } from "react-router-dom";
 import { useSubscription } from "../hooks/useSubscription";
+import { WA_GENERAL, WA_YGM } from "../data/contact";
 
 const WhatsAppButton = () => {
     const location = useLocation();
     const { isSubscribed } = useSubscription();
     const isCourseDetailPage = /^\/courses\/[^/]+/.test(location.pathname);
     const isHome = location.pathname === "/";
+    const onServices = /^\/(services|ygm-terms)/.test(location.pathname);
     // These routes show a bottom sticky bar (only for non-members) — lift the
     // button above it on mobile so it doesn't cover the "Become a member" bar.
     const raised = !isSubscribed && (isCourseDetailPage || isHome);
@@ -16,7 +18,7 @@ const WhatsAppButton = () => {
         <Fab
             variant="extended"
             component="a"
-            href="https://wa.me/message/4NYE3ABSMTN5K1"
+            href={onServices ? WA_YGM : WA_GENERAL}
             target="_blank"
             rel="noopener noreferrer"
             sx={{
