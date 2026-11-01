@@ -26,14 +26,37 @@ const SITE = "https://selfcraftskills.com";
 const DATA = "src/data/servicesData.ts";
 const dataSrc = readFileSync(DATA, "utf8");
 
-const plans = [...dataSrc.matchAll(/name:\s*"(YGM [^"]+)",\s*was:\s*"[^"]*",\s*now:\s*"₹([\d,]+)"/g)]
-    .map((m) => ({ name: m[1], price: m[2].replace(/,/g, ""), unit: "month" }));
-const oneOffs = [...dataSrc.matchAll(/title:\s*"([^"]+)",\s*price:\s*"₹([\d,]+)",\s*terms:\s*"([^"]+)"/g)]
-    .map((m) => ({ name: m[1], price: m[2].replace(/,/g, ""), terms: m[3] }));
+// Both catalogues carry tiers of the same name, so each is parsed from its
+// own slice of the file and the platform is kept in the offer name.
+const bounds = [
+    ["YouTube", "const youtube: PlatformCatalogue", "const instagram: PlatformCatalogue"],
+    ["Instagram", "const instagram: PlatformCatalogue", "export const platforms"],
+];
 
-if (plans.length !== 3 || oneOffs.length !== 2) {
-    console.error(`[prerender-meta] parsed ${plans.length} plans and ${oneOffs.length} one-off services from ${DATA} — expected 3 and 2. Did the data shape change?`);
-    process.exit(1);
+const plans = [];
+const oneOffs = [];
+
+for (const [platform, from, to] of bounds) {
+    const start = dataSrc.indexOf(from);
+    const end = dataSrc.indexOf(to);
+    if (start === -1 || end === -1 || end <= start) {
+        console.error(`[prerender-meta] could not find the ${platform} catalogue in ${DATA}. Did the data shape change?`);
+        process.exit(1);
+    }
+    const section = dataSrc.slice(start, end);
+
+    // `was` is optional: only tiers with a real higher list price carry one.
+    const p = [...section.matchAll(/name:\s*"(YGM [^"]+)",\s*(?:was:\s*"[^"]*",\s*)?now:\s*"₹([\d,]+)"/g)]
+        .map((m) => ({ name: `${m[1]} — ${platform}`, price: m[2].replace(/,/g, "") }));
+    const o = [...section.matchAll(/title:\s*"([^"]+)",\s*price:\s*"₹([\d,]+)",\s*terms:\s*"([^"]+)"/g)]
+        .map((m) => ({ name: m[1], price: m[2].replace(/,/g, ""), terms: m[3] }));
+
+    if (p.length !== 3 || o.length !== 2) {
+        console.error(`[prerender-meta] parsed ${p.length} plans and ${o.length} one-off services for ${platform} — expected 3 and 2. Did the data shape change?`);
+        process.exit(1);
+    }
+    plans.push(...p);
+    oneOffs.push(...o);
 }
 
 const servicesSchema = {
@@ -87,17 +110,17 @@ const routes = [
         path: "/services",
         title: "Social Media & YouTube Growth | YGM by Self Craft Skills",
         description:
-            "Social media strategy, content and channel management for YouTube, Instagram and LinkedIn. YouTube retainers from ₹7,999, audits from ₹1,999.",
+            "Social media strategy, content and channel management for YouTube, Instagram and LinkedIn. Monthly plans from ₹7,999, audits from ₹1,499.",
         ogTitle: "YGM — Your Growth Matters | Social Media Growth & Channel Management",
         ogDescription:
-            "Social media strategy, content and channel management for creators and brands. YouTube retainers from ₹7,999, or a one-time channel audit from ₹1,999.",
+            "Social media strategy, content and channel management for creators and brands. YouTube and Instagram plans from ₹7,999, or a one-time audit from ₹1,499.",
         image: `${SITE}/og-ygm.jpg`,
         imageAlt: "YGM — Your Growth Matters, powered by Self Craft Skills",
         // Google has ignored meta keywords since 2009 — kept only because the
         // site's other pages carry one. Real keyword signal comes from the H1,
         // headings and body copy.
         keywords:
-            "social media management, social media strategy, youtube channel management, instagram content strategy, linkedin content, youtube seo india, channel audit, thumbnail design",
+            "social media management, instagram management pricing, youtube channel management, instagram growth services, social media strategy, linkedin content, youtube seo india, channel audit",
         // index.html's schema describes the course membership. Left in place it
         // would tell Google this page is a Product/Course/FAQ it is not.
         dropSchemaTypes: ["Product", "Course", "FAQPage"],

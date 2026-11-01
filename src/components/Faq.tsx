@@ -8,7 +8,7 @@ import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 import { Link as RouterLink } from "react-router-dom";
 import FadeInOnScroll from "./FadeInOnScroll";
 import { colors } from "../theme/colors";
-import { oneTimeServices, ygmPlans } from "../data/servicesData";
+import { CONSULT_PRICE, ENTRY_AUDIT_PRICE, PLAN_PRICES } from "../data/servicesData";
 
 const faqData = [
     {
@@ -43,9 +43,7 @@ const faqData = [
 ];
 
 // Prices come from the services catalogue so this answer can't go stale.
-const planPrices = ygmPlans.map((p) => p.now).join(", ");
-const auditPrice = oneTimeServices.find((s) => s.id === "audit")?.price;
-const consultPrice = oneTimeServices.find((s) => s.id === "consult")?.price;
+const planPrices = PLAN_PRICES.join(", ");
 
 // The services side of the business answers a different question than the
 // membership does — "can you do it for me?" rather than "what will I learn?"
@@ -58,7 +56,7 @@ const ygmFaq = [
     },
     {
         q: "Is YGM only for YouTube?",
-        a: "No. The strategy, content and management work covers Instagram and LinkedIn as well as YouTube. The monthly plans listed on the services page are built specifically around YouTube channels, so wider social media work is quoted once we know the scope.",
+        a: "No. There are separate monthly plans for YouTube and for Instagram \u2014 use the platform switch on the services page to see each one. They sit at the same prices but cover different work: uploads, metadata and thumbnails on YouTube, feed posts, carousels, Stories and Reels on Instagram. LinkedIn and multi-platform work is quoted once we know the scope.",
     },
     {
         q: "How is this different from the membership?",
@@ -66,7 +64,7 @@ const ygmFaq = [
     },
     {
         q: "What does it cost?",
-        a: `Monthly channel management runs at ${planPrices} per month depending on how much strategy and creative support you need. A one-time channel audit is ${auditPrice} and a 60-minute consultation is ${consultPrice}. Individual thumbnails, graphics and edits are available on a published rate card.`,
+        a: `Monthly management runs at ${planPrices} per month on either platform, depending on how much strategy and creative support you need. A one-time audit starts at ${ENTRY_AUDIT_PRICE} and a 60-minute consultation is ${CONSULT_PRICE}. Individual thumbnails, posts, carousels and edits are available on a published rate card.`,
     },
     {
         q: "Will you need my Google password?",

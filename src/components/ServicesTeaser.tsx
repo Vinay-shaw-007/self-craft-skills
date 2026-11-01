@@ -9,7 +9,7 @@ import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 import { Link as RouterLink } from "react-router-dom";
 import YgmLogoSrc from "../assets/YGM.png";
-import { oneTimeServices, ygmPlans } from "../data/servicesData";
+import { ENTRY_AUDIT_PRICE, ENTRY_PRICE } from "../data/servicesData";
 import { ygm } from "../theme/ygmColors";
 
 const DOT_MASK = "radial-gradient(ellipse 80% 70% at 30% 40%, #000 20%, transparent 85%)";
@@ -24,8 +24,6 @@ const offerings = [
 
 const ServicesTeaser = () => {
     // Prices come from the catalogue so the teaser can't drift from /services.
-    const from = ygmPlans[0].now;
-    const auditPrice = oneTimeServices.find((s) => s.id === "audit")?.price;
 
     return (
         <Container maxWidth="lg" sx={{ py: { xs: 5, md: 7 } }}>
@@ -117,7 +115,7 @@ const ServicesTeaser = () => {
                             fontSize: "0.82rem", color: "rgba(255,255,255,0.5)",
                             textAlign: { xs: "center", md: "right" },
                         }}>
-                            Monthly plans from {from}{auditPrice ? ` · audits from ${auditPrice}` : ""}
+                            Monthly plans from {ENTRY_PRICE} · audits from {ENTRY_AUDIT_PRICE}
                         </Typography>
                     </Stack>
                 </Stack>
