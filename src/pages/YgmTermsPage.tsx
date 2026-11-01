@@ -37,7 +37,7 @@ const YgmTermsPage = () => {
         <Box sx={{ py: { xs: 6, md: 10 }, backgroundColor: "#F8F9FA" }}>
             <Seo
                 title="YGM Service Terms | Self Craft Skills"
-                description="Service terms for YGM — Your Growth Matters: scope, channel access, billing, cancellation and refunds for social media and YouTube growth engagements."
+                description="Service terms for YGM — Your Growth Matters: scope, account access, billing, cancellation and refunds for YouTube, Instagram and LinkedIn growth engagements."
                 canonicalPath="/ygm-terms"
             />
             <Container maxWidth="md">
@@ -57,8 +57,8 @@ const YgmTermsPage = () => {
 
                 <Typography paragraph>
                     These terms apply to the paid services offered under YGM — Your Growth
-                    Matters, the social media and YouTube growth service operated by Self
-                    Craft Skills. They cover monthly retainers, one-time channel audits and
+                    Matters, the YouTube, Instagram and LinkedIn growth service operated by
+                    Self Craft Skills. They cover monthly retainers, one-time audits and
                     consultations, and individual creative services ordered from the{" "}
                     <Link component={RouterLink} to="/services">published rate card</Link>.
                 </Typography>
@@ -81,18 +81,22 @@ const YgmTermsPage = () => {
 
                 <H>2. The Services We Provide</H>
                 <Typography paragraph>
-                    YGM provides social media and YouTube channel services, which may
-                    include channel management, upload scheduling, SEO of titles,
-                    descriptions and tags, playlist and metadata organisation, content
-                    planning, competitor and keyword research, analytics reporting,
-                    thumbnails and channel graphics, and short-form and long-form video
-                    editing. The exact services included depend on the plan or individual
-                    service you purchase, as described on the services page at the time of
-                    purchase.
+                    YGM provides growth services for YouTube channels, Instagram accounts
+                    and LinkedIn profiles, which may include channel and account management,
+                    upload and publishing schedules, SEO of titles, descriptions and tags,
+                    playlist and metadata organisation, content planning, competitor and
+                    keyword research, analytics reporting, thumbnails, carousels and channel
+                    graphics, short-form and long-form video editing, ghostwritten posts, and
+                    replying to comments and direct messages. The exact services included
+                    depend on the plan or individual service you purchase, as described on
+                    the services page at the time of purchase.
                 </Typography>
                 <Typography paragraph>
-                    Monthly retainers are sold on a per-channel basis. Work on an
-                    additional channel requires a separate plan or a custom quote.
+                    Monthly retainers are sold per account, for one platform. A plan for
+                    your YouTube channel does not cover your Instagram account or your
+                    LinkedIn profile, and a second channel, account or profile requires its
+                    own plan or a custom quote. Tell us what you want covered and we will
+                    quote for the combination.
                 </Typography>
 
                 <H>3. What Your Monthly Allowance Includes</H>
@@ -123,36 +127,50 @@ const YgmTermsPage = () => {
                     new work rather than a revision.
                 </Typography>
 
-                <H>5. Channel Access and Account Security</H>
+                <H>5. Account Access and Security</H>
                 <Typography paragraph>
-                    Channel management requires access to your channel. Access is granted
-                    through YouTube Studio's own permission system — by adding us as a
-                    Manager or Editor on your Brand Account, or the equivalent delegated
-                    access on other platforms.
-                </Typography>
-                <Typography paragraph>
-                    <strong>
-                        We will not ask for, and you should not share, your Google account
-                        password or one-time passwords.
-                    </strong>{" "}
-                    Password sharing breaches Google's own terms and puts your account at
-                    risk of being locked or lost. If you send credentials anyway, you do so
-                    at your own risk.
-                </Typography>
-                <Typography paragraph>
-                    You remain the owner of your channel, content and all associated
-                    accounts at all times. Within the access you grant us, we will not:
+                    Where we manage an account for you, we work only through that platform's
+                    own delegated-access system. The platforms do not all offer the same
+                    thing, so what we ask for differs:
                 </Typography>
                 <Bullets items={[
-                    "Delete your videos, playlists or channel.",
-                    "Change your monetisation, payment or banking settings.",
+                    "YouTube — a Manager or Editor role on your Brand Account, granted and withdrawn by you in YouTube Studio under Settings and Permissions.",
+                    "Instagram — a task-scoped invitation through Meta Business Suite, granted and withdrawn by you in Business Settings under People. If you do not use Meta Business Suite, we deliver finished posts for you to publish instead.",
+                    "LinkedIn — no access. LinkedIn provides no delegated access to a personal profile, so we deliver finished posts and you publish them. If you would rather we published for you, you connect your own account to a scheduling tool and give us a seat on that tool; we never hold your LinkedIn account itself.",
+                ]} />
+                <Typography paragraph sx={{ mt: 1 }}>
+                    <strong>
+                        We will not ask for, and you should not share, the password or
+                        one-time codes for any of these accounts.
+                    </strong>{" "}
+                    Password sharing breaches the platforms' own terms and puts your account
+                    at risk of being locked or lost. If you send credentials anyway, you do
+                    so at your own risk, and we may decline to use them.
+                </Typography>
+                <Typography paragraph>
+                    You remain the owner of your channels, profiles, content and all
+                    associated accounts at all times. Within the access you grant us, we
+                    will not:
+                </Typography>
+                <Bullets items={[
+                    "Delete your videos, posts, playlists, channel or profile.",
+                    "Change your monetisation, payment, ad account or banking settings.",
                     "Change your account recovery details or remove your own access.",
-                    "Publish anything you have not approved, except routine scheduled uploads agreed in advance as part of your plan.",
+                    "Publish anything you have not approved, except routine scheduled posts and uploads agreed in advance as part of your plan.",
+                    "Send messages or connection requests to other people from your account, unless replying to them is part of your plan.",
                 ]} />
                 <Typography paragraph sx={{ mt: 1 }}>
                     You can revoke our access at any time, and should do so when an
-                    engagement ends. We will also remove ourselves from your channel on
-                    request after the final month of service.
+                    engagement ends. We will also remove ourselves from your account on
+                    request after the final month of service. Where a plan involves no
+                    access at all, there is nothing to revoke — you simply stop sending us
+                    work, subject to the notice period in section 15.
+                </Typography>
+                <Typography paragraph>
+                    Because we hold no access to a LinkedIn profile, anything that depends on
+                    platform data — monthly reporting in particular — relies on the analytics
+                    export you share with us. If that export is not provided, we will report
+                    on what we can see publicly and say so.
                 </Typography>
 
                 <H>6. What You Need to Provide</H>
@@ -198,7 +216,8 @@ const YgmTermsPage = () => {
                 </Typography>
                 <Typography paragraph>
                     We may show work produced for you — thumbnails, graphics, edits,
-                    anonymised performance results and your channel name — in our portfolio,
+                    anonymised performance results and your channel, account or profile
+                    name — in our portfolio,
                     website, social media and proposals. If you would prefer us not to, tell
                     us in writing at any time and we will stop using it going forward. We
                     will never publish your unreleased content, raw footage, revenue figures
@@ -211,9 +230,9 @@ const YgmTermsPage = () => {
                         We do not guarantee any specific result.
                     </strong>{" "}
                     This includes, without limitation, subscriber growth, views, watch time,
-                    click-through rate, impressions, reach, engagement, search ranking,
-                    revenue, or approval into the YouTube Partner Programme or any other
-                    monetisation programme.
+                    click-through rate, impressions, reach, engagement, followers,
+                    connections, inbound enquiries, search ranking, revenue, or approval into
+                    the YouTube Partner Programme or any other monetisation programme.
                 </Typography>
                 <Typography paragraph>
                     Platform algorithms, audience behaviour, competition, your niche,
@@ -237,11 +256,12 @@ const YgmTermsPage = () => {
 
                 <H>11. How We Work</H>
                 <Typography paragraph>
-                    We work only within platform rules. We do not buy subscribers, views,
-                    likes, comments or engagement of any kind, use bots or engagement pods,
-                    or take part in sub-for-sub schemes. We will not knowingly publish
-                    misleading metadata, misleading thumbnails, or content that breaches a
-                    platform's policies.
+                    We work only within platform rules. We do not buy subscribers,
+                    followers, connections, views, likes, comments or engagement of any kind,
+                    use bots, engagement pods or comment rings, or take part in sub-for-sub
+                    or follow-for-follow schemes. We will not knowingly publish misleading
+                    metadata, misleading thumbnails, or content that breaches a platform's
+                    policies.
                 </Typography>
                 <Typography paragraph>
                     If you ask us to do something that breaches platform rules or these
@@ -252,7 +272,7 @@ const YgmTermsPage = () => {
                 <H>12. Fees, Billing and Taxes</H>
                 <Bullets items={[
                     "Monthly retainers are billed in advance. Your billing date is the date you signed up, and renews on the same date each month.",
-                    "One-time services — channel audits, consultations and rate card work — are payable in full before the work begins or the session is held.",
+                    "One-time services — audits, consultations, strategy calls and rate card work — are payable in full before the work begins or the session is held.",
                     "All prices are quoted in Indian Rupees (INR).",
                     "Self Craft Skills is not currently registered for GST. The prices shown are the total amount payable and no GST is added.",
                     "If GST registration becomes applicable to us in future, GST will apply to invoices issued from that point. We will tell you before that change affects your billing.",
@@ -267,10 +287,10 @@ const YgmTermsPage = () => {
                 <H>13. Late or Failed Payment</H>
                 <Typography paragraph>
                     If a renewal payment is not received by the billing date, we may pause
-                    work on your channel until payment is received. Paused days are not
+                    work on your account until payment is received. Paused days are not
                     added to the end of your month and do not reduce that month's fee. If
                     payment remains outstanding for fifteen days, we may end the engagement
-                    and remove our access to your channel.
+                    and remove any access we hold.
                 </Typography>
 
                 <H>14. Changing or Pausing Your Plan</H>
@@ -309,8 +329,8 @@ const YgmTermsPage = () => {
                 </Typography>
                 <Bullets items={[
                     "Monthly retainers: the fee for a month that has already started is not refundable, because the slot is reserved and work begins at the start of the cycle. Cancelling stops future billing as described in section 15.",
-                    "Channel audits: refundable in full if you cancel before we begin the audit. Once we have started reviewing your channel, the fee is not refundable, whether or not the report has been delivered yet.",
-                    "Consultations: refundable in full, or rescheduled free of charge, if you tell us at least 24 hours before the scheduled time. Cancellations inside 24 hours, and missed sessions, are not refundable.",
+                    "Audits: refundable in full if you cancel before we begin the audit. Once we have started reviewing your channel, account or profile, the fee is not refundable, whether or not the report has been delivered yet.",
+                    "Consultations and strategy calls: refundable in full, or rescheduled free of charge, if you tell us at least 24 hours before the scheduled time. Cancellations inside 24 hours, and missed sessions, are not refundable.",
                     "Rate card work: refundable in full before work starts. Once work has started it is not refundable, though any undelivered items in the same order are.",
                 ]} />
                 <Typography paragraph sx={{ mt: 1 }}>
@@ -321,7 +341,7 @@ const YgmTermsPage = () => {
                     working days.
                 </Typography>
                 <Typography paragraph>
-                    Dissatisfaction with channel performance is not grounds for a refund, as
+                    Dissatisfaction with performance is not grounds for a refund, as
                     explained in section 9.
                 </Typography>
 
