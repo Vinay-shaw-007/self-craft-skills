@@ -253,6 +253,7 @@ const instagram: PlatformCatalogue = {
     plans: [
         {
             name: "YGM Essentials",
+            was: "₹9,999",
             now: "₹7,999",
             period: "per month",
             features: [
@@ -271,7 +272,8 @@ const instagram: PlatformCatalogue = {
         },
         {
             name: "YGM Growth",
-            now: "₹15,999",
+            was: "₹15,999",
+            now: "₹13,999",
             period: "per month",
             carryOver: "Everything in Essentials, plus:",
             features: [
@@ -290,7 +292,8 @@ const instagram: PlatformCatalogue = {
         },
         {
             name: "YGM Authority",
-            now: "₹23,999",
+            was: "₹23,999",
+            now: "₹19,999",
             period: "per month",
             carryOver: "Everything in Growth, plus:",
             features: [
@@ -385,6 +388,6 @@ export const platforms: PlatformCatalogue[] = [youtube, instagram];
 export const ENTRY_PRICE = youtube.plans[0].now;
 /** The cheapest way in without a retainer. */
 export const ENTRY_AUDIT_PRICE = instagram.oneTime[0].price;
-/** The monthly ladder, identical on both platforms. */
-export const PLAN_PRICES = youtube.plans.map((p) => p.now);
+/** The top of the ladder, for quoting a range off-page. */
+export const TOP_PRICE = youtube.plans[youtube.plans.length - 1].now;
 export const CONSULT_PRICE = youtube.oneTime[1].price;
