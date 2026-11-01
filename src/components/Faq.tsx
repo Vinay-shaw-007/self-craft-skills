@@ -54,7 +54,7 @@ const ygmFaq = [
     },
     {
         q: "Is YGM only for YouTube?",
-        a: "No. There are separate monthly plans for YouTube and for Instagram \u2014 use the platform switch on the services page to see each one. They cover different work and are priced separately: uploads, metadata and thumbnails on YouTube, feed posts, carousels, Stories and Reels on Instagram. LinkedIn and multi-platform work is quoted once we know the scope.",
+        a: "No. There are separate monthly plans for YouTube, Instagram and LinkedIn \u2014 use the platform switch on the services page to see each one. They cover different work and are priced separately: uploads, metadata and thumbnails on YouTube, feed posts, carousels, Stories and Reels on Instagram, and ghostwritten posts and carousels on LinkedIn. Work spanning several platforms at once is quoted on scope.",
     },
     {
         q: "How is this different from the membership?",

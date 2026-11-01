@@ -144,10 +144,16 @@ const ContactButtons = ({ onDark }: { onDark?: boolean }) => (
 );
 
 /** The platform's own mark, used wherever pricing is platform-specific. */
-const PlatformIcon = ({ platform, sx }: { platform: PlatformId; sx?: object }) =>
-    platform === "youtube"
-        ? <YouTubeIcon sx={{ color: "#FF0000", ...sx }} />
-        : <InstagramIcon sx={{ color: "#E1306C", ...sx }} />;
+const platformIcons: Record<PlatformId, { Icon: typeof YouTubeIcon; color: string }> = {
+    youtube: { Icon: YouTubeIcon, color: "#FF0000" },
+    instagram: { Icon: InstagramIcon, color: "#E1306C" },
+    linkedin: { Icon: LinkedInIcon, color: "#0A66C2" },
+};
+
+const PlatformIcon = ({ platform, sx }: { platform: PlatformId; sx?: object }) => {
+    const { Icon, color } = platformIcons[platform];
+    return <Icon sx={{ color, ...sx }} />;
+};
 
 /**
  * Flags which platform a price applies to, so a YouTube retainer is never
@@ -440,10 +446,13 @@ const ServicesPage = () => {
             <Box sx={{ pt: { xs: 7, md: 10 } }}>
                 <Container maxWidth="lg">
                     <Stack direction="row" spacing={0.6} sx={{
-                        mx: "auto", width: "fit-content", p: 0.6,
+                        mx: "auto", p: 0.6,
+                        width: { xs: "100%", sm: "fit-content" },
+                        maxWidth: 440,
                         borderRadius: "999px",
                         background: ygm.mint,
                         border: `1px solid rgba(${ygm.greenRgb},0.2)`,
+                        "& .MuiButton-startIcon": { display: { xs: "none", sm: "inherit" } },
                     }}>
                         {platforms.map((cat) => {
                             const active = cat.id === platform;
@@ -457,8 +466,9 @@ const ServicesPage = () => {
                                         color: active ? undefined : ygm.slate,
                                     }} />}
                                     sx={{
-                                        px: { xs: 2.2, sm: 3.2 }, py: 1, borderRadius: "999px",
-                                        fontWeight: 700, fontSize: "0.92rem",
+                                        flex: { xs: 1, sm: "0 0 auto" }, minWidth: 0,
+                                        px: { xs: 1, sm: 3.2 }, py: 1, borderRadius: "999px",
+                                        fontWeight: 700, fontSize: { xs: "0.86rem", sm: "0.92rem" },
                                         color: active ? "#fff" : ygm.slate,
                                         background: active ? ygm.forest : "transparent",
                                         "&:hover": {

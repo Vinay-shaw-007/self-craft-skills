@@ -82,7 +82,7 @@ export const ygmServices: YgmService[] = [
 ];
 
 
-export type PlatformId = "youtube" | "instagram";
+export type PlatformId = "youtube" | "instagram" | "linkedin";
 
 export interface YgmPlan {
     name: string;
@@ -135,7 +135,7 @@ const youtube: PlatformCatalogue = {
     id: "youtube",
     label: "YouTube",
     badge: "For YouTube Channels",
-    plansSub: "Each tier builds on the one before it, with no lock-in. Switch platform above for Instagram plans.",
+    plansSub: "Each tier builds on the one before it, with no lock-in. Use the switch above to compare platforms.",
     oneTimeSub: "Get a clearer picture of your channel and the opportunities worth exploring.",
     addOnsSub: "Available on their own or alongside any monthly plan.",
     plans: [
@@ -247,7 +247,7 @@ const instagram: PlatformCatalogue = {
     id: "instagram",
     label: "Instagram",
     badge: "For Instagram Profiles",
-    plansSub: "Feed, Stories and Reels handled together, with no lock-in. Switch platform above for YouTube plans.",
+    plansSub: "Feed, Stories and Reels handled together, with no lock-in. Use the switch above to compare platforms.",
     oneTimeSub: "Start with a clear read on your profile before committing to a monthly package.",
     addOnsSub: "Buy any piece on its own, or top up a monthly package when a month runs heavy.",
     plans: [
@@ -381,13 +381,153 @@ const instagram: PlatformCatalogue = {
     ],
 };
 
-/** Both catalogues, in the order the toggle shows them. */
-export const platforms: PlatformCatalogue[] = [youtube, instagram];
+
+const linkedin: PlatformCatalogue = {
+    id: "linkedin",
+    label: "LinkedIn",
+    badge: "For LinkedIn Profiles",
+    plansSub: "Posts written in your voice and delivered ready to publish, with no lock-in. Use the switch above to compare platforms.",
+    oneTimeSub: "Start with a clear read on your profile and positioning before committing to a monthly package.",
+    addOnsSub: "Buy any piece on its own, or top up a monthly package when a month runs heavy.",
+    plans: [
+        {
+            name: "YGM Essentials",
+            was: "₹12,999",
+            now: "₹9,999",
+            period: "per month",
+            features: [
+                "12 ghostwritten posts per month",
+                "Content strategy and content pillars",
+                "Profile optimisation at onboarding",
+                "Posts delivered on a weekly schedule",
+                "One 30-minute voice call per month",
+                "Monthly performance report",
+            ],
+            focus: "A consistent voice and a profile that explains what you do.",
+            audience: "For founders and professionals starting to post seriously.",
+        },
+        {
+            name: "YGM Growth",
+            was: "₹21,999",
+            now: "₹17,999",
+            period: "per month",
+            carryOver: "Everything in Essentials, plus:",
+            features: [
+                "Up to 16 ghostwritten posts per month, including 2 document carousels",
+                "Industry and competitor research",
+                "A running idea bank you can draw from",
+                "Two 30-minute voice calls per month",
+                "Detailed monthly analytics",
+            ],
+            focus: "A sharper point of view, backed by what is working in your market.",
+            audience: "For founders building reach and authority in a niche.",
+            highlighted: true,
+        },
+        {
+            name: "YGM Authority",
+            was: "₹29,999",
+            now: "₹25,999",
+            period: "per month",
+            carryOver: "Everything in Growth, plus:",
+            features: [
+                "Up to 20 ghostwritten posts per month, including 4 document carousels",
+                "Profile and banner refresh",
+                "A 30-minute voice call every week",
+                "Drafted replies for your comment threads",
+                "Quarterly positioning review",
+            ],
+            focus: "A deliberate personal brand, maintained week by week.",
+            audience: "For founders treating LinkedIn as a primary channel.",
+        },
+    ],
+    oneTime: [
+        {
+            id: "li-audit",
+            icon: "audit",
+            title: "LinkedIn Profile Audit",
+            price: "₹1,499",
+            terms: "One time",
+            listLabel: "Includes:",
+            items: [
+                "Headline, About, and featured section review",
+                "Positioning and content pillar observations",
+                "Review of recent posts and what they earned",
+                "Search and discoverability opportunities",
+                "Prioritised recommendations for improvement",
+            ],
+        },
+        {
+            id: "li-consult",
+            icon: "consult",
+            title: "LinkedIn Strategy Call",
+            price: "₹1,499",
+            terms: "60 mins",
+            listLabel: "Discuss topics such as:",
+            items: [
+                "Positioning and what you want to be known for",
+                "Content pillars and posting cadence",
+                "Hooks, structure, and formats that travel",
+                "Reading your own analytics properly",
+                "Turning attention into conversations",
+            ],
+        },
+    ],
+    addOns: [
+        { service: "Ghostwritten LinkedIn post", price: "₹600 / post", revisions: "2 rounds" },
+        { service: "Document carousel, up to 10 slides", price: "₹1,200 / carousel", revisions: "2 rounds" },
+        { service: "Additional carousel slide", price: "₹150 / slide", revisions: "2 rounds" },
+        { service: "Profile optimisation", price: "₹1,999 / one time", revisions: "2 rounds" },
+        { service: "Profile banner design", price: "₹1,000 / banner", revisions: "2 rounds" },
+        { service: "Monthly content calendar", price: "₹1,500 / month", revisions: "—" },
+        { service: "Monthly analytics and recommendations", price: "₹1,500 / month", revisions: "—" },
+    ],
+    notes: [
+        {
+            label: "Publishing",
+            text: "You publish. We deliver finished posts, with any graphics attached, to the schedule agreed at onboarding. If you would rather we published for you, we can work through a scheduling tool you authorise yourself — we never ask for your LinkedIn password and we do not use shared logins.",
+        },
+        {
+            label: "Engagement",
+            text: "Replying to comments, and commenting on other people's posts, happens from your own account. On Authority we draft those replies for you to post.",
+        },
+        {
+            label: "Reporting",
+            text: "LinkedIn performance data sits behind your account, so monthly reporting uses the analytics export you share with us.",
+        },
+        {
+            label: "Calls",
+            text: "Ghostwriting depends on regular contact — the calls in your plan are how the writing stays in your voice. Unused calls do not roll over.",
+        },
+        {
+            label: "Not included",
+            text: "Paid ads and ad spend, InMail and outreach campaigns, lead generation, and content beyond the agreed monthly allowance.",
+        },
+        {
+            label: "Revisions",
+            text: "Two revision rounds per post or carousel; further rounds or out-of-scope requests may cost extra.",
+        },
+    ],
+};
+
+/** Every catalogue, in the order the toggle shows them. */
+export const platforms: PlatformCatalogue[] = [youtube, instagram, linkedin];
+
+const rupees = (price: string) => Number(price.replace(/\D/g, ""));
+const cheapest = (prices: string[]) =>
+    prices.reduce((a, b) => (rupees(b) < rupees(a) ? b : a));
+const dearest = (prices: string[]) =>
+    prices.reduce((a, b) => (rupees(b) > rupees(a) ? b : a));
+
+const everyPlanPrice = platforms.flatMap((p) => p.plans.map((plan) => plan.now));
 
 /** The cheapest monthly plan anywhere — the "from" figure quoted off-page. */
-export const ENTRY_PRICE = youtube.plans[0].now;
-/** The cheapest way in without a retainer. */
-export const ENTRY_AUDIT_PRICE = instagram.oneTime[0].price;
+export const ENTRY_PRICE = cheapest(everyPlanPrice);
 /** The top of the ladder, for quoting a range off-page. */
-export const TOP_PRICE = youtube.plans[youtube.plans.length - 1].now;
-export const CONSULT_PRICE = youtube.oneTime[1].price;
+export const TOP_PRICE = dearest(everyPlanPrice);
+/** The cheapest way in without a retainer. */
+export const ENTRY_AUDIT_PRICE = cheapest(
+    platforms.map((p) => p.oneTime[0].price),
+);
+export const CONSULT_PRICE = cheapest(
+    platforms.map((p) => p.oneTime[1].price),
+);

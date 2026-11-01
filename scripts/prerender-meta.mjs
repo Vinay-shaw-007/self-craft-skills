@@ -30,7 +30,8 @@ const dataSrc = readFileSync(DATA, "utf8");
 // own slice of the file and the platform is kept in the offer name.
 const bounds = [
     ["YouTube", "const youtube: PlatformCatalogue", "const instagram: PlatformCatalogue"],
-    ["Instagram", "const instagram: PlatformCatalogue", "export const platforms"],
+    ["Instagram", "const instagram: PlatformCatalogue", "const linkedin: PlatformCatalogue"],
+    ["LinkedIn", "const linkedin: PlatformCatalogue", "export const platforms"],
 ];
 
 const plans = [];
