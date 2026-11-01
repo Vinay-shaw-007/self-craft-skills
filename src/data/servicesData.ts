@@ -272,8 +272,8 @@ const instagram: PlatformCatalogue = {
         },
         {
             name: "YGM Growth",
-            was: "₹15,999",
-            now: "₹13,999",
+            was: "₹17,999",
+            now: "₹14,999",
             period: "per month",
             carryOver: "Everything in Essentials, plus:",
             features: [
@@ -292,8 +292,8 @@ const instagram: PlatformCatalogue = {
         },
         {
             name: "YGM Authority",
-            was: "₹23,999",
-            now: "₹19,999",
+            was: "₹25,999",
+            now: "₹21,999",
             period: "per month",
             carryOver: "Everything in Growth, plus:",
             features: [
