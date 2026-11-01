@@ -1,6 +1,6 @@
 // src/pages/ServicesPage.tsx
-// Freelance services page for YGM — Your Growth Matters, the YouTube growth
-// sub-brand of Self Craft Skills. This page runs the YGM green palette
+// Freelance services page for YGM — Your Growth Matters, the YouTube,
+// Instagram and LinkedIn growth sub-brand of Self Craft Skills. This page runs the YGM green palette
 // end to end (see theme/ygmColors.ts) rather than the site's indigo, so it
 // reads as a micro-site for the sub-brand. Content lives in data/servicesData.ts.
 import { Box, Button, Container, Divider, Grid, Link, Stack, Typography } from "@mui/material";
@@ -41,7 +41,7 @@ const ygmServiceIcons: Record<YgmServiceId, ReactNode> = {
     management: <ManageAccountsRoundedIcon />,
     strategy: <QueryStatsRoundedIcon />,
     branding: <PaletteRoundedIcon />,
-    shorts: <MovieFilterRoundedIcon />,
+    shortform: <MovieFilterRoundedIcon />,
 };
 
 const oneTimeIcons = {
@@ -482,9 +482,9 @@ const ServicesPage = () => {
                                 background: ygm.forest, color: "rgba(255,255,255,0.85)",
                             }}>
                                 <Typography sx={{ lineHeight: 1.8, fontSize: "1rem" }}>
-                                    Growing a YouTube channel takes more than publishing videos.
-                                    It takes planning, consistency, optimisation, and an
-                                    understanding of what your audience wants to watch.
+                                    Growth takes more than publishing regularly. It takes
+                                    planning, consistency, optimisation, and an understanding
+                                    of what your audience actually wants from you.
                                 </Typography>
                             </Box>
                         </Grid>
@@ -494,9 +494,10 @@ const ServicesPage = () => {
                                 background: "#fff", border: `1px solid rgba(${ygm.greenRgb},0.3)`,
                             }}>
                                 <Typography sx={{ lineHeight: 1.8, fontSize: "1rem", color: ygm.ink }}>
-                                    YGM — Your Growth Matters — helps growing creators manage their
-                                    channels more strategically, improve their publishing workflow,
-                                    and make informed content decisions.
+                                    YGM — Your Growth Matters — helps creators, founders and brands
+                                    manage their channels, accounts and profiles more strategically,
+                                    improve their publishing workflow, and make informed content
+                                    decisions.
                                 </Typography>
                             </Box>
                         </Grid>
@@ -506,9 +507,9 @@ const ServicesPage = () => {
                                 background: ygm.forest, color: "rgba(255,255,255,0.85)",
                             }}>
                                 <Typography sx={{ lineHeight: 1.8, fontSize: "1rem" }}>
-                                    We bring together channel management, YouTube SEO, content
-                                    planning, analytics, creative support, and video services
-                                    under one clear approach.
+                                    We bring together channel and account management, platform
+                                    SEO, content planning, analytics, creative support, and video
+                                    and writing services under one clear approach.
                                 </Typography>
                             </Box>
                         </Grid>
@@ -520,8 +521,8 @@ const ServicesPage = () => {
             <Box sx={{ background: ygm.mintSoft, py: { xs: 7, md: 10 } }}>
                 <Container maxWidth="lg">
                     <SectionHeading
-                        eyebrow="Our YouTube services"
-                        title="What YGM handles for your channel."
+                        eyebrow="Our growth services"
+                        title="What YGM handles for you."
                     />
                     <Grid container spacing={2.5}>
                         {ygmServices.map((s) => (
@@ -1003,8 +1004,9 @@ const ServicesPage = () => {
                                 mt: 2, color: "rgba(255,255,255,0.45)",
                                 maxWidth: 360, lineHeight: 1.7, fontSize: "0.88rem",
                             }}>
-                                YouTube growth, channel management and social media strategy for
-                                creators, brands and startups. You create; we help you grow.
+                                Growth, content and account management for YouTube, Instagram
+                                and LinkedIn — for creators, brands and startups. You create;
+                                we help you grow.
                             </Typography>
                         </Grid>
 

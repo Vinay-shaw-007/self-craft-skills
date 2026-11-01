@@ -1,7 +1,8 @@
 // src/data/servicesData.ts
 // Freelance service catalogue for the /services page. YGM — Your Growth
-// Matters — is the YouTube growth sub-brand; the broader social media
-// services sit above it under the Self Craft Skills parent brand.
+// Matters — is the growth sub-brand, selling YouTube, Instagram and LinkedIn
+// retainers; the broader social media services sit above it under the Self
+// Craft Skills parent brand.
 // Prices are the live 2026 rates — update here, not in the page.
 
 import { waLink } from "./contact";
@@ -48,7 +49,7 @@ export const serviceCategories: ServiceCategory[] = [
     },
 ];
 
-export type YgmServiceId = "management" | "strategy" | "branding" | "shorts";
+export type YgmServiceId = "management" | "strategy" | "branding" | "shortform";
 
 export interface YgmService {
     id: YgmServiceId;
@@ -59,23 +60,23 @@ export interface YgmService {
 export const ygmServices: YgmService[] = [
     {
         id: "management",
-        title: "YouTube Channel Management",
-        desc: "Full-service upload scheduling, SEO-optimised titles, descriptions, tags, playlists, chapters, cards, and end screens.",
+        title: "Channel & Account Management",
+        desc: "Publishing and scheduling, SEO-optimised titles, descriptions, captions and tags, plus playlists, chapters, and profile housekeeping.",
     },
     {
         id: "strategy",
         title: "Content Strategy & Planning",
-        desc: "Data-driven keyword research, competitor analysis, content planning, and analytics to maximise reach and watch time.",
+        desc: "Keyword and hashtag research, competitor analysis, content planning, and analytics read properly, so decisions come from your own numbers.",
     },
     {
         id: "branding",
-        title: "Thumbnails & Channel Branding",
-        desc: "Eye-catching custom thumbnails, channel banners, and community graphics that strengthen your visual identity.",
+        title: "Thumbnails, Carousels & Branding",
+        desc: "Custom thumbnails, feed and document carousels, banners, Story designs, and community graphics that strengthen your visual identity.",
     },
     {
-        id: "shorts",
-        title: "Shorts, Reels & Consultations",
-        desc: "Repurposing long-form content into Shorts and Reels, plus 1-on-1 strategy consultations tailored to your channel goals.",
+        id: "shortform",
+        title: "Short-Form, Writing & Calls",
+        desc: "Long-form repurposed into Shorts and Reels, posts ghostwritten in your voice, and 1-on-1 strategy calls tailored to your goals.",
     },
 ];
 
