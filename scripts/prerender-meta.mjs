@@ -91,7 +91,7 @@ const routes = [
         ogTitle: "YGM — Your Growth Matters | Social Media Growth & Channel Management",
         ogDescription:
             "Social media strategy, content and channel management for creators and brands. YouTube retainers from ₹7,999, or a one-time channel audit from ₹1,999.",
-        image: `${SITE}/og-ygm.png`,
+        image: `${SITE}/og-ygm.jpg`,
         imageAlt: "YGM — Your Growth Matters, powered by Self Craft Skills",
         // Google has ignored meta keywords since 2009 — kept only because the
         // site's other pages carry one. Real keyword signal comes from the H1,

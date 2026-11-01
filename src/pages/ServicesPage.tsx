@@ -83,10 +83,9 @@ const footerLinkSx = {
 };
 
 /**
- * The YGM mark. The source PNG is opaque with a white margin around the
- * rounded square, so we clip to a squircle slightly tighter than the
- * artwork's own corner radius and scale past the margin — otherwise white
- * corners show against the dark green sections.
+ * The YGM mark. The artwork is a full-bleed square with no corner radius of
+ * its own, so we clip it to a squircle here. Nothing is scaled past the
+ * edges: the arrow tip sits close enough to the corner to lose its point.
  */
 const YgmLogo = ({ size, alt = "" }: { size: number | Record<string, number>; alt?: string }) => (
     <Box sx={{
@@ -100,7 +99,7 @@ const YgmLogo = ({ size, alt = "" }: { size: number | Record<string, number>; al
             component="img"
             src={YgmLogoSrc}
             alt={alt}
-            sx={{ width: "100%", height: "100%", display: "block", transform: "scale(1.08)" }}
+            sx={{ width: "100%", height: "100%", display: "block" }}
         />
     </Box>
 );

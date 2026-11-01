@@ -59,7 +59,7 @@ const ServicesTeaser = () => {
                                 boxShadow: "0 10px 24px rgba(0,0,0,0.3)",
                             }}>
                                 <Box component="img" src={YgmLogoSrc} alt=""
-                                    sx={{ width: "100%", height: "100%", display: "block", transform: "scale(1.08)" }} />
+                                    sx={{ width: "100%", height: "100%", display: "block" }} />
                             </Box>
                             <Typography sx={{
                                 fontSize: "0.72rem", fontWeight: 700,
