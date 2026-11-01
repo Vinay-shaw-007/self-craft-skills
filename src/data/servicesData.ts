@@ -474,7 +474,7 @@ const linkedin: PlatformCatalogue = {
     ],
     addOns: [
         { service: "Ghostwritten LinkedIn post", price: "₹600 / post", revisions: "2 rounds" },
-        { service: "Document carousel, up to 10 slides", price: "₹1,200 / carousel", revisions: "2 rounds" },
+        { service: "Document carousel, up to 6 slides", price: "₹1,200 / carousel", revisions: "2 rounds" },
         { service: "Additional carousel slide", price: "₹150 / slide", revisions: "2 rounds" },
         { service: "Profile optimisation", price: "₹1,999 / one time", revisions: "2 rounds" },
         { service: "Profile banner design", price: "₹1,000 / banner", revisions: "2 rounds" },
@@ -501,6 +501,10 @@ const linkedin: PlatformCatalogue = {
         {
             label: "Not included",
             text: "Paid ads and ad spend, InMail and outreach campaigns, lead generation, and content beyond the agreed monthly allowance.",
+        },
+        {
+            label: "Carousels",
+            text: "A document carousel runs to six slides. Longer decks are billed per additional slide at the rate card above. Carousels count towards your monthly post allowance.",
         },
         {
             label: "Revisions",
