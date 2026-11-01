@@ -25,7 +25,7 @@ import { socialLinks } from "../data/socialLinks";
 // Exact-case filename — the Netlify build runs on a case-sensitive filesystem.
 import YgmLogoSrc from "../assets/YGM.png";
 import {
-    CONTACT, platforms, serviceCategories, ygmServices,
+    CONTACT, ENTRY_AUDIT_PRICE, ENTRY_PRICE, platforms, serviceCategories, ygmServices,
     type PlatformId, type YgmServiceId,
 } from "../data/servicesData";
 import { ygm } from "../theme/ygmColors";
@@ -326,8 +326,8 @@ const ServicesPage = () => {
     return (
         <main>
             <Seo
-                title="Social Media &amp; YouTube Growth | YGM by Self Craft Skills"
-                description="Social media strategy, content and channel management for YouTube, Instagram and LinkedIn. YouTube retainers from ₹7,999, audits from ₹1,999."
+                title="YGM — YouTube, Instagram &amp; LinkedIn Growth | Self Craft Skills"
+                description={`Social media strategy, content and channel management for YouTube, Instagram and LinkedIn. Monthly plans from ${ENTRY_PRICE}, audits from ${ENTRY_AUDIT_PRICE}.`}
                 canonicalPath="/services"
             />
 

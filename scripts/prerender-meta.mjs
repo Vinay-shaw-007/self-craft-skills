@@ -60,6 +60,13 @@ for (const [platform, from, to] of bounds) {
     oneOffs.push(...o);
 }
 
+/** Quoted in the meta copy below — read from the catalogue, never typed twice. */
+const inr = (n) => `₹${n.toLocaleString("en-IN")}`;
+const entryPlan = inr(Math.min(...plans.map((p) => Number(p.price))));
+const entryAudit = inr(
+    Math.min(...oneOffs.filter((o) => /audit/i.test(o.name)).map((o) => Number(o.price))),
+);
+
 const servicesSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -109,12 +116,14 @@ const routes = [
     {
         file: "services.html",
         path: "/services",
-        title: "Social Media & YouTube Growth | YGM by Self Craft Skills",
+        title: "YGM — YouTube, Instagram & LinkedIn Growth | Self Craft Skills",
         description:
-            "Social media strategy, content and channel management for YouTube, Instagram and LinkedIn. Monthly plans from ₹7,999, audits from ₹1,499.",
+            "Social media strategy, content and channel management for YouTube, Instagram and LinkedIn. "
+            + `Monthly plans from ${entryPlan}, audits from ${entryAudit}.`,
         ogTitle: "YGM — Your Growth Matters | Social Media Growth & Channel Management",
         ogDescription:
-            "Social media strategy, content and channel management for creators and brands. YouTube and Instagram plans from ₹7,999, or a one-time audit from ₹1,499.",
+            "Social media strategy, content and channel management for creators and brands. "
+            + `YouTube, Instagram and LinkedIn plans from ${entryPlan}, or a one-time audit from ${entryAudit}.`,
         image: `${SITE}/og-ygm.jpg`,
         imageAlt: "YGM — Your Growth Matters, powered by Self Craft Skills",
         // Google has ignored meta keywords since 2009 — kept only because the
